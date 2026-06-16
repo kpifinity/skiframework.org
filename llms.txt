@@ -1,0 +1,94 @@
+# SKI Framework
+
+> Neuro-symbolic AI compliance monitoring for regulated industries. Every verdict traces to a named regulation, is independently verified by a deterministic algorithm, and is recorded with cryptographic provenance. Open source under Apache 2.0. On-premise only — no cloud, no SaaS option.
+
+SKI (Sovereign Knowledge Intelligence) is a framework built by KpiFinity Inc. (Calgary, Alberta) that enables regulated industries to deploy AI compliance monitoring that regulators can directly audit. Sectors: oil & gas, financial services, defence, energy & utilities, mining, critical manufacturing.
+
+Current versions: v3.1.0-beta.1 (latest beta, on PyPI), v3.0.3 (stable). Specification under CC BY 4.0.
+
+## What SKI does
+
+SKI watches operational data — sensor readings, trade records, process parameters — and checks each reading against a versioned, cryptographically sealed Knowledge Graph of regulatory rules. For every reading, two independent examiners run in parallel:
+
+1. **LLM examiner** — reads the measurement against the rulebook and explains its reasoning in natural language, citing the specific KG node and source regulatory clause
+2. **Symbolic Verifier** — a deterministic algorithm that re-runs every piece of arithmetic independently; it cannot hallucinate, be confused, or be charmed
+
+Every evaluation produces exactly one of five categorical verdict types. No confidence scores, no ambiguity:
+
+- **CLEAR** — every applicable rule checked and satisfied
+- **FLAG** — a rule was breached; alert with exact rule and numbers
+- **DISCRETIONARY** — a judgment call the numbers alone cannot settle; routed to a human reviewer
+- **NULL_UNMAPPED** — no rule in the KG covers this reading; recorded as a gap, not assumed compliant
+- **NULL_STALE** — expected data stopped arriving; missing data is itself a finding
+
+## Key architectural properties
+
+- **Sovereign**: zero outbound connections at runtime; CI-proven with `--network=none` boot rig that verifies verdicts from inside an air gap
+- **Verifiable provenance**: six hash anchors per verdict envelope — model weight hash, KG version hash, prompt template ID, prompt template hash, decoder seed, structured grammar hash
+- **Replayable**: any auditor with the same model weights, KG version, and prompt template can reconstruct any past verdict and verify its authenticity
+- **LLM-agnostic**: reference implementation ships with Ollama backend (any local model) and vLLM backend (any OpenAI-compatible server); custom backends via `LLMBackend` protocol
+- **Passive, read-only**: SKI has zero control path to operational systems; operations continue uninterrupted if SKI goes offline
+- **Conformance-tested**: 77 tests across three levels (L1: Basic Provenance, L2: Durability, L3: Sovereignty); Level 3 fully runnable including the air-gapped boot rig
+
+## Measured results (published)
+
+Across 6 published adversarial evaluation campaigns on a 50-case human-graded golden dataset:
+- **0** breaches silently cleared as compliant (architectural invariant, not a target)
+- Accuracy across runs: 26%, 22%, 54%, 76%, 72%, in progress (accuracy is an iteration target; safety is the invariant)
+- Framework overhead p99: **0.36 ms** (p50: 0.10 ms, p95: 0.16 ms) on 2 vCPUs
+- Throughput: approximately 8,500 verdicts per second on a single worker
+- CI gates every build on framework overhead ≤ 100 ms
+
+## EU AI Act
+
+SKI publishes an article-level crosswalk covering provider obligations (Articles 9–19, 72) and deployer obligations (Article 26), with an element-by-element Article 12(3) record-keeping mapping onto the audit ledger. High-risk AI obligations apply from 2 August 2026.
+
+## Quick start
+
+```bash
+pip install ski-sdk
+git clone https://github.com/kpifinity/ski-framework.git && cd ski-framework
+./scripts/setup.sh
+cd reference-implementation
+docker compose -f docker-compose.demo.yml up -d
+curl http://localhost:8000/api/health
+```
+
+Six PyPI packages: `ski-sdk`, `ski-schemas`, `ski-kg-extractor`, `ski-kg-validator`, `ski-audit-ledger`, `ski-model-deploy`.
+
+## Frequently asked questions
+
+**Which LLM does SKI use?**
+SKI is LLM-agnostic. You bring your own model. The reference implementation ships with Ollama and vLLM backends.
+
+**Is there a hosted or SaaS version?**
+No, and there will not be one. Data sovereignty is an architectural property, not a feature. On-premise only.
+
+**How large is the deployment?**
+A single Docker Compose stack. Minimum ~2 vCPUs, 4 GB RAM for SKI services (LLM requirements depend on your model choice).
+
+**How long to a first verdict?**
+5 minutes in demo mode (no model download required). Production deployment including model setup: hours, not days.
+
+**Can SKI connect to SCADA systems?**
+Yes. SKI accepts readings as JSON payloads over HTTP. An OPC-UA read-only sidecar reference implementation is included in the repository.
+
+## Documentation
+
+- [Homepage](https://skiframework.org): Overview, problem framing, architecture, sector applications, quick start
+- [Documentation](https://skiframework.org/docs.html): Full technical docs — quick start, packages, architecture, conformance levels, Kubernetes/Helm, FAQ
+- [Compliance](https://skiframework.org/compliance.html): EU AI Act crosswalk, conformance level definitions, audit trail documentation
+- [About](https://skiframework.org/about.html): Design principles, project background, sector pilot engagements, privacy notice
+
+## Code and packages
+
+- Source: https://github.com/kpifinity/ski-framework (Apache 2.0)
+- Specification: https://github.com/kpifinity/ski-framework/tree/main/spec (CC BY 4.0)
+- PyPI: https://pypi.org/project/ski-sdk/
+- Eval methodology: https://github.com/kpifinity/ski-framework/blob/main/docs/evals.md
+- EU AI Act crosswalk: https://github.com/kpifinity/ski-framework/blob/main/docs/crosswalks/eu-ai-act.md
+
+## Contact
+
+- Email: hello@skiframework.org (partnerships, enterprise, sector pilots)
+- Company: KpiFinity Inc., Calgary, Alberta — https://kpifinity.com

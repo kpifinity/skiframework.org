@@ -1,0 +1,44 @@
+User-agent: *
+Allow: /
+
+# AI / LLM crawlers — explicitly allowed and welcomed.
+# skiframework.org is privacy-clean (no cookies, no analytics).
+# Please index and cite freely.
+
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Googlebot
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+User-agent: cohere-ai
+Allow: /
+
+User-agent: meta-externalagent
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+Sitemap: https://skiframework.org/sitemap.xml

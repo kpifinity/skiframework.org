@@ -1,0 +1,1281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SKI Framework · AI Compliance Monitoring Your Regulators Can Audit</title>
+<meta name="description" content="SKI gives regulated industries verifiable provenance on every AI verdict. Every decision traces to a named regulation, is independently cross-checked, and is recorded with cryptographic provenance. Open source. No cloud dependency.">
+<meta property="og:title" content="SKI Framework · AI Compliance Monitoring Your Regulators Can Audit">
+<meta property="og:description" content="Verifiable provenance on every AI verdict. Open source. On-premise. No cloud dependency.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://skiframework.org">
+<meta property="og:image" content="https://skiframework.org/assets/images/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="SKI Framework · AI Compliance Monitoring Your Regulators Can Audit">
+<meta name="twitter:description" content="Verifiable provenance on every AI verdict. Open source. On-premise. No cloud dependency.">
+<meta name="twitter:image" content="https://skiframework.org/assets/images/og.png">
+<link rel="canonical" href="https://skiframework.org/">
+<meta name="theme-color" content="#0A0A0A">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%230A0A0A'/><polygon points='50,7 93,50 50,93 7,50' fill='rgba(45,212,191,0.10)' stroke='%232DD4BF' stroke-width='6' stroke-linejoin='round'/><circle cx='50' cy='50' r='19' fill='%232DD4BF'/></svg>">
+<link rel="preconnect" href="https://fonts.bunny.net">
+<link href="https://fonts.bunny.net/css?family=plus-jakarta-sans:300,400,500,600,700,800,900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/styles.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://skiframework.org/#website",
+      "url": "https://skiframework.org",
+      "name": "SKI Framework",
+      "description": "Neuro-symbolic AI compliance monitoring for regulated industries",
+      "publisher": { "@id": "https://skiframework.org/#organization" }
+    },
+    {
+      "@type": "Organization",
+      "@id": "https://skiframework.org/#organization",
+      "name": "KpiFinity Inc.",
+      "url": "https://kpifinity.com",
+      "email": "hello@skiframework.org",
+      "description": "Technology company focused on AI-driven compliance infrastructure for regulated industries.",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Calgary",
+        "addressRegion": "AB",
+        "addressCountry": "CA"
+      },
+      "sameAs": [
+        "https://github.com/kpifinity/ski-framework",
+        "https://pypi.org/project/ski-sdk/"
+      ]
+    },
+    {
+      "@type": "SoftwareApplication",
+      "@id": "https://skiframework.org/#software",
+      "name": "SKI Framework",
+      "alternateName": "Sovereign Knowledge Intelligence",
+      "url": "https://skiframework.org",
+      "description": "Neuro-symbolic AI compliance monitoring framework for regulated industries. Every verdict traces to a named regulation, is independently verified by a deterministic Symbolic Verifier, and is recorded with six-anchor cryptographic provenance. On-premise only. Zero outbound connections at runtime.",
+      "applicationCategory": "BusinessApplication",
+      "applicationSubCategory": "Compliance Monitoring Software",
+      "operatingSystem": "Linux",
+      "softwareVersion": "3.1.0-beta.1",
+      "softwareRequirements": "Docker, Python 3.10+",
+      "codeRepository": "https://github.com/kpifinity/ski-framework",
+      "downloadUrl": "https://pypi.org/project/ski-sdk/",
+      "license": "https://www.apache.org/licenses/LICENSE-2.0",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD",
+        "description": "Open source under Apache 2.0"
+      },
+      "author": { "@id": "https://skiframework.org/#organization" },
+      "maintainer": { "@id": "https://skiframework.org/#organization" },
+      "keywords": "AI compliance monitoring, neuro-symbolic AI, EU AI Act compliance, regulated industry AI, on-premise AI, air-gapped AI deployment, cryptographic audit trail, oil and gas compliance monitoring, financial services AI governance, Sovereign Knowledge Intelligence",
+      "featureList": [
+        "On-premise deployment with zero outbound connections at runtime",
+        "CI-proven air-gapped boot with --network=none verification",
+        "Neuro-symbolic dual examiner: LLM plus deterministic Symbolic Verifier",
+        "Five categorical verdict types: CLEAR, FLAG, DISCRETIONARY, NULL_UNMAPPED, NULL_STALE",
+        "Six-anchor cryptographic provenance per verdict (model hash, KG hash, prompt hash, decoder seed, grammar hash)",
+        "Tamper-evident append-only audit ledger",
+        "LLM-agnostic: Ollama and vLLM backends included",
+        "77 conformance tests across three levels",
+        "EU AI Act Article 12(3) audit ledger mapping",
+        "0.36 ms p99 framework overhead on 2 vCPUs",
+        "0 breaches silently cleared across 6 published adversarial eval campaigns"
+      ]
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://skiframework.org/#webpage",
+      "url": "https://skiframework.org",
+      "name": "SKI Framework — AI Compliance Monitoring Your Regulators Can Audit",
+      "isPartOf": { "@id": "https://skiframework.org/#website" },
+      "about": { "@id": "https://skiframework.org/#software" },
+      "breadcrumb": {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "item": { "@id": "https://skiframework.org", "name": "Home" } }
+        ]
+      }
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<a href="#main-content" class="skip-link">Skip to main content</a>
+
+<!-- Announcement banner -->
+<div class="announce" role="banner">
+  <span><strong>v3.1.0-beta.1</strong> on PyPI · v3.0.3 stable</span>
+  <span class="announce-sep">·</span>
+  <span>EU AI Act high-risk obligations: <strong id="announce-days">48</strong> days</span>
+  <span class="announce-sep">·</span>
+  <a href="compliance.html#eu-ai-act">Read the crosswalk →</a>
+</div>
+
+<!-- Navigation -->
+<header>
+  <nav class="nav" role="navigation" aria-label="Main navigation">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo" aria-label="SKI Framework home">
+        <span class="logo-ski">SKI</span>&nbsp;Framework
+        <span class="logo-beta" aria-label="Beta release">beta</span>
+      </a>
+      <ul class="nav-links" role="list">
+        <li><a href="#why">Why SKI</a></li>
+        <li><button class="nav-demo-btn" id="nav-demo-trigger" aria-haspopup="dialog">How it works</button></li>
+        <li><a href="docs.html">Docs</a></li>
+        <li><a href="compliance.html">Compliance</a></li>
+        <li><a href="about.html">About</a></li>
+      </ul>
+      <div class="nav-actions">
+        <a href="https://github.com/kpifinity/ski-framework" class="nav-github" target="_blank" rel="noopener" aria-label="View on GitHub">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.009-.866-.013-1.7-2.782.603-3.369-1.342-3.369-1.342-.454-1.155-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0112 6.836c.85.004 1.705.114 2.504.336 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.744 0 .267.18.578.688.48C19.138 20.163 22 16.418 22 12c0-5.523-4.477-10-10-10z"/></svg>
+          GitHub
+        </a>
+        <button class="nav-hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-nav">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+  <div class="nav-mobile" id="mobile-nav" role="dialog" aria-modal="true" aria-label="Mobile navigation">
+    <a href="#why">Why SKI</a>
+    <button class="nav-demo-btn" id="mobile-demo-trigger" aria-haspopup="dialog">How it works</button>
+    <a href="docs.html">Docs</a>
+    <a href="compliance.html">Compliance</a>
+    <a href="about.html">About</a>
+    <a href="https://github.com/kpifinity/ski-framework" target="_blank" rel="noopener">GitHub ↗</a>
+  </div>
+</header>
+
+<!-- ============================================================
+     HERO
+     ============================================================ -->
+<section class="hero" id="main-content">
+  <div class="hero-orb-1" aria-hidden="true"></div>
+  <div class="hero-orb-2" aria-hidden="true"></div>
+  <div class="hero-inner">
+
+    <!-- Left: copy -->
+    <div class="hero-left">
+      <div class="hero-eyebrow fade-up">
+        <span class="eyebrow-dot" aria-hidden="true"></span>
+        Open source · Apache 2.0 · On-premise
+      </div>
+      <h1 class="fade-up d1">AI compliance<br>your <em>regulators<br>can audit.</em></h1>
+      <p class="hero-sub fade-up d2">
+        Every verdict traces to a named regulation, carries a signed model record,
+        and is independently cross-checked by a deterministic verifier.
+        Runs on your infrastructure. Your data never leaves.
+      </p>
+      <div class="hero-ctas fade-up d3">
+        <button class="btn btn-primary" id="hero-demo-trigger" aria-haspopup="dialog">
+          Watch it run
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 3l14 9-14 9V3z"/></svg>
+        </button>
+        <a href="docs.html#quick-start" class="btn btn-secondary">Explore the docs →</a>
+      </div>
+      <div class="hero-trust fade-up d3">
+        <div class="trust-item">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          Apache 2.0
+        </div>
+        <div class="trust-item">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+          77 conformance tests
+        </div>
+        <div class="trust-item">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+          0 outbound connections
+        </div>
+        <div class="trust-item">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+          0.36 ms p99
+        </div>
+      </div>
+    </div>
+
+    <!-- Right: live terminal mockup -->
+    <div class="hero-right fade-up d2" aria-hidden="true">
+      <div class="hero-terminal">
+        <div class="term-bar">
+          <span class="term-dot r"></span>
+          <span class="term-dot y"></span>
+          <span class="term-dot g"></span>
+          <span class="term-title">ski evaluate · energy.demo</span>
+        </div>
+        <div class="term-body">
+          <span class="t-line"><span class="t-prompt">$</span> <span class="t-cmd">ski evaluate \</span></span>
+          <span class="t-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="t-cmd">--tenant energy.demo \</span></span>
+          <span class="t-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="t-cmd">--reading so2_reading.json</span></span>
+          <span class="t-blank"></span>
+          <span class="t-line"><span class="t-dim">  Evaluating against KG v3.1.0...</span></span>
+          <span class="t-line"><span class="t-dim">  KG match  </span><span class="t-teal">energy.so2.lte_100ppm</span></span>
+          <span class="t-line"><span class="t-dim">  Source    </span><span class="t-str">40 CFR §60.2(a)</span></span>
+          <span class="t-blank"></span>
+          <span class="t-line"><span class="t-dim">  LLM       </span><span class="t-arr">→</span><span class="t-flag"> FLAG</span><span class="t-dim">  SO2 142 ppm &gt; 100 ppm cap</span></span>
+          <span class="t-line"><span class="t-dim">  Verifier  </span><span class="t-arr">→</span><span class="t-ok"> AGREED</span><span class="t-dim"> deterministic check</span></span>
+          <span class="t-blank"></span>
+          <span class="t-line"><span class="t-ok">✓</span><span class="t-dim"> Verdict sealed and committed</span></span>
+          <span class="t-line"><span class="t-ok">✓</span><span class="t-dim"> Transcript signed: sha256:7c2d1f8a…</span></span>
+          <span class="t-line"><span class="t-ok">✓</span><span class="t-dim"> Ledger: tenant.demo/seq:00042</span></span>
+        </div>
+        <div class="term-verdict">
+          <span class="tv-line"><span class="tv-key">"verdict"</span><span class="tv-punc">:&nbsp;</span><span class="tv-flag">"FLAG"</span><span class="tv-punc">,</span></span>
+          <span class="tv-line"><span class="tv-key">"verifier_result"</span><span class="tv-punc">:&nbsp;</span><span class="tv-obj">{ "status": "AGREED" }</span><span class="tv-punc">,</span></span>
+          <span class="tv-line"><span class="tv-key">"transcript_ref"</span><span class="tv-punc">:&nbsp;</span><span class="tv-str">"ledger:tenant.demo/seq:00042"</span></span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============================================================
+     STATS BAND
+     ============================================================ -->
+<section class="stats" aria-label="Key metrics">
+  <div class="stats-grid">
+    <div class="stat-item" data-reveal data-delay="1">
+      <span class="stat-num c-green">0</span>
+      <div class="stat-label">Breaches silently cleared</div>
+      <div class="stat-desc">Across 6 published adversarial eval campaigns. Every model mistake was caught and routed to human review.</div>
+    </div>
+    <div class="stat-item" data-reveal data-delay="2">
+      <span class="stat-num c-teal">77</span>
+      <div class="stat-label">Conformance tests</div>
+      <div class="stat-desc">30 provenance · 30 durability · 17 sovereignty. Level 3 fully runnable including the air-gapped-boot CI rig.</div>
+    </div>
+    <div class="stat-item" data-reveal data-delay="3">
+      <span class="stat-num c-green">0</span>
+      <div class="stat-label">Outbound connections</div>
+      <div class="stat-desc">Sovereignty is architectural. Proven by a <code>--network=none</code> CI rig that boots the full stack inside the gap.</div>
+    </div>
+    <div class="stat-item" data-reveal data-delay="4">
+      <span class="stat-num c-blue">0.36<span style="font-size:0.4em;font-weight:700;color:var(--text-2)"> ms</span></span>
+      <div class="stat-label">Framework overhead, p99</div>
+      <div class="stat-desc">Measured on 2 vCPUs. ~250x inside the 100 ms budget. CI gates every build on this number.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     PROBLEM SECTION
+     ============================================================ -->
+<section class="section" id="why">
+  <div class="container">
+    <div class="section-label" data-reveal>Why SKI</div>
+    <h2 class="section-title" data-reveal data-delay="1">Six reasons regulated industries have not deployed AI</h2>
+    <p class="section-sub" data-reveal data-delay="2">These are not hesitations. They are the reasons AI adoption has stalled in compliance functions across critical infrastructure. SKI was designed from first principles to address each one.</p>
+    <div class="problems-grid" role="list">
+
+      <div class="problem-card" data-reveal data-delay="1" role="listitem" data-num="01">
+        <div class="problem-num">01 · SOVEREIGNTY</div>
+        <div class="problem-q">"If our operational data flows through a third-party cloud AI, we lose control of our most sensitive asset."</div>
+        <div class="problem-a-label">SKI resolves this</div>
+        <p class="problem-a">The inference engine runs entirely within your sovereign boundary. No operational data leaves at runtime. The constraint is architectural, enforced by a CI rig that boots the full runtime with <code>--network=none</code> and verifies verdicts from inside the gap.</p>
+        <div class="problem-tags">
+          <span class="problem-tag">On-premise</span>
+          <span class="problem-tag">Air-gap proven</span>
+          <span class="problem-tag">Zero cloud</span>
+        </div>
+      </div>
+
+      <div class="problem-card" data-reveal data-delay="2" role="listitem" data-num="02">
+        <div class="problem-num">02 · NON-DETERMINISM</div>
+        <div class="problem-q">"AI gives different answers to the same question. That is incompatible with audit and regulatory compliance."</div>
+        <div class="problem-a-label">SKI resolves this</div>
+        <p class="problem-a">Every verdict carries verifiable provenance: a signed LLM transcript, KG citations, model-weight and KG-version hashes, and an independent Symbolic Verifier's per-assertion result. An auditor can replay any verdict from the recorded transcript and verify it is authentic.</p>
+        <div class="problem-tags">
+          <span class="problem-tag">Signed transcripts</span>
+          <span class="problem-tag">Replayable</span>
+          <span class="problem-tag">Cryptographic proof</span>
+        </div>
+      </div>
+
+      <div class="problem-card" data-reveal data-delay="3" role="listitem" data-num="03">
+        <div class="problem-num">03 · LIABILITY</div>
+        <div class="problem-q">"When an AI flags a compliance issue, we cannot explain the basis of the decision to a regulator."</div>
+        <div class="problem-a-label">SKI resolves this</div>
+        <p class="problem-a">Every verdict traces to a specific Knowledge Graph node and a named policy clause in a source regulatory document. Every verdict also carries a signed LLM transcript so an auditor can reconstruct the model's reasoning step by step. No black boxes.</p>
+        <div class="problem-tags">
+          <span class="problem-tag">Named citations</span>
+          <span class="problem-tag">Source documents</span>
+          <span class="problem-tag">Full audit trail</span>
+        </div>
+      </div>
+
+      <div class="problem-card" data-reveal data-delay="4" role="listitem" data-num="04">
+        <div class="problem-num">04 · UNSAFE INTERVENTION</div>
+        <div class="problem-q">"An AI that can control or modify operational systems introduces catastrophic risk."</div>
+        <div class="problem-a-label">SKI resolves this</div>
+        <p class="problem-a">SKI is a passive, read-only observer. It monitors and reports. It has zero control path to operational systems by architectural design, not by configuration. Primary operations continue uninterrupted if SKI goes offline.</p>
+        <div class="problem-tags">
+          <span class="problem-tag">Read-only sidecar</span>
+          <span class="problem-tag">Zero control path</span>
+          <span class="problem-tag">Fail-safe</span>
+        </div>
+      </div>
+
+      <div class="problem-card" data-reveal data-delay="1" role="listitem" data-num="05">
+        <div class="problem-num">05 · RULE DRIFT</div>
+        <div class="problem-q">"Regulations change. We cannot guarantee the AI is evaluating against the current rules, not last year's."</div>
+        <div class="problem-a-label">SKI resolves this</div>
+        <p class="problem-a">The Knowledge Graph is a living, versioned artifact with a governed update pipeline. Every change requires extraction, human expert validation, cryptographic signing, and deployment. The audit ledger records which graph version produced each verdict.</p>
+        <div class="problem-tags">
+          <span class="problem-tag">Versioned rulebook</span>
+          <span class="problem-tag">Human review</span>
+          <span class="problem-tag">Sealed and signed</span>
+        </div>
+      </div>
+
+      <div class="problem-card" data-reveal data-delay="2" role="listitem" data-num="06">
+        <div class="problem-num">06 · ACCOUNTABILITY</div>
+        <div class="problem-q">"If the AI is making compliance decisions, who is accountable? The regulator will ask."</div>
+        <div class="problem-a-label">SKI resolves this</div>
+        <p class="problem-a">Human reviewers validate every Knowledge Graph rule before production. Human authority is preserved on all escalations. The DISCRETIONARY verdict explicitly routes ambiguous cases to a named reviewer. The AI augments judgement; it does not replace it.</p>
+        <div class="problem-tags">
+          <span class="problem-tag">Human oversight</span>
+          <span class="problem-tag">Named accountability</span>
+          <span class="problem-tag">Audit-ready</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     HOW IT WORKS TEASER
+     ============================================================ -->
+<section class="section-sm">
+  <div class="container">
+    <div class="how-teaser">
+      <div class="how-teaser-text">
+        <div class="section-label">How it works</div>
+        <h2>From a regulatory requirement to a verifiable verdict in plain language</h2>
+        <p>The 2-minute animated walkthrough explains how SKI turns thousands of regulations into a sealed digital rulebook, applies two independent examiners to every reading, and produces a verdict any auditor can verify in language that does not require an engineering degree.</p>
+        <button class="btn btn-primary" id="section-demo-trigger" aria-haspopup="dialog">
+          Watch it run
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 3l14 9-14 9V3z"/></svg>
+        </button>
+      </div>
+      <div class="how-steps" aria-label="8-step walkthrough overview">
+        <div class="how-step"><div class="how-step-n" aria-hidden="true">1</div> The problem: rules vs. scale</div>
+        <div class="how-step"><div class="how-step-n" aria-hidden="true">2</div> Meet SKI: watch-only, on-premise</div>
+        <div class="how-step"><div class="how-step-n" aria-hidden="true">3</div> The sealed digital rulebook</div>
+        <div class="how-step"><div class="how-step-n" aria-hidden="true">4</div> Two independent examiners</div>
+        <div class="how-step"><div class="how-step-n" aria-hidden="true">5</div> Five verdict types, nothing ambiguous</div>
+        <div class="how-step"><div class="how-step-n" aria-hidden="true">6</div> The tamper-evident audit trail</div>
+        <div class="how-step"><div class="how-step-n" aria-hidden="true">7</div> What SKI delivers vs. what it doesn't</div>
+        <div class="how-step"><div class="how-step-n" aria-hidden="true">8</div> Get started in 5 minutes</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     VERDICT ENVELOPE DEMO
+     ============================================================ -->
+<section class="section envelope" id="envelope">
+  <div class="container">
+    <div class="section-label" data-reveal>The verdict envelope</div>
+    <h2 class="section-title" data-reveal data-delay="1">Every evaluation produces exactly this shape</h2>
+    <p class="section-sub" style="margin-bottom:48px">A real verdict envelope: categorical verdict, KG citations, formalizable assertions, the Symbolic Verifier's cross-check, and six hash anchors. Hover any field to see the audit guarantee it carries.</p>
+
+    <div class="envelope-inner">
+      <div class="envelope-code" role="region" aria-label="Interactive verdict envelope. Hover fields for details.">
+        <div class="envelope-code-header">
+          <div class="env-dot env-dot-r" aria-hidden="true"></div>
+          <div class="env-dot env-dot-y" aria-hidden="true"></div>
+          <div class="env-dot env-dot-g" aria-hidden="true"></div>
+          <span class="envelope-code-title">V3VerdictEnvelope · spec v3.0 §4.2</span>
+        </div>
+        <pre role="presentation"><code
+><span class="ef" data-field="verdict"><span class="punct">{</span></span>
+<span class="ef" data-field="verdict">  <span class="k">"verdict"</span><span class="punct">:</span> <span class="v-flag">"FLAG"</span><span class="punct">,</span></span>
+<span class="ef" data-field="reasoning">  <span class="k">"reasoning"</span><span class="punct">:</span> <span class="v-str">"SO2 at 142 ppm exceeds the §60.2(a) cap of 100 ppm."</span><span class="punct">,</span></span>
+<span class="ef" data-field="kg_citations">  <span class="k">"kg_citations"</span><span class="punct">:</span> <span class="punct">[{</span></span>
+<span class="ef" data-field="kg_citations">    <span class="k">"node_id"</span><span class="punct">:</span> <span class="v-str">"energy.so2.lte_100ppm"</span><span class="punct">,</span></span>
+<span class="ef" data-field="kg_citations">    <span class="k">"role"</span><span class="punct">:</span> <span class="v-str">"obligation"</span><span class="punct">,</span></span>
+<span class="ef" data-field="kg_citations">    <span class="k">"source_document"</span><span class="punct">:</span> <span class="v-str">"40 CFR 60.2(a)"</span><span class="punct">,</span></span>
+<span class="ef" data-field="kg_citations">    <span class="k">"source_clause"</span><span class="punct">:</span> <span class="v-str">"Subpart A: General Provisions"</span></span>
+<span class="ef" data-field="kg_citations">  <span class="punct">}],</span></span>
+<span class="ef" data-field="formalizable_assertions">  <span class="k">"formalizable_assertions"</span><span class="punct">:</span> <span class="punct">[{</span></span>
+<span class="ef" data-field="formalizable_assertions">    <span class="k">"obligation_id"</span><span class="punct">:</span> <span class="v-str">"energy.so2.lte_100ppm"</span><span class="punct">,</span></span>
+<span class="ef" data-field="formalizable_assertions">    <span class="k">"metric"</span><span class="punct">:</span> <span class="v-str">"so2_ppm"</span><span class="punct">,</span></span>
+<span class="ef" data-field="formalizable_assertions">    <span class="k">"operator"</span><span class="punct">:</span> <span class="v-str">"must_not_exceed"</span><span class="punct">,</span></span>
+<span class="ef" data-field="formalizable_assertions">    <span class="k">"observed"</span><span class="punct">:</span> <span class="v-num">142</span><span class="punct">,</span></span>
+<span class="ef" data-field="formalizable_assertions">    <span class="k">"expected"</span><span class="punct">:</span> <span class="v-num">100</span><span class="punct">,</span></span>
+<span class="ef" data-field="formalizable_assertions">    <span class="k">"unit"</span><span class="punct">:</span> <span class="v-str">"ppm"</span><span class="punct">,</span></span>
+<span class="ef" data-field="formalizable_assertions">    <span class="k">"satisfied"</span><span class="punct">:</span> <span class="v-bool">false</span></span>
+<span class="ef" data-field="formalizable_assertions">  <span class="punct">}],</span></span>
+<span class="ef" data-field="verifier_result">  <span class="k">"verifier_result"</span><span class="punct">:</span> <span class="punct">{</span></span>
+<span class="ef" data-field="verifier_result">    <span class="k">"status"</span><span class="punct">:</span> <span class="v-str">"AGREED"</span><span class="punct">,</span></span>
+<span class="ef" data-field="verifier_result">    <span class="k">"verifier_observed"</span><span class="punct">:</span> <span class="v-num">142</span><span class="punct">,</span></span>
+<span class="ef" data-field="verifier_result">    <span class="k">"verifier_expected"</span><span class="punct">:</span> <span class="v-num">100</span></span>
+<span class="ef" data-field="verifier_result">  <span class="punct">},</span></span>
+<span class="ef" data-field="model_provenance">  <span class="k">"model_provenance"</span><span class="punct">:</span> <span class="punct">{</span></span>
+<span class="ef" data-field="model_provenance">    <span class="k">"model_weight_hash"</span><span class="punct">:</span> <span class="v-str">"sha256:7c2d1f8a…"</span><span class="punct">,</span></span>
+<span class="ef" data-field="model_provenance">    <span class="k">"kg_version_hash"</span><span class="punct">:</span> <span class="v-str">"sha256:eb21125f…"</span><span class="punct">,</span></span>
+<span class="ef" data-field="model_provenance">    <span class="k">"prompt_template_id"</span><span class="punct">:</span> <span class="v-str">"ski.v3.evaluate.5"</span><span class="punct">,</span></span>
+<span class="ef" data-field="model_provenance">    <span class="k">"decoder_seed"</span><span class="punct">:</span> <span class="v-num">0</span></span>
+<span class="ef" data-field="model_provenance">  <span class="punct">},</span></span>
+<span class="ef" data-field="transcript_ref">  <span class="k">"transcript_ref"</span><span class="punct">:</span> <span class="v-str">"ledger:tenant.demo/seq:00042"</span></span>
+<span class="ef"><span class="punct">}</span></span>
+</code></pre>
+      </div>
+
+      <div class="envelope-panel">
+        <div class="envelope-panel-inner">
+          <div class="envelope-panel-default" aria-live="polite">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="color:var(--text-3)" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4m0-4h.01"/></svg>
+            <span>Tap or hover any field to see the audit guarantee it carries</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     MEASURED, NOT ASSERTED
+     ============================================================ -->
+<section class="section measured" id="measured">
+  <div class="container">
+    <div class="measured-grid">
+      <div class="measured-text">
+        <div class="section-label" data-reveal>SKI Evals</div>
+        <h2 class="section-title" data-reveal data-delay="1">Measured, not asserted</h2>
+        <p class="section-sub">SKI ships its own adversarial evaluation suite and publishes every run, including the failures. A 50-case human-graded golden dataset runs through the real production path and reports accuracy, recall, and the one invariant that cannot move.</p>
+        <table class="eval-table" aria-label="Evaluation campaign results">
+          <thead>
+            <tr>
+              <th>Run</th>
+              <th>Accuracy</th>
+              <th>Silent clears</th>
+              <th>What changed</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>1</td><td class="acc">26%</td><td class="zero">0</td><td class="fix">Baseline</td></tr>
+            <tr><td>2</td><td class="acc">22%</td><td class="zero">0</td><td class="fix">Schema crash found and fixed</td></tr>
+            <tr><td>3</td><td class="acc">54%</td><td class="zero">0</td><td class="fix">Prompt v3</td></tr>
+            <tr><td>4</td><td class="acc">76%</td><td class="zero">0</td><td class="fix">Fabricated-observation gap fixed</td></tr>
+            <tr><td>5</td><td class="acc">72%</td><td class="zero">0</td><td class="fix">Unverified-CLEAR gap fixed</td></tr>
+            <tr><td>6</td><td class="acc">74%</td><td class="zero">0</td><td class="fix">LLM-contradiction routing tightened; 13 over-routed to DISCRETIONARY</td></tr>
+          </tbody>
+        </table>
+        <p style="font-size:12px;color:var(--text-3);margin-top:8px;font-style:italic;">Accuracy is an iteration target. The safety property is an architectural invariant.</p>
+        <div class="mlinks">
+          <a href="https://github.com/kpifinity/ski-framework/blob/main/docs/evals.md" target="_blank" rel="noopener" class="mlink">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            Eval methodology and full run history →
+          </a>
+          <a href="https://github.com/kpifinity/ski-framework/blob/main/docs/benchmarks.md" target="_blank" rel="noopener" class="mlink">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            Benchmark methodology →
+          </a>
+        </div>
+      </div>
+      <div class="measured-right">
+        <div class="measured-hero">
+          <div class="measured-hero-num">0</div>
+          <div class="measured-hero-label">Breaches silently cleared</div>
+          <p style="font-size:13px;color:var(--text-2);line-height:1.6;max-width:260px;margin:0 auto">Across every eval campaign to date. When the model errs, the Symbolic Verifier catches it and routes to human review.</p>
+        </div>
+        <div class="measured-stat">
+          <div class="num" style="color:var(--teal)">0.36 ms</div>
+          <div class="label">Framework overhead p99</div>
+          <div class="sub">p50 0.10 ms · p95 0.16 ms · ~8,500 verdicts/s single worker. CI gates every build on ≤ 100 ms.</div>
+        </div>
+        <div class="measured-stat">
+          <div class="num" style="color:var(--blue)">77</div>
+          <div class="label">Conformance tests, 3 levels</div>
+          <div class="sub">Level 3 Sovereignty is fully runnable, including the air-gapped-boot rig that boots inside <code>--network=none</code>.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     EU AI ACT BANNER
+     ============================================================ -->
+<section class="section-sm">
+  <div class="container">
+    <div class="euai" role="complementary" aria-label="EU AI Act deadline">
+      <div class="euai-left">
+        <div class="euai-badge">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 8v4m0 4h.01"/></svg>
+          EU AI Act · Regulation (EU) 2024/1689
+        </div>
+        <h3>High-risk AI obligations apply from <strong>2 August 2026</strong></h3>
+        <p>SKI publishes an article-level control crosswalk covering provider obligations (Articles 9–19, 72) and deployer obligations (Article 26), with an element-by-element Article 12(3) record-keeping mapping onto the audit ledger.</p>
+      </div>
+      <div class="euai-right">
+        <div class="euai-countdown" aria-label="Days until EU AI Act enforcement">
+          <span class="euai-days" id="euai-days">48</span>
+          <div class="euai-days-label">days remaining</div>
+        </div>
+        <a href="compliance.html#eu-ai-act" class="btn btn-secondary">Read the crosswalk →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     SECTOR CARDS
+     ============================================================ -->
+<section class="section" id="sectors">
+  <div class="container">
+    <div class="section-label" data-reveal>Sector Applications</div>
+    <h2 class="section-title" data-reveal data-delay="1">Built for industries where compliance failures cost lives, licences, or billions</h2>
+    <p class="section-sub">SKI was architected for environments where regulators audit every decision, data sovereignty is non-negotiable, and system failure is not an option.</p>
+    <div class="sectors-grid" role="list">
+
+      <div class="sector-card" data-reveal data-delay="1" role="listitem">
+        <div class="sector-num">01</div>
+        <div class="sector-name">Oil &amp; Gas</div>
+        <div class="sector-regs">Provincial energy regulators · Environmental protection statutes · Operational safety codes</div>
+        <p class="sector-desc">Continuous wellhead pressure, flow rate, and emissions monitoring against permit conditions. Detection of threshold breaches before reporting deadlines. SCADA integration via read-only OPC-UA sidecar.</p>
+        <div class="sector-tags">
+          <span class="sector-tag">SCADA integration</span>
+          <span class="sector-tag">Air-gap proven</span>
+          <span class="sector-tag">Wellhead monitoring</span>
+        </div>
+      </div>
+
+      <div class="sector-card" data-reveal data-delay="2" role="listitem">
+        <div class="sector-num">02</div>
+        <div class="sector-name">Financial Services</div>
+        <div class="sector-regs">Model risk supervisory guidance · Operational resilience regimes · Conduct obligations</div>
+        <p class="sector-desc">Model risk governance and trading compliance monitoring with full audit trail. Every algorithmic decision traced to a named policy clause for regulatory examination. No cloud exposure for sensitive position data.</p>
+        <div class="sector-tags">
+          <span class="sector-tag">Model governance</span>
+          <span class="sector-tag">Regulatory reporting</span>
+          <span class="sector-tag">Trade surveillance</span>
+        </div>
+      </div>
+
+      <div class="sector-card" data-reveal data-delay="3" role="listitem">
+        <div class="sector-num">03</div>
+        <div class="sector-name">Defence</div>
+        <div class="sector-regs">Controlled-information regimes · Defence cybersecurity frameworks · Classified handling</div>
+        <p class="sector-desc">Classification handling compliance and access monitoring in air-gapped environments. Cryptographic integrity verification on every compliance verdict. Full audit trail for security reviews.</p>
+        <div class="sector-tags">
+          <span class="sector-tag">Air-gapped (CI-proven)</span>
+          <span class="sector-tag">Classification controls</span>
+          <span class="sector-tag">Zero cloud</span>
+        </div>
+      </div>
+
+      <div class="sector-card" data-reveal data-delay="4" role="listitem">
+        <div class="sector-num">04</div>
+        <div class="sector-name">Energy &amp; Utilities</div>
+        <div class="sector-regs">Bulk electric reliability standards · ICS security frameworks · Energy regulator directives</div>
+        <p class="sector-desc">Grid operations compliance monitoring with sub-millisecond framework overhead per verdict. Reliability standards enforcement across distributed substations with on-premise edge nodes per site.</p>
+        <div class="sector-tags">
+          <span class="sector-tag">Grid operations</span>
+          <span class="sector-tag">Edge deployment</span>
+          <span class="sector-tag">Distributed sites</span>
+        </div>
+      </div>
+
+      <div class="sector-card" data-reveal data-delay="1" role="listitem">
+        <div class="sector-num">05</div>
+        <div class="sector-name">Mining &amp; Resources</div>
+        <div class="sector-regs">Environmental protection statutes · Tailings management standards · Worker safety</div>
+        <p class="sector-desc">Environmental monitoring compliance for tailings, water treatment, and air quality against permit conditions. Continuous tracking of reportable events with a tamper-evident ledger available directly to regulators.</p>
+        <div class="sector-tags">
+          <span class="sector-tag">Environmental monitoring</span>
+          <span class="sector-tag">Tailings compliance</span>
+          <span class="sector-tag">Audit ledger</span>
+        </div>
+      </div>
+
+      <div class="sector-card" data-reveal data-delay="2" role="listitem">
+        <div class="sector-num">06</div>
+        <div class="sector-name">Critical Manufacturing</div>
+        <div class="sector-regs">Electronic records and signature regulations · GMP · Quality management standards</div>
+        <p class="sector-desc">Manufacturing process compliance and deviation detection in pharmaceutical and medical device production. Complete electronic records with validated audit trails. Passive monitoring with zero impact on batch processes.</p>
+        <div class="sector-tags">
+          <span class="sector-tag">Process deviation</span>
+          <span class="sector-tag">Electronic records</span>
+          <span class="sector-tag">GMP compliance</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     GET STARTED
+     ============================================================ -->
+<section class="section getstarted" id="start">
+  <div class="container">
+    <div class="getstarted-card">
+      <div class="section-label" data-reveal style="justify-content:center">Get started</div>
+      <h2 data-reveal data-delay="1">Running in 5 minutes</h2>
+      <p>Six packages on PyPI. A 5-minute demo mode that exercises every framework guarantee with no model download. Or run the full 77-test conformance suite.</p>
+
+      <div class="code-block">
+        <div class="code-block-header">
+          <span class="code-block-title">Install from PyPI</span>
+        </div>
+        <pre><code><span class="comment"># Client SDK and tools (six packages):</span>
+<span class="cmd">pip install ski-sdk ski-schemas ski-kg-extractor ski-kg-validator ski-audit-ledger ski-model-deploy</span></code></pre>
+      </div>
+
+      <div class="code-block">
+        <div class="code-block-header">
+          <span class="code-block-title">First verdict in 5 minutes (demo mode)</span>
+        </div>
+        <pre><code><span class="cmd">git clone https://github.com/kpifinity/ski-framework.git && cd ski-framework</span>
+<span class="cmd">./scripts/setup.sh</span>                 <span class="comment"># generates secrets, TLS, signed demo KG</span>
+<span class="cmd">cd reference-implementation</span>
+<span class="cmd">docker compose -f docker-compose.demo.yml up -d</span>
+<span class="cmd">curl http://localhost:8000/api/health</span>   <span class="comment"># {"status":"ok","kg":"loaded"}</span></code></pre>
+      </div>
+
+      <div class="code-block">
+        <div class="code-block-header">
+          <span class="code-block-title">Full conformance suite (77 tests)</span>
+        </div>
+        <pre><code><span class="cmd">pip install -r requirements-dev.txt && pytest conformance/</span></code></pre>
+      </div>
+
+      <div class="getstarted-ctas">
+        <a href="docs.html#quick-start" class="btn btn-primary">Full quick start →</a>
+        <a href="https://github.com/kpifinity/ski-framework" target="_blank" rel="noopener" class="btn btn-secondary">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.009-.866-.013-1.7-2.782.603-3.369-1.342-3.369-1.342-.454-1.155-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0112 6.836c.85.004 1.705.114 2.504.336 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.744 0 .267.18.578.688.48C19.138 20.163 22 16.418 22 12c0-5.523-4.477-10-10-10z"/></svg>
+          View on GitHub
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     FOOTER
+     ============================================================ -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="footer-logo"><span class="logo-ski">SKI</span> Framework</div>
+        <p class="footer-tagline">Neuro-symbolic AI compliance monitoring for regulated industries. Verifiable provenance on every verdict.</p>
+        <div class="footer-badges">
+          <span class="footer-badge">Spec v3.0</span>
+          <span class="footer-badge">v3.1.0-beta.1</span>
+          <span class="footer-badge">Apache 2.0</span>
+          <span class="footer-badge">Open Source</span>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <h4>Product</h4>
+        <ul>
+          <li><button class="footer-demo-btn" id="footer-demo-trigger" aria-haspopup="dialog">How it works</button></li>
+          <li><a href="docs.html">Documentation</a></li>
+          <li><a href="compliance.html">Compliance</a></li>
+          <li><a href="docs.html#changelog">Changelog</a></li>
+          <li><a href="https://github.com/kpifinity/ski-framework/blob/main/ROADMAP.md" target="_blank" rel="noopener">Roadmap ↗</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Developers</h4>
+        <ul>
+          <li><a href="docs.html#quick-start">Quick start</a></li>
+          <li><a href="docs.html#packages">Packages</a></li>
+          <li><a href="docs.html#conformance">Conformance</a></li>
+          <li><a href="docs.html#kubernetes">Kubernetes</a></li>
+          <li><a href="https://pypi.org/project/ski-sdk/" target="_blank" rel="noopener">PyPI ↗</a></li>
+          <li><a href="https://github.com/kpifinity/ski-framework" target="_blank" rel="noopener">GitHub ↗</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Compliance</h4>
+        <ul>
+          <li><a href="compliance.html#eu-ai-act">EU AI Act crosswalk</a></li>
+          <li><a href="compliance.html#conformance">Conformance levels</a></li>
+          <li><a href="compliance.html#audit">Audit trail</a></li>
+          <li><a href="https://github.com/kpifinity/ski-framework/blob/main/docs/crosswalks/eu-ai-act.md" target="_blank" rel="noopener">Article mapping ↗</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Open Source</h4>
+        <ul>
+          <li><a href="about.html">About</a></li>
+          <li><a href="https://github.com/kpifinity/ski-framework/blob/main/SECURITY.md" target="_blank" rel="noopener">SECURITY.md ↗</a></li>
+          <li><a href="https://github.com/kpifinity/ski-framework/blob/main/SUPPORT.md" target="_blank" rel="noopener">SUPPORT.md ↗</a></li>
+          <li><a href="https://github.com/kpifinity/ski-framework/blob/main/TRADEMARKS.md" target="_blank" rel="noopener">Trademarks ↗</a></li>
+          <li><a href="mailto:hello@skiframework.org">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p class="footer-copy">
+        © 2026 KpiFinity Inc., Calgary, Alberta.
+        Specification under <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener">CC BY 4.0</a>;
+        software under <a href="https://github.com/kpifinity/ski-framework/blob/main/LICENSE" target="_blank" rel="noopener">Apache 2.0</a>.
+        · <a href="mailto:hello@skiframework.org">hello@skiframework.org</a>
+        · <a href="https://kpifinity.com" target="_blank" rel="noopener">kpifinity.com ↗</a>
+      </p>
+      <p class="footer-trademark">
+        "SKI Framework", "Sovereign Knowledge Intelligence", and "SKI Conformant" are trademarks of KpiFinity Inc.
+        <a href="https://github.com/kpifinity/ski-framework/blob/main/TRADEMARKS.md" target="_blank" rel="noopener">Trademark Policy</a>
+      </p>
+      <p class="footer-disclaimer">
+        <strong>Not legal, regulatory, or compliance advice.</strong>
+        The SKI Framework is a technical and architectural specification. Organisations applying SKI to a specific regulatory obligation should consult qualified legal, regulatory, and risk counsel. The EU AI Act crosswalk is informative; it does not constitute legal advice.
+      </p>
+    </div>
+  </div>
+</footer>
+
+<!-- ============================================================
+     Demo Modal — How SKI Works (8 steps, auto-play)
+     ============================================================ -->
+<div id="demo-modal" class="demo-modal" role="dialog" aria-modal="true" aria-label="How SKI works — 8-step interactive walkthrough" hidden>
+  <div class="demo-modal-bg" id="demo-bg"></div>
+  <div class="demo-modal-inner">
+    <div class="demo-auto-bar" id="demo-auto-bar"></div>
+    <div class="demo-modal-top">
+      <div class="demo-modal-meta">
+        <span class="demo-modal-kicker">SKI in 8 steps</span>
+        <span class="demo-modal-step" id="demo-step-count">01 / 08</span>
+      </div>
+      <div class="demo-modal-btns">
+        <span class="demo-esc-hint" aria-hidden="true">ESC to close</span>
+        <button class="demo-icon-btn" id="demo-play-btn" aria-label="Pause auto-play">
+          <svg id="demo-play-icon" width="11" height="12" viewBox="0 0 11 12" fill="currentColor" aria-hidden="true">
+            <rect x="1" y="1" width="3.5" height="10" rx="1"/><rect x="6.5" y="1" width="3.5" height="10" rx="1"/>
+          </svg>
+        </button>
+        <button class="demo-icon-btn" id="demo-close-btn" aria-label="Close demo">
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+            <path d="M1.5 1.5l9 9M10.5 1.5l-9 9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <div class="skix" id="skix">
+      <div class="skix-progress" id="skixProgress"></div>
+      <header class="skix-header" aria-hidden="true">
+        <div class="skix-brand">SKI <b>Framework</b><span>how it works</span></div>
+        <div class="skix-count" id="skixCount">01 / 08</div>
+      </header>
+
+      <div class="skix-stage">
+
+        <!-- 1 · THE PROBLEM -->
+        <section class="skix-slide is-active">
+          <div class="skix-kicker fx">01 · The problem</div>
+          <h1 class="fx d1">Your operations never stop.<br><em>Neither do the rules.</em></h1>
+          <p class="skix-sub fx d2">A refinery, a trading floor, a power grid — each produces <strong>thousands of readings and decisions every day</strong>, and regulators expect every one of them to comply. Checking them all by hand is impossible. Ordinary AI could help, but no board hands compliance to a black box that cannot explain itself.</p>
+          <div class="skix-art fx d3">
+            <svg viewBox="0 0 760 210" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <g class="fxs d1"><rect x="60" y="60" width="200" height="100" rx="10" fill="#141414" stroke="#2a2a2a" stroke-width="2"/><rect x="92" y="34" width="16" height="26" fill="#141414" stroke="#2a2a2a" stroke-width="2"/><rect x="128" y="22" width="16" height="38" fill="#141414" stroke="#2a2a2a" stroke-width="2"/><text x="160" y="105" text-anchor="middle" class="t-label">Your operations</text><text x="160" y="128" text-anchor="middle" class="t-small">24 / 7 / 365</text></g>
+              <g fill="#37c3b8" class="fxs d2"><circle class="pulse" cx="300" cy="88" r="4.5"/><circle class="pulse p2" cx="324" cy="110" r="4.5"/><circle class="pulse p3" cx="300" cy="132" r="4.5"/></g>
+              <g class="fxs d3"><line class="flow" x1="348" y1="110" x2="436" y2="110" stroke="#5ba7f7" stroke-width="2.5"/><path d="M436 104 l12 6 l-12 6 z" fill="#5ba7f7"/><text x="392" y="92" text-anchor="middle" class="t-small">who checks all of this?</text></g>
+              <g class="fxs d4"><rect x="476" y="78" width="224" height="84" rx="10" fill="#141414" stroke="#2a2a2a" stroke-width="2"/><rect x="488" y="66" width="200" height="10" rx="4" fill="#141414" stroke="#2a2a2a" stroke-width="2"/><rect x="500" y="54" width="176" height="10" rx="4" fill="#141414" stroke="#2a2a2a" stroke-width="2"/><text x="588" y="112" text-anchor="middle" class="t-label">The rules</text><text x="588" y="136" text-anchor="middle" class="t-small">thousands of pages · always changing</text></g>
+            </svg>
+          </div>
+        </section>
+
+        <!-- 2 · MEET SKI -->
+        <section class="skix-slide">
+          <div class="skix-kicker fx">02 · Meet SKI</div>
+          <h1 class="fx d1">A digital compliance examiner<br><em>inside your own building</em></h1>
+          <p class="skix-sub fx d2">SKI watches your operational data and checks it against the rules, continuously. Two promises are built into its architecture, not its settings: <strong>your data never leaves your premises</strong>, and SKI is <strong>watch-only</strong>. It has no ability to touch or control equipment. If SKI went offline tomorrow, operations would not notice.</p>
+          <div class="skix-art fx d3">
+            <svg viewBox="0 0 760 250" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <rect class="beam" x="50" y="38" width="660" height="174" rx="16" fill="none" stroke="#37c3b8" stroke-width="2.5"/>
+              <text x="380" y="26" text-anchor="middle" class="t-tag">YOUR PREMISES — NOTHING CROSSES THIS LINE</text>
+              <g class="fxs d2"><rect x="100" y="86" width="180" height="84" rx="10" fill="#141414" stroke="#2a2a2a" stroke-width="2"/><text x="190" y="123" text-anchor="middle" class="t-label">Operations</text><text x="190" y="146" text-anchor="middle" class="t-small">sensors · systems · trades</text></g>
+              <g class="fxs d3"><line class="flow" x1="296" y1="128" x2="446" y2="128" stroke="#5ba7f7" stroke-width="2.5"/><path d="M446 122 l12 6 l-12 6 z" fill="#5ba7f7"/><text x="372" y="112" text-anchor="middle" class="t-small">readings flow one way</text></g>
+              <g class="fxs d4"><rect x="478" y="80" width="184" height="96" rx="12" fill="#141414" stroke="#37c3b8" stroke-width="2"/><ellipse cx="570" cy="116" rx="24" ry="15" fill="none" stroke="#37c3b8" stroke-width="2.5"/><circle cx="570" cy="116" r="6.5" fill="#37c3b8"/><text x="570" y="158" text-anchor="middle" class="t-label">SKI · watching</text></g>
+              <g class="fxs d5"><line x1="446" y1="186" x2="296" y2="186" stroke="#2a2a2a" stroke-width="2.5" stroke-dasharray="5 7"/><circle cx="371" cy="186" r="13" fill="#0A0A0A" stroke="#ff7070" stroke-width="2.5"/><line x1="364" y1="179" x2="378" y2="193" stroke="#ff7070" stroke-width="2.5"/><text x="371" y="226" text-anchor="middle" class="t-small">no control path back — by design, not by policy</text></g>
+            </svg>
+          </div>
+        </section>
+
+        <!-- 3 · THE RULEBOOK -->
+        <section class="skix-slide">
+          <div class="skix-kicker fx">03 · The rulebook</div>
+          <h1 class="fx d1">Rules become a <em>sealed digital rulebook</em></h1>
+          <p class="skix-sub fx d2">Regulations are translated into precise, checkable rules: <em>"SO2 must not exceed 100 ppm."</em> <strong>Your own experts review and approve every rule</strong>, and the finished rulebook is cryptographically sealed — a digital wax seal that visibly breaks if anyone alters a single character. SKI refuses to run on a rulebook whose seal does not verify.</p>
+          <div class="skix-art fx d3">
+            <svg viewBox="0 0 760 220" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <g class="fxs d1"><rect x="60" y="50" width="180" height="120" rx="10" fill="#141414" stroke="#2a2a2a" stroke-width="2"/><line x1="84" y1="80" x2="216" y2="80" stroke="#2a2a2a" stroke-width="2"/><line x1="84" y1="100" x2="216" y2="100" stroke="#2a2a2a" stroke-width="2"/><line x1="84" y1="120" x2="186" y2="120" stroke="#2a2a2a" stroke-width="2"/><text x="150" y="152" text-anchor="middle" class="t-small">regulation · legal language</text></g>
+              <g class="fxs d2"><line class="flow" x1="252" y1="110" x2="282" y2="110" stroke="#5ba7f7" stroke-width="2.5"/><path d="M282 104 l12 6 l-12 6 z" fill="#5ba7f7"/></g>
+              <g class="fxs d3"><circle cx="354" cy="110" r="44" fill="#141414" stroke="#5ba7f7" stroke-width="2"/><circle cx="354" cy="96" r="11" fill="none" stroke="#5ba7f7" stroke-width="2.5"/><path d="M334 134 q20 -22 40 0" fill="none" stroke="#5ba7f7" stroke-width="2.5"/><text x="354" y="178" text-anchor="middle" class="t-small">your experts approve every rule</text></g>
+              <g class="fxs d4"><line class="flow" x1="412" y1="110" x2="442" y2="110" stroke="#5ba7f7" stroke-width="2.5"/><path d="M442 104 l12 6 l-12 6 z" fill="#5ba7f7"/></g>
+              <g class="fxs d5"><rect x="478" y="50" width="220" height="120" rx="10" fill="#141414" stroke="#37c3b8" stroke-width="2"/><text x="588" y="88" text-anchor="middle" class="t-label">Digital rulebook</text><text x="588" y="110" text-anchor="middle" class="t-small">precise · checkable · versioned</text><circle cx="588" cy="138" r="14" fill="#37c3b8"/><path d="M581.5 138 l4.5 5.5 l9 -10" stroke="#04201c" stroke-width="2.5" fill="none" stroke-linecap="round"/></g>
+              <g class="fxs d6"><text x="588" y="196" text-anchor="middle" class="t-small">sealed — any tampering is instantly detectable</text></g>
+            </svg>
+          </div>
+        </section>
+
+        <!-- 4 · TWO EXAMINERS -->
+        <section class="skix-slide">
+          <div class="skix-kicker fx">04 · The double-check</div>
+          <h1 class="fx d1">Every reading gets <em>two examiners</em></h1>
+          <p class="skix-sub fx d2">An AI reads each measurement against the rulebook and explains its reasoning, like a junior analyst. An <strong>independent checker then re-does every piece of arithmetic</strong>, like a calculator that cannot be charmed. The AI cannot invent a reading, a limit, or a rule: every claim is verified against the actual data and the sealed rulebook. <strong>If the two ever disagree, a person decides.</strong></p>
+          <div class="skix-art fx d3">
+            <svg viewBox="0 0 760 240" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <g class="fxs d1"><rect x="50" y="86" width="150" height="68" rx="10" fill="#141414" stroke="#2a2a2a" stroke-width="2"/><text x="125" y="114" text-anchor="middle" class="t-label">Reading</text><text x="125" y="136" text-anchor="middle" class="t-small">SO2 = 142 ppm</text></g>
+              <g class="fxs d2"><path class="flow" d="M208 110 C 248 110 248 62 286 62" stroke="#5ba7f7" stroke-width="2.5" fill="none"/><path class="flow" d="M208 130 C 248 130 248 178 286 178" stroke="#37c3b8" stroke-width="2.5" fill="none"/></g>
+              <g class="fxs d3"><rect x="294" y="28" width="200" height="68" rx="10" fill="#141414" stroke="#5ba7f7" stroke-width="2"/><text x="394" y="56" text-anchor="middle" class="t-label">AI examiner</text><text x="394" y="78" text-anchor="middle" class="t-small">reads · reasons · explains</text></g>
+              <g class="fxs d4"><rect x="294" y="144" width="200" height="68" rx="10" fill="#141414" stroke="#37c3b8" stroke-width="2"/><text x="394" y="172" text-anchor="middle" class="t-label">Independent checker</text><text x="394" y="194" text-anchor="middle" class="t-small">re-verifies every number</text></g>
+              <g class="fxs d5"><path class="flow" d="M502 62 C 546 62 546 112 584 116" stroke="#5ba7f7" stroke-width="2.5" fill="none"/><path class="flow" d="M502 178 C 546 178 546 128 584 124" stroke="#37c3b8" stroke-width="2.5" fill="none"/><circle cx="640" cy="120" r="46" fill="#141414" stroke="#3ecf8e" stroke-width="2.5"/><text x="640" y="115" text-anchor="middle" class="t-label">Agree?</text><text x="640" y="136" text-anchor="middle" class="t-small">then it counts</text></g>
+              <g class="fxs d6"><text x="640" y="206" text-anchor="middle" font-size="13" font-weight="600" fill="#ffb454">disagree → a human decides</text></g>
+            </svg>
+          </div>
+        </section>
+
+        <!-- 5 · FIVE ANSWERS -->
+        <section class="skix-slide">
+          <div class="skix-kicker fx">05 · The answers</div>
+          <h1 class="fx d1">Only five possible answers.<br><em>Never a guess.</em></h1>
+          <p class="skix-sub fx d2">No confidence scores. No "probably fine." Every check ends in exactly one of five verdicts, and when SKI is not certain, it says so and hands the case to a person instead of bluffing.</p>
+          <div class="skix-cards v5">
+            <div class="skix-card c-green fx d2"><span class="skix-vtag">CLEAR</span><p>Every applicable rule checked and satisfied. Logged quietly, no noise.</p></div>
+            <div class="skix-card c-red fx d3"><span class="skix-vtag">FLAG</span><p>A rule was breached. Your operations team is alerted with the exact rule and numbers.</p></div>
+            <div class="skix-card c-violet fx d4"><span class="skix-vtag">NEEDS A HUMAN</span><p>A judgment call the numbers alone cannot settle. Routed to a qualified reviewer.</p></div>
+            <div class="skix-card c-amber fx d5"><span class="skix-vtag">NO RULE COVERS THIS</span><p>A gap in the rulebook, recorded as a gap. Never quietly assumed to be fine.</p></div>
+            <div class="skix-card c-amber fx d6"><span class="skix-vtag">SENSOR WENT QUIET</span><p>Expected data stopped arriving. Missing data is itself a finding, not an excuse.</p></div>
+          </div>
+          <p class="skix-caption fx d6">silence is never mistaken for compliance</p>
+        </section>
+
+        <!-- 6 · THE LOGBOOK -->
+        <section class="skix-slide">
+          <div class="skix-kicker fx">06 · The record</div>
+          <h1 class="fx d1">Every answer enters a <em>tamper-evident logbook</em></h1>
+          <p class="skix-sub fx d2">Each verdict is written into a permanent ledger together with the reading, the exact rule applied, the AI's full reasoning, and the checker's result. Entries are <strong>chained like links</strong>: alter one word in one entry, even years later, and the chain visibly breaks. An auditor can pick any past decision and <strong>re-check it independently</strong>.</p>
+          <div class="skix-art fx d3">
+            <svg viewBox="0 0 760 190" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <g class="fxs d1"><rect x="60" y="48" width="150" height="86" rx="10" fill="#141414" stroke="#37c3b8" stroke-width="2"/><text x="135" y="80" text-anchor="middle" class="t-small">Mon 09:14:02</text><text x="135" y="106" text-anchor="middle" font-size="13" font-weight="800" fill="#3ecf8e" letter-spacing=".1em">CLEAR</text></g>
+              <g class="fxs d2"><line x1="210" y1="91" x2="252" y2="91" stroke="#37c3b8" stroke-width="3"/><circle cx="231" cy="91" r="5" fill="#0A0A0A" stroke="#37c3b8" stroke-width="2"/></g>
+              <g class="fxs d2"><rect x="252" y="48" width="150" height="86" rx="10" fill="#141414" stroke="#37c3b8" stroke-width="2"/><text x="327" y="80" text-anchor="middle" class="t-small">Mon 09:14:31</text><text x="327" y="106" text-anchor="middle" font-size="13" font-weight="800" fill="#ff7070" letter-spacing=".1em">FLAG</text></g>
+              <g class="fxs d3"><line x1="402" y1="91" x2="444" y2="91" stroke="#37c3b8" stroke-width="3"/><circle cx="423" cy="91" r="5" fill="#0A0A0A" stroke="#37c3b8" stroke-width="2"/></g>
+              <g class="fxs d3"><rect x="444" y="48" width="150" height="86" rx="10" fill="#141414" stroke="#37c3b8" stroke-width="2"/><text x="519" y="80" text-anchor="middle" class="t-small">Mon 09:15:02</text><text x="519" y="106" text-anchor="middle" font-size="13" font-weight="800" fill="#3ecf8e" letter-spacing=".1em">CLEAR</text></g>
+              <g class="fxs d4"><line x1="594" y1="91" x2="636" y2="91" stroke="#37c3b8" stroke-width="3"/><circle cx="615" cy="91" r="5" fill="#0A0A0A" stroke="#37c3b8" stroke-width="2"/></g>
+              <g class="fxs d4"><text x="660" y="96" class="t-small">… forever</text></g>
+              <g class="fxs d5"><text x="380" y="172" text-anchor="middle" class="t-small">every entry cryptographically linked to the one before — tampering breaks the chain</text></g>
+            </svg>
+          </div>
+        </section>
+
+        <!-- 7 · PROOF -->
+        <section class="skix-slide">
+          <div class="skix-kicker fx">07 · The proof</div>
+          <h1 class="fx d1">Tested the hard way,<br><em>results published</em></h1>
+          <p class="skix-sub fx d2">We run SKI against a library of deliberately tricky, human-graded scenarios — boundary values, expired rules, silent sensors — and publish every run, including the failures. The AI examiner does make mistakes; <strong>that is exactly why the architecture exists.</strong> The number that matters has never moved:</p>
+          <div class="skix-stats">
+            <div class="skix-stat fx d3"><div class="skix-statlabel">AI mistakes per test run</div><div class="skix-statvalue" style="color:var(--amber)">some, always</div></div>
+            <div class="skix-stat s-hero fx d4"><div class="skix-statlabel">Real breaches silently passed as compliant</div><div class="skix-statvalue">0</div></div>
+          </div>
+          <p class="skix-caption fx d5">six published test campaigns — every AI mistake was caught by the independent checker and routed to a human, never waved through</p>
+        </section>
+
+        <!-- 8 · CLOSE -->
+        <section class="skix-slide">
+          <div class="skix-kicker fx">08 · The point</div>
+          <h1 class="fx d1"><em>Provable</em> compliance.<br>On your premises. On the record.</h1>
+          <p class="skix-sub fx d2">Your data never leaves the building. The AI never touches your equipment. Every answer shows its work, is double-checked by math, and is written into a logbook nobody can quietly edit. When the regulator says "prove it," you can.</p>
+          <div class="skix-pillars">
+            <div class="skix-pillar fx d3"><div class="skix-check" style="background:rgba(55,195,184,.12)"><svg width="22" height="22" viewBox="0 0 22 22" aria-hidden="true"><path d="M4 12 l5 5 L18 6" fill="none" stroke="#37c3b8" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></div><h3>Stays sovereign</h3><p>runs entirely inside your boundary, air-gap capable, and proven</p></div>
+            <div class="skix-pillar fx d4"><div class="skix-check" style="background:rgba(91,167,247,.12)"><svg width="22" height="22" viewBox="0 0 22 22" aria-hidden="true"><path d="M4 12 l5 5 L18 6" fill="none" stroke="#5ba7f7" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></div><h3>Shows its work</h3><p>every verdict carries its reasoning, its rule, and its evidence</p></div>
+            <div class="skix-pillar fx d5"><div class="skix-check" style="background:rgba(62,207,142,.12)"><svg width="22" height="22" viewBox="0 0 22 22" aria-hidden="true"><path d="M4 12 l5 5 L18 6" fill="none" stroke="#3ecf8e" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></div><h3>Survives an audit</h3><p>any decision, any year, independently re-checkable</p></div>
+          </div>
+          <div class="skix-cta-row fx d6">
+            <a href="docs.html#quick-start" class="skix-btn is-primary" onclick="demoClose()">Get started →</a>
+            <a href="https://github.com/kpifinity/ski-framework" class="skix-btn" target="_blank" rel="noopener" onclick="demoClose()">View on GitHub</a>
+          </div>
+        </section>
+
+      </div><!-- /skix-stage -->
+
+      <p class="skix-hint">← → keys or buttons below · Space to pause</p>
+      <footer class="skix-footer">
+        <button class="skix-btn" id="skixPrev" aria-label="Previous step">← Back</button>
+        <div class="skix-dots" id="skixDots" role="tablist" aria-label="Step navigation"></div>
+        <button class="skix-btn is-primary" id="skixNext" aria-label="Next step">Next →</button>
+      </footer>
+    </div><!-- /skix -->
+  </div><!-- /demo-modal-inner -->
+</div><!-- /demo-modal -->
+
+<style>
+/* ── Skix explainer component (modal only) ─────────────── */
+.skix{
+  --bg:#0A0A0A;--panel:#141414;--panel2:#1C1C1C;--line:#2a2a2a;
+  --text:#F2F2F4;--dim:#8B95A8;
+  --accent:#37c3b8;--blue:#5ba7f7;
+  --green:#3ecf8e;--red:#ff7070;--amber:#ffb454;--violet:#b394ff;
+  position:relative;width:100%;height:100%;background:var(--bg);
+  color:var(--text);font-family:"Plus Jakarta Sans","Inter",system-ui,sans-serif;
+  display:flex;flex-direction:column;overflow:hidden;
+}
+.skix *{margin:0;padding:0;box-sizing:border-box}
+.skix-progress{position:absolute;top:0;left:0;height:2px;background:var(--accent);width:0;transition:width .45s cubic-bezier(.4,0,.2,1);z-index:5}
+.skix-header{display:flex;justify-content:space-between;align-items:center;padding:20px 36px;border-bottom:1px solid var(--line);flex:0 0 auto}
+.skix-brand{font-weight:700;font-size:15px;letter-spacing:.06em}
+.skix-brand b{color:var(--accent);font-weight:700}
+.skix-brand span{color:var(--dim);font-weight:400;margin-left:10px;font-size:13.5px;letter-spacing:.02em}
+.skix-count{color:var(--dim);font-size:13px;font-variant-numeric:tabular-nums;letter-spacing:.08em}
+.skix-stage{flex:1 1 auto;position:relative;min-height:0}
+.skix-slide{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0;padding:24px clamp(24px,7vw,96px) 40px;opacity:0;transform:translateX(36px);transition:opacity .5s ease,transform .5s ease;pointer-events:none;text-align:center}
+.skix-slide.is-active{opacity:1;transform:none;pointer-events:auto}
+.skix-slide.is-prev{transform:translateX(-36px)}
+.skix-kicker{font-size:12px;font-weight:700;letter-spacing:.22em;color:var(--accent);text-transform:uppercase;margin-bottom:18px}
+.skix-slide h1{font-size:clamp(24px,3.4vw,40px);line-height:1.18;font-weight:700;max-width:21ch;margin-bottom:18px;letter-spacing:-.01em}
+.skix-slide h1 em{color:var(--accent);font-style:normal}
+.skix-sub{color:var(--dim);font-size:clamp(14px,1.35vw,17px);line-height:1.65;max-width:66ch;margin-bottom:clamp(20px,3.5vh,40px)}
+.skix-sub strong{color:var(--text);font-weight:600}
+.skix-art{width:min(740px,90vw);flex:0 0 auto}
+.skix-caption{margin-top:18px;color:var(--dim);font-size:13.5px;letter-spacing:.02em}
+.skix-footer{flex:0 0 auto;display:flex;justify-content:center;align-items:center;gap:26px;padding:16px;border-top:1px solid var(--line)}
+.skix-btn{background:var(--panel);border:1px solid var(--line);color:var(--text);padding:10px 24px;border-radius:9px;font-size:14px;font-family:inherit;cursor:pointer;transition:border-color .2s,transform .15s;text-decoration:none;display:inline-flex;align-items:center}
+.skix-btn:hover{border-color:var(--accent)}
+.skix-btn:active{transform:scale(.97)}
+.skix-btn.is-primary{background:var(--accent);border-color:var(--accent);color:#04201c;font-weight:600}
+.skix-dots{display:flex;gap:9px}
+.skix-dot{width:8px;height:8px;border-radius:50%;background:var(--line);cursor:pointer;border:none;padding:0;transition:background .3s,transform .3s}
+.skix-dot.is-on{background:var(--accent);transform:scale(1.25)}
+.skix-hint{position:absolute;bottom:72px;width:100%;text-align:center;color:var(--dim);font-size:12px;letter-spacing:.06em;opacity:.6}
+.skix .fx{opacity:0}
+.skix-slide.is-active .fx{animation:skixUp .65s cubic-bezier(.2,.9,.3,1) forwards}
+.skix-slide.is-active .fx.d1{animation-delay:.12s}
+.skix-slide.is-active .fx.d2{animation-delay:.28s}
+.skix-slide.is-active .fx.d3{animation-delay:.44s}
+.skix-slide.is-active .fx.d4{animation-delay:.60s}
+.skix-slide.is-active .fx.d5{animation-delay:.76s}
+.skix-slide.is-active .fx.d6{animation-delay:.92s}
+@keyframes skixUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.skix svg .fxs{opacity:0}
+.skix-slide.is-active svg .fxs{animation:skixIn .6s cubic-bezier(.2,.9,.3,1) forwards}
+.skix-slide.is-active svg .fxs.d1{animation-delay:.15s}
+.skix-slide.is-active svg .fxs.d2{animation-delay:.35s}
+.skix-slide.is-active svg .fxs.d3{animation-delay:.55s}
+.skix-slide.is-active svg .fxs.d4{animation-delay:.75s}
+.skix-slide.is-active svg .fxs.d5{animation-delay:.95s}
+.skix-slide.is-active svg .fxs.d6{animation-delay:1.15s}
+@keyframes skixIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.skix svg .flow{stroke-dasharray:5 9;animation:skixDash 1.1s linear infinite}
+@keyframes skixDash{to{stroke-dashoffset:-14}}
+.skix svg .pulse{animation:skixPulse 2.2s ease-in-out infinite}
+.skix svg .pulse.p2{animation-delay:.7s}
+.skix svg .pulse.p3{animation-delay:1.4s}
+@keyframes skixPulse{0%,100%{opacity:.2}50%{opacity:1}}
+.skix svg .beam{stroke-dasharray:900;stroke-dashoffset:900}
+.skix-slide.is-active svg .beam{animation:skixBeam 1.4s ease .2s forwards}
+@keyframes skixBeam{to{stroke-dashoffset:0}}
+.skix svg{display:block;width:100%;height:auto}
+.skix svg text{font-family:inherit}
+.skix svg .t-label{font-size:15px;font-weight:600;fill:var(--text)}
+.skix svg .t-small{font-size:12.5px;fill:var(--dim)}
+.skix svg .t-tag{font-size:11.5px;font-weight:700;letter-spacing:.14em;fill:var(--accent)}
+.skix-cards{display:grid;gap:14px;width:min(860px,92vw)}
+.skix-cards.v5{grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+.skix-card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 18px;text-align:left}
+.skix-card .skix-vtag{display:inline-block;font-size:11px;font-weight:800;letter-spacing:.12em;padding:4px 10px;border-radius:6px;margin-bottom:10px}
+.skix-card p{color:var(--dim);font-size:13px;line-height:1.55}
+.skix-card.c-green{border-color:rgba(62,207,142,.45)}.skix-card.c-green .skix-vtag{background:rgba(62,207,142,.12);color:var(--green)}
+.skix-card.c-red{border-color:rgba(255,112,112,.45)}.skix-card.c-red .skix-vtag{background:rgba(255,112,112,.12);color:var(--red)}
+.skix-card.c-amber{border-color:rgba(255,180,84,.45)}.skix-card.c-amber .skix-vtag{background:rgba(255,180,84,.12);color:var(--amber)}
+.skix-card.c-violet{border-color:rgba(179,148,255,.45)}.skix-card.c-violet .skix-vtag{background:rgba(179,148,255,.12);color:var(--violet)}
+.skix-stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px;width:min(680px,90vw)}
+.skix-stat{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:24px 20px;text-align:center}
+.skix-stat .skix-statlabel{color:var(--dim);font-size:13px;letter-spacing:.04em;margin-bottom:12px}
+.skix-stat .skix-statvalue{font-size:clamp(24px,2.8vw,32px);font-weight:800;letter-spacing:-.01em}
+.skix-stat.s-hero{border-color:rgba(62,207,142,.55);background:linear-gradient(180deg,rgba(62,207,142,.08),transparent)}
+.skix-stat.s-hero .skix-statvalue{font-size:clamp(40px,4.5vw,52px);color:var(--green)}
+.skix-pillars{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:16px;width:min(720px,90vw)}
+.skix-pillar{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:22px 16px;text-align:center}
+.skix-pillar .skix-check{width:44px;height:44px;margin:0 auto 12px;border-radius:50%;display:flex;align-items:center;justify-content:center}
+.skix-pillar h3{font-size:15px;font-weight:600;margin-bottom:6px}
+.skix-pillar p{color:var(--dim);font-size:12.5px;line-height:1.5}
+.skix-cta-row{display:flex;gap:14px;justify-content:center;margin-top:24px;flex-wrap:wrap}
+/* hide built-in header + progress bar in modal */
+.demo-modal-inner .skix-header{display:none!important}
+.demo-modal-inner .skix-progress{display:none!important}
+@media(max-width:640px){
+  /* --- slide container: start at top, scroll if content overflows --- */
+  .skix-slide{
+    padding:14px 18px 20px;
+    justify-content:flex-start;
+    overflow-y:auto;
+    -webkit-overflow-scrolling:touch;
+    gap:0
+  }
+  .skix-hint{display:none}
+  .skix-kicker{margin-bottom:10px}
+  .skix-slide h1{font-size:clamp(18px,5.5vw,26px);margin-bottom:10px}
+  .skix-sub{font-size:13px;line-height:1.55;margin-bottom:14px}
+
+  /* --- 5 verdict cards: 2-column grid so they fit --- */
+  .skix-cards{width:100%!important;gap:8px}
+  .skix-cards.v5{grid-template-columns:1fr 1fr}
+  .skix-card{padding:10px 11px}
+  .skix-card .skix-vtag{font-size:9px;padding:3px 7px;margin-bottom:7px}
+  .skix-card p{font-size:11.5px;line-height:1.45}
+  .skix-caption{font-size:12px;margin-top:10px}
+
+  /* --- stats (slide 7): side by side --- */
+  .skix-stats{width:100%!important;gap:10px;grid-template-columns:1fr 1fr}
+  .skix-stat{padding:14px 12px}
+  .skix-stat .skix-statlabel{font-size:11.5px;margin-bottom:8px}
+  .skix-stat .skix-statvalue{font-size:clamp(20px,5vw,28px)}
+  .skix-stat.s-hero .skix-statvalue{font-size:clamp(32px,8vw,42px)}
+
+  /* --- pillars (slide 8): 3 across --- */
+  .skix-pillars{width:100%!important;gap:8px;grid-template-columns:repeat(3,1fr)}
+  .skix-pillar{padding:14px 10px}
+  .skix-pillar .skix-check{width:36px;height:36px;margin-bottom:8px}
+  .skix-pillar h3{font-size:12.5px;margin-bottom:4px}
+  .skix-pillar p{font-size:11px}
+  .skix-cta-row{margin-top:14px;gap:8px}
+  .skix-cta-row .skix-btn{padding:9px 14px;font-size:13px}
+
+  /* --- art SVGs: full width --- */
+  .skix-art{width:100%!important}
+
+  /* --- footer: compact --- */
+  .skix-footer{padding:10px 14px;gap:10px}
+  .skix-btn{padding:8px 14px;font-size:13px}
+  .skix-dots{gap:6px}
+  .skix-dot{width:6px;height:6px}
+  .demo-modal-top{padding:10px 14px}
+}
+</style>
+
+<script>
+/* ── Demo modal controller ─────────────────────────────── */
+(function(){
+  'use strict';
+  const STEP_MS = 5200; // ms per auto-play step
+
+  const modal     = document.getElementById('demo-modal');
+  const modalBg   = document.getElementById('demo-bg');
+  const closeBtn  = document.getElementById('demo-close-btn');
+  const playBtn   = document.getElementById('demo-play-btn');
+  const playIcon  = document.getElementById('demo-play-icon');
+  const autoBar   = document.getElementById('demo-auto-bar');
+  const stepLabel = document.getElementById('demo-step-count');
+
+  const root    = document.getElementById('skix');
+  const slides  = [...root.querySelectorAll('.skix-slide')];
+  const dotsEl  = root.querySelector('#skixDots');
+  const nextBtn = root.querySelector('#skixNext');
+  const prevBtn = root.querySelector('#skixPrev');
+  const N = slides.length;
+  let cur = 0, playing = false, timer = null, barAnim = null, openedAt = 0, lastTrigger = null;
+
+  // Build step dots
+  slides.forEach((_, n) => {
+    const d = document.createElement('button');
+    d.className = 'skix-dot' + (n === 0 ? ' is-on' : '');
+    d.setAttribute('role', 'tab');
+    d.setAttribute('aria-label', 'Step ' + (n + 1));
+    d.onclick = () => { pause(); go(n); };
+    dotsEl.appendChild(d);
+  });
+
+  function pad(n){ return String(n).padStart(2,'0'); }
+
+  function go(n){
+    if (n < 0 || n >= N) return;
+    slides.forEach((s,k) => { s.classList.toggle('is-prev', k < n); s.classList.remove('is-active'); });
+    cur = n;
+    void slides[cur].offsetWidth; // restart entrance animations
+    slides[cur].classList.add('is-active');
+    [...dotsEl.children].forEach((d,k) => d.classList.toggle('is-on', k === cur));
+    nextBtn.textContent = cur === N - 1 ? 'Restart ↺' : 'Next →';
+    if (stepLabel) stepLabel.textContent = pad(cur + 1) + ' / ' + pad(N);
+    if (playing) startBar();
+  }
+
+  function startBar(){
+    clearTimeout(timer);
+    if (barAnim) barAnim.cancel();
+    autoBar.style.width = '0';
+    void autoBar.offsetWidth;
+    barAnim = autoBar.animate([{width:'0%'},{width:'100%'}], {duration: STEP_MS, easing:'linear', fill:'forwards'});
+    timer = setTimeout(() => go(cur === N - 1 ? 0 : cur + 1), STEP_MS);
+  }
+
+  function stopBar(){
+    clearTimeout(timer);
+    if (barAnim) { barAnim.cancel(); barAnim = null; }
+    autoBar.style.width = '0';
+  }
+
+  function play(){
+    playing = true;
+    playIcon.innerHTML = '<rect x="1" y="1" width="3.5" height="10" rx="1"/><rect x="6.5" y="1" width="3.5" height="10" rx="1"/>';
+    playBtn.setAttribute('aria-label','Pause auto-play');
+    startBar();
+  }
+
+  function pause(){
+    playing = false;
+    playIcon.innerHTML = '<path d="M1.5 1.5 L9.5 6 L1.5 10.5 Z"/>';
+    playBtn.setAttribute('aria-label','Resume auto-play');
+    stopBar();
+  }
+
+  // Expose so slide CTAs can trigger close
+  window.demoClose = closeModal;
+
+  // Focus trap helpers
+  const FOCUSABLE_SEL = 'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])';
+  function getFocusable(){ return [...modal.querySelectorAll(FOCUSABLE_SEL)]; }
+
+  function openModal(e){
+    // Track which trigger opened the modal so we can restore focus on close
+    lastTrigger = e && e.currentTarget ? e.currentTarget : document.activeElement;
+
+    // Close mobile nav if open
+    const mobileNav = document.getElementById('mobile-nav');
+    const hamburger = document.querySelector('.nav-hamburger');
+    if (mobileNav && mobileNav.classList.contains('is-open')) {
+      mobileNav.classList.remove('is-open');
+      if (hamburger) hamburger.setAttribute('aria-expanded', 'false');
+    }
+
+    modal.removeAttribute('hidden');
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+      modal.classList.add('is-open');
+      // Move focus to close button after transition starts
+      setTimeout(() => closeBtn.focus(), 80);
+    }));
+    document.body.style.overflow = 'hidden';
+    openedAt = Date.now();
+    go(0);
+    // Delay play() until after the open animation — the trigger button sits inside
+    // the modal bounds, so mouseenter fires instantly and kills auto-play if we
+    // call play() synchronously here.
+    setTimeout(play, 380);
+  }
+
+  function closeModal(){
+    modal.classList.remove('is-open');
+    pause();
+    document.body.style.overflow = '';
+    // Clean ?demo param from URL without adding a history entry
+    if (/[?&]demo/.test(location.search)) {
+      history.replaceState({}, '', location.pathname);
+    }
+    // Return focus to whatever triggered the modal
+    setTimeout(() => {
+      modal.setAttribute('hidden','');
+      if (lastTrigger && typeof lastTrigger.focus === 'function') lastTrigger.focus();
+    }, 320);
+  }
+
+  // Triggers
+  ['hero-demo-trigger','nav-demo-trigger','mobile-demo-trigger','section-demo-trigger','footer-demo-trigger'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.addEventListener('click', e => openModal(e));
+  });
+  closeBtn.addEventListener('click', closeModal);
+  modalBg.addEventListener('click', closeModal);
+
+  // Keyboard
+  document.addEventListener('keydown', e => {
+    if (!modal.classList.contains('is-open')) return;
+    if (e.key === 'Escape') { closeModal(); return; }
+    if (e.key === 'ArrowRight') { e.preventDefault(); pause(); go(cur === N-1 ? 0 : cur+1); }
+    if (e.key === 'ArrowLeft')  { e.preventDefault(); pause(); go(cur-1); }
+    if (e.key === ' ')          { e.preventDefault(); playing ? pause() : play(); }
+  });
+
+  // Manual nav buttons
+  nextBtn.addEventListener('click', () => { pause(); go(cur === N-1 ? 0 : cur+1); });
+  prevBtn.addEventListener('click', () => { pause(); go(cur-1); });
+  playBtn.addEventListener('click', () => playing ? pause() : play());
+
+  // Pause on hover — ignore events for the first 900 ms after modal opens
+  // (the trigger button sits inside the modal area, mouseenter fires immediately)
+  const inner = modal.querySelector('.demo-modal-inner');
+  inner.addEventListener('mouseenter', () => {
+    if (playing && Date.now() - openedAt > 900) {
+      clearTimeout(timer);
+      if (barAnim) barAnim.pause();
+      // Show paused state visually so user knows hovering paused it
+      playIcon.innerHTML = '<path d="M1.5 1.5 L9.5 6 L1.5 10.5 Z"/>';
+      playBtn.setAttribute('aria-label','Resume auto-play');
+    }
+  });
+  inner.addEventListener('mouseleave', () => {
+    if (playing) {
+      if (barAnim) barAnim.play();
+      const remaining = barAnim ? Math.max(0, STEP_MS - (barAnim.currentTime || 0)) : STEP_MS;
+      clearTimeout(timer);
+      timer = setTimeout(() => go(cur === N-1 ? 0 : cur+1), remaining);
+      // Restore playing state visually
+      playIcon.innerHTML = '<rect x="1" y="1" width="3.5" height="10" rx="1"/><rect x="6.5" y="1" width="3.5" height="10" rx="1"/>';
+      playBtn.setAttribute('aria-label','Pause auto-play');
+    }
+  });
+
+  // Touch swipe (loops to match auto-play behaviour)
+  let x0 = null;
+  root.addEventListener('touchstart', e => { x0 = e.touches[0].clientX; }, {passive:true});
+  root.addEventListener('touchend', e => {
+    if (x0 === null) return;
+    const dx = e.changedTouches[0].clientX - x0;
+    if (dx < -40) { pause(); go(cur === N-1 ? 0 : cur+1); }
+    if (dx > 40)  { pause(); go(cur-1); }
+    x0 = null;
+  }, {passive:true});
+
+  // Focus trap — keep Tab inside modal while open
+  modal.addEventListener('keydown', e => {
+    if (e.key !== 'Tab') return;
+    const focusable = getFocusable();
+    if (!focusable.length) return;
+    const first = focusable[0];
+    const last  = focusable[focusable.length - 1];
+    if (e.shiftKey) {
+      if (document.activeElement === first) { e.preventDefault(); last.focus(); }
+    } else {
+      if (document.activeElement === last)  { e.preventDefault(); first.focus(); }
+    }
+  });
+
+  // ?demo URL param auto-open
+  if (/[?&]demo/.test(location.search)) {
+    window.addEventListener('load', () => openModal(null));
+  }
+})();
+</script>
+
+<script>
+(function(){
+  const d=document.getElementById('announce-days');
+  if(d){const t=new Date('2026-08-02T00:00:00Z');const n=new Date();d.textContent=Math.max(0,Math.ceil((t-n)/86400000));}
+})();
+</script>
+<script src="assets/js/main.js" defer></script>
+</body>
+</html>
+                                                                                                                                                                                                                                                                                                                                                                                                

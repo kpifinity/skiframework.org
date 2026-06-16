@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Compliance · SKI Framework</title>
+<meta name="description" content="EU AI Act crosswalk, SKI conformance levels, and audit trail documentation for regulated industry deployments.">
+<meta property="og:title" content="Compliance · SKI Framework">
+<meta property="og:description" content="EU AI Act article-level crosswalk, SKI conformance levels (L1–L3), and audit trail documentation for regulated industry deployments.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://skiframework.org/compliance.html">
+<meta property="og:image" content="https://skiframework.org/assets/images/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Compliance · SKI Framework">
+<meta name="twitter:description" content="EU AI Act article-level crosswalk, SKI conformance levels (L1–L3), and audit trail documentation for regulated industry deployments.">
+<meta name="twitter:image" content="https://skiframework.org/assets/images/og.png">
+<link rel="canonical" href="https://skiframework.org/compliance.html">
+<meta name="theme-color" content="#0A0A0A">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%230A0A0A'/><polygon points='50,7 93,50 50,93 7,50' fill='rgba(45,212,191,0.10)' stroke='%232DD4BF' stroke-width='6' stroke-linejoin='round'/><circle cx='50' cy='50' r='19' fill='%232DD4BF'/></svg>">
+<link rel="preconnect" href="https://fonts.bunny.net">
+<link href="https://fonts.bunny.net/css?family=plus-jakarta-sans:300,400,500,600,700,800,900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/styles.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": "https://skiframework.org/compliance.html#webpage",
+      "url": "https://skiframework.org/compliance.html",
+      "name": "Compliance — SKI Framework",
+      "description": "EU AI Act article-level crosswalk, SKI conformance levels (L1 through L3), and audit trail documentation for regulated industry deployments.",
+      "dateModified": "2026-06-16",
+      "author": { "@type": "Organization", "name": "KpiFinity Inc.", "url": "https://kpifinity.com" },
+      "publisher": { "@id": "https://skiframework.org/#organization" },
+      "isPartOf": { "@id": "https://skiframework.org/#website" },
+      "about": [
+        {
+          "@type": "Legislation",
+          "name": "EU AI Act",
+          "alternateName": "Regulation (EU) 2024/1689",
+          "legislationIdentifier": "2024/1689",
+          "legislationJurisdiction": "EU",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32024R1689"
+        },
+        { "@id": "https://skiframework.org/#software" }
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "item": { "@id": "https://skiframework.org", "name": "Home" } },
+        { "@type": "ListItem", "position": 2, "item": { "@id": "https://skiframework.org/compliance.html", "name": "Compliance" } }
+      ]
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<a href="#main-content" class="skip-link">Skip to main content</a>
+
+<div class="announce" role="banner">
+  <span><strong>v3.1.0-beta.1</strong> on PyPI · v3.0.3 stable</span>
+  <span class="announce-sep">·</span>
+  <span>EU AI Act high-risk obligations: <strong id="announce-days">48</strong> days</span>
+  <span class="announce-sep">·</span>
+  <a href="#eu-ai-act">Read the crosswalk ↓</a>
+</div>
+
+<header>
+  <nav class="nav" role="navigation" aria-label="Main navigation">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo" aria-label="SKI Framework home">
+        <span class="logo-ski">SKI</span>&nbsp;Framework
+        <span class="logo-beta">beta</span>
+      </a>
+      <ul class="nav-links" role="list">
+        <li><a href="index.html#why">Why SKI</a></li>
+        <li><a href="index.html?demo">How it works</a></li>
+        <li><a href="docs.html">Docs</a></li>
+        <li><a href="compliance.html" class="active">Compliance</a></li>
+        <li><a href="about.html">About</a></li>
+      </ul>
+      <div class="nav-actions">
+        <a href="https://github.com/kpifinity/ski-framework" class="nav-github" target="_blank" rel="noopener">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.009-.866-.013-1.7-2.782.603-3.369-1.342-3.369-1.342-.454-1.155-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0112 6.836c.85.004 1.705.114 2.504.336 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.744 0 .267.18.578.688.48C19.138 20.163 22 16.418 22 12c0-5.523-4.477-10-10-10z"/></svg>
+          GitHub
+        </a>
+        <button class="nav-hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-nav">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+  <div class="nav-mobile" id="mobile-nav" role="dialog" aria-modal="true" aria-label="Mobile navigation">
+    <a href="index.html#why">Why SKI</a>
+    <a href="index.html?demo">How it works</a>
+    <a href="docs.html">Docs</a>
+    <a href="compliance.html">Compliance</a>
+    <a href="about.html">About</a>
+    <a href="https://github.com/kpifinity/ski-framework" target="_blank" rel="noopener">GitHub ↗</a>
+  </div>
+</header>
+
+<main class="docs-layout" id="main-content">
+
+  <!-- Mobile section nav (visible on small screens only) -->
+  <nav class="docs-mobile-nav" aria-label="Jump to section">
+    <a href="#eu-ai-act">EU AI Act</a>
+    <a href="#eu-timeline">Timeline</a>
+    <a href="#eu-provider">Provider</a>
+    <a href="#eu-deployer">Deployer</a>
+    <a href="#eu-article12">Article 12</a>
+    <a href="#eu-full">Crosswalk</a>
+    <a href="#conformance">Conformance</a>
+    <a href="#level-1">Level 1</a>
+    <a href="#level-2">Level 2</a>
+    <a href="#level-3">Level 3</a>
+    <a href="#audit">Audit trail</a>
+    <a href="#replay">Replay</a>
+  </nav>
+
+  <aside class="docs-sidebar" role="navigation" aria-label="Compliance sections">
+    <div class="docs-sidebar-inner">
+      <div class="docs-sidebar-section">
+        <div class="docs-sidebar-label">EU AI Act</div>
+        <a href="#eu-ai-act">Overview</a>
+        <a href="#eu-timeline">Timeline</a>
+        <a href="#eu-provider">Provider obligations</a>
+        <a href="#eu-deployer">Deployer obligations</a>
+        <a href="#eu-article12">Article 12: Record-keeping</a>
+        <a href="#eu-full">Full crosswalk</a>
+      </div>
+      <div class="docs-sidebar-section">
+        <div class="docs-sidebar-label">SKI Conformance</div>
+        <a href="#conformance">Overview</a>
+        <a href="#level-1">Level 1: Provenance</a>
+        <a href="#level-2">Level 2: Durability</a>
+        <a href="#level-3">Level 3: Sovereignty</a>
+      </div>
+      <div class="docs-sidebar-section">
+        <div class="docs-sidebar-label">Audit trail</div>
+        <a href="#audit">Audit trail design</a>
+        <a href="#replay">Verdict replay</a>
+        <a href="#disclaimer">Disclaimer</a>
+      </div>
+    </div>
+  </aside>
+
+  <div class="docs-content">
+
+    <div class="docs-hero">
+      <div class="section-label">Compliance</div>
+      <h1>Regulatory compliance &amp; conformance</h1>
+      <p class="docs-lead">SKI was designed from first principles for regulated industries. This page covers the EU AI Act article-level crosswalk, SKI's three-tier conformance framework, and the audit trail design that makes every verdict replayable.</p>
+      <div class="docs-callout docs-callout-amber">
+        <strong>Not legal advice.</strong> The material on this page is informative only. Organisations applying SKI to a specific regulatory obligation must consult qualified legal, regulatory, and risk counsel. The EU AI Act crosswalk does not constitute legal advice.
+      </div>
+    </div>
+
+    <!-- ── EU AI Act ───────────────────────────────────────────── -->
+    <section id="eu-ai-act">
+      <h2>EU AI Act, Regulation (EU) 2024/1689</h2>
+      <p>SKI publishes an article-level control crosswalk covering the high-risk AI system obligations under Regulation (EU) 2024/1689 (the EU AI Act). The crosswalk addresses both provider and deployer obligations and maps each SKI architectural control to the relevant Article.</p>
+      <div class="euai" style="margin-top:24px;" role="complementary">
+        <div class="euai-left">
+          <div class="euai-badge">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 8v4m0 4h.01"/></svg>
+            Key date
+          </div>
+          <h3>High-risk AI obligations apply from <strong>2 August 2026</strong></h3>
+          <p>Chapter III Section 2 obligations, covering risk management, data governance, technical documentation, transparency, accuracy, robustness, and cybersecurity, apply to high-risk AI system providers from this date. Deployer obligations under Article 26 apply from the same date.</p>
+        </div>
+        <div class="euai-right">
+          <div class="euai-countdown" aria-label="Days until enforcement">
+            <span class="euai-days" id="euai-days">48</span>
+            <div class="euai-days-label">days remaining</div>
+          </div>
+          <a href="https://github.com/kpifinity/ski-framework/blob/main/docs/crosswalks/eu-ai-act.md" target="_blank" rel="noopener" class="btn btn-secondary">Full crosswalk on GitHub →</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="eu-timeline">
+      <h2>EU AI Act timeline</h2>
+      <div class="docs-table-wrap">
+        <table class="docs-table">
+          <thead><tr><th>Date</th><th>Event</th></tr></thead>
+          <tbody>
+            <tr><td>1 August 2024</td><td>Regulation (EU) 2024/1689 entered into force</td></tr>
+            <tr><td>2 February 2025</td><td>Prohibited AI practices (Article 5) applied</td></tr>
+            <tr><td>2 August 2025</td><td>GPAI model obligations applied; Article 6(1) high-risk categories applied</td></tr>
+            <tr><td><strong>2 August 2026</strong></td><td><strong>High-risk AI Chapter III Section 2 obligations apply. Deployer obligations (Article 26) apply.</strong></td></tr>
+            <tr><td>2 August 2027</td><td>Article 6(1) AI systems in Annex I products apply</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="eu-provider">
+      <h2>Provider obligations crosswalk (Articles 9–19, 72)</h2>
+      <p>SKI addresses provider obligations through its architectural design. The following is a summary, the full element-by-element mapping is in <a href="https://github.com/kpifinity/ski-framework/blob/main/docs/crosswalks/eu-ai-act.md" target="_blank" rel="noopener">docs/crosswalks/eu-ai-act.md ↗</a>.</p>
+      <div class="docs-table-wrap">
+        <table class="docs-table">
+          <thead><tr><th>Article</th><th>Subject</th><th>SKI control</th></tr></thead>
+          <tbody>
+            <tr>
+              <td>Art. 9</td>
+              <td>Risk management system</td>
+              <td>Taxonomy guard, DISCRETIONARY escalation, no-silent-clear invariant. Human review required for all ambiguous verdicts.</td>
+            </tr>
+            <tr>
+              <td>Art. 10</td>
+              <td>Data and data governance</td>
+              <td>KG extraction and validation pipeline with human expert review at each stage. Signed KG proves provenance of the rulebook.</td>
+            </tr>
+            <tr>
+              <td>Art. 11</td>
+              <td>Technical documentation</td>
+              <td>Spec v3.0 (open), CITATION.cff, CHANGELOG.md, benchmark methodology, conformance test suite, release notes per version.</td>
+            </tr>
+            <tr>
+              <td>Art. 12</td>
+              <td>Record-keeping</td>
+              <td>Audit ledger with append-only enforcement, hash chaining, signed transcripts, and per-verdict model provenance. See Article 12 section below.</td>
+            </tr>
+            <tr>
+              <td>Art. 13</td>
+              <td>Transparency (deployers)</td>
+              <td>Every verdict includes a human-readable reasoning field. Five categorical verdict types with defined escalation paths. DISCRETIONARY is never opaque.</td>
+            </tr>
+            <tr>
+              <td>Art. 14</td>
+              <td>Human oversight</td>
+              <td>SKI is read-only. DISCRETIONARY routes ambiguous cases to named human reviewers. Zero control path to operational systems.</td>
+            </tr>
+            <tr>
+              <td>Art. 15</td>
+              <td>Accuracy, robustness, cybersecurity</td>
+              <td>Benchmark suite (published p99 = 0.36 ms), adversarial eval suite with 50-case golden dataset, ed25519 signing, hash-chain integrity, KG signature validation.</td>
+            </tr>
+            <tr>
+              <td>Art. 17</td>
+              <td>Quality management system</td>
+              <td>CI-gated conformance suite (77 tests), benchmark CI gate, nightly eval workflow, changelog promotion discipline, trusted publishing.</td>
+            </tr>
+            <tr>
+              <td>Art. 72</td>
+              <td>Post-market monitoring</td>
+              <td>Prometheus metrics (ski_agreement_rate, ski_verdicts_total, ski_ledger_sequence_gaps_total), Grafana alert rules, nightly eval report.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="eu-deployer">
+      <h2>Deployer obligations (Article 26)</h2>
+      <div class="docs-table-wrap">
+        <table class="docs-table">
+          <thead><tr><th>Article 26 element</th><th>SKI support</th></tr></thead>
+          <tbody>
+            <tr>
+              <td>26(1), Use per intended purpose</td>
+              <td>SKI is a read-only sidecar. The passive architecture prevents use outside its monitoring purpose.</td>
+            </tr>
+            <tr>
+              <td>26(2), Human oversight measures</td>
+              <td>DISCRETIONARY verdict type explicitly routes ambiguous outcomes to named human reviewers.</td>
+            </tr>
+            <tr>
+              <td>26(5), Input data relevance</td>
+              <td>The KG is domain-specific and validated against source regulatory documents. Unmapped readings produce NULL_UNMAPPED, never a false CLEAR.</td>
+            </tr>
+            <tr>
+              <td>26(6), Log retention</td>
+              <td>Audit ledger is append-only with configurable retention. Every verdict and signed transcript is retained per the deployer's retention policy.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="eu-article12">
+      <h2>Article 12(3), Record-keeping mapping</h2>
+      <p>Article 12(3) requires that high-risk AI systems automatically log events to enable post-market monitoring and investigation of incidents. The SKI audit ledger maps to each required element:</p>
+      <div class="docs-table-wrap">
+        <table class="docs-table">
+          <thead><tr><th>Art. 12(3) requirement</th><th>Audit ledger field</th></tr></thead>
+          <tbody>
+            <tr><td>Period of each use (date, time)</td><td><code>ledger.created_at</code> (UTC timestamp, nanosecond precision)</td></tr>
+            <tr><td>Reference database against which checked</td><td><code>envelope.model_provenance.kg_version_hash</code></td></tr>
+            <tr><td>Input data</td><td><code>ledger.measurement_record_ref</code> (pointer to stored measurement)</td></tr>
+            <tr><td>Persons involved in verification</td><td><code>envelope.verifier_result.status</code> + DISCRETIONARY reviewer assignment</td></tr>
+            <tr><td>Result of verification</td><td><code>envelope.verdict</code>, <code>envelope.formalizable_assertions[]</code></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="eu-full">
+      <h2>Full crosswalk</h2>
+      <p>The complete element-by-element crosswalk, covering all provider and deployer obligations, is maintained in the repository:</p>
+      <a href="https://github.com/kpifinity/ski-framework/blob/main/docs/crosswalks/eu-ai-act.md" target="_blank" rel="noopener" class="btn btn-secondary" style="display:inline-flex;align-items:center;gap:8px;margin-top:8px;">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        docs/crosswalks/eu-ai-act.md →
+      </a>
+    </section>
+
+    <!-- ── Conformance ────────────────────────────────────────── -->
+    <section id="conformance">
+      <h2>SKI Conformance Framework</h2>
+      <p>SKI defines three cumulative conformance levels. Each level builds on the previous, an L2 deployment must also satisfy all L1 requirements. The 77-test conformance suite in <code>conformance/</code> is the authoritative gate for each claim.</p>
+      <p>A deployment may call itself "SKI Conformant" only if it passes all tests at the claimed level on its current production build. The conformance suite must be run against the actual deployment, not a simulation or staging environment. For trademark policy, see <a href="https://github.com/kpifinity/ski-framework/blob/main/TRADEMARKS.md" target="_blank" rel="noopener">TRADEMARKS.md ↗</a>.</p>
+    </section>
+
+    <section id="level-1">
+      <h2>Level 1: Provenance (30 tests)</h2>
+      <p>Every verdict envelope satisfies the full V3 schema, cites at least one KG node with a named source document, carries a signed LLM transcript, and includes complete model provenance (weight hash, KG hash, prompt template, decoder seed). The taxonomy guard is enforced, no CLEAR without verified assertions.</p>
+      <div class="code-block">
+        <div class="code-block-header"><span class="code-block-title">Run Level 1</span></div>
+        <pre><code><span class="cmd">pytest conformance/provenance/ -v</span>
+<span class="comment"># 30 tests</span></code></pre>
+      </div>
+    </section>
+
+    <section id="level-2">
+      <h2>Level 2: Durability (30 tests)</h2>
+      <p>Requires Level 1. The audit ledger enforces append-only at the database trigger level. Hash chaining is intact. Sequence gap detection fires correctly. Signed transcripts are verifiable by replay. Retention policy is documented and enforced.</p>
+      <div class="code-block">
+        <div class="code-block-header"><span class="code-block-title">Run Level 1 + Level 2</span></div>
+        <pre><code><span class="cmd">pytest conformance/provenance/ conformance/durability/ -v</span>
+<span class="comment"># 60 tests</span></code></pre>
+      </div>
+    </section>
+
+    <section id="level-3">
+      <h2>Level 3: Sovereignty (17 tests)</h2>
+      <p>Requires Level 1 + 2. The full runtime produces correct verdicts inside a <code>--network=none</code> container, zero outbound connections, proven not by policy but by the air-gapped boot rig that boots the complete stack and verifies hash-chained ledger entries from inside the gap. KG signature validation is enforced at load time. Helm NetworkPolicy is rendered and verified.</p>
+      <div class="code-block">
+        <div class="code-block-header"><span class="code-block-title">Run all 77 tests (including L3 air-gap rig)</span></div>
+        <pre><code><span class="cmd">SKI_L3_AIRGAP=1 pytest conformance/ -v</span>
+<span class="comment"># 77 tests, L3 requires Docker with --network=none capability</span></code></pre>
+      </div>
+    </section>
+
+    <!-- ── Audit trail ────────────────────────────────────────── -->
+    <section id="audit">
+      <h2>Audit trail design</h2>
+      <p>The SKI audit ledger is designed to satisfy the record-keeping requirements of high-risk AI deployments. Key properties:</p>
+      <ul style="margin:12px 0 12px 24px;line-height:2.2">
+        <li><strong>Append-only</strong>, enforced at the PostgreSQL trigger level. No UPDATE or DELETE is possible through the API or directly.</li>
+        <li><strong>Hash-chained</strong>, each entry contains a SHA-256 hash of the previous entry. A tampered entry breaks the chain; the gap detector alerts.</li>
+        <li><strong>Signed transcripts</strong>, every LLM output is signed with ed25519 before writing. An auditor can verify any transcript is authentic.</li>
+        <li><strong>Per-verdict provenance</strong>, model weight hash, KG version hash, prompt template ID, and decoder seed recorded on every entry.</li>
+        <li><strong>Sequence gap detection</strong>, the <code>ski_ledger_sequence_gaps_total</code> metric fires if any sequence number is missing.</li>
+        <li><strong>Configurable retention</strong>, retention policy is operator-configured; the ledger itself never deletes.</li>
+      </ul>
+    </section>
+
+    <section id="replay">
+      <h2>Verdict replay</h2>
+      <p>Any verdict can be replayed from its stored transcript. An auditor with the same model weights, KG version, and prompt template can reconstruct the exact evaluation that produced a given envelope and verify the signature. This makes every verdict independently auditable, not just claimed to be.</p>
+      <div class="code-block">
+        <div class="code-block-header"><span class="code-block-title">Replay a verdict from the ledger</span></div>
+        <pre><code><span class="comment"># Query the ledger for a specific sequence entry</span>
+<span class="cmd">curl http://localhost:8000/api/ledger/seq/42</span>
+
+<span class="comment"># Verify the transcript signature</span>
+<span class="cmd">python -m ski_sdk.audit.verify --ledger-entry 42 --key keys/signing.pub</span></code></pre>
+      </div>
+    </section>
+
+    <section id="disclaimer">
+      <h2>Disclaimer</h2>
+      <p>The compliance information on this page, including the EU AI Act crosswalk, is provided for informational purposes only and does not constitute legal, regulatory, or compliance advice. SKI is a technical framework, not a compliance certification service.</p>
+      <p>Organisations deploying AI systems in regulated industries should obtain advice from qualified legal, regulatory, and risk counsel regarding their specific obligations under applicable law. Whether a given deployment satisfies the requirements of the EU AI Act or any other regulation depends on facts specific to each organisation, system, and use case that cannot be assessed by a technical framework alone.</p>
+      <p>KpiFinity Inc. makes no warranty, express or implied, that the SKI Framework will meet any specific regulatory requirement or that any particular deployment will be compliant with applicable law.</p>
+    </section>
+
+  </div><!-- /docs-content -->
+</main>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="footer-logo"><span class="logo-ski">SKI</span> Framework</div>
+        <p class="footer-tagline">Neuro-symbolic AI compliance monitoring for regulated industries. Verifiable provenance on every verdict.</p>
+        <div class="footer-badges">
+          <span class="footer-badge">Spec v3.0</span>
+          <span class="footer-badge">v3.1.0-beta.1</span>
+          <span class="footer-badge">Apache 2.0</span>
+          <span class="footer-badge">Open Source</span>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Product</h4>
+        <ul>
+          <li><a href="index.html?demo">How it works</a></li>
+          <li><a href="docs.html">Documentation</a></li>
+          <li><a href="compliance.html">Compliance</a></li>
+          <li><a href="docs.html#changelog">Changelog</a></li>
+          <li><a href="https://github.com/kpifinity/ski-framework/blob/main/ROADMAP.md" target="_blank" rel="noopener">Roadmap ↗</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Developers</h4>
+        <ul>
+          <li><a href="docs.html#quick-start">Quick start</a></li>
+          <li><a href="docs.html#packages">Packages</a></li>
+          <li><a href="docs.html#conformance">Conformance</a></li>
+          <li><a href="https://pypi.org/project/ski-sdk/" target="_blank" rel="noopener">PyPI ↗</a></li>
+          <li><a href="https://github.com/kpifinity/ski-framework" target="_blank" rel="noopener">GitHub ↗</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Compliance</h4>
+        <ul>
+          <li><a href="#eu-ai-act">EU AI Act crosswalk</a></li>
+          <li><a href="#conformance">Conformance levels</a></li>
+          <li><a href="#audit">Audit trail</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Open Source</h4>
+        <ul>
+          <li><a href="about.html">About</a></li>
+          <li><a href="https://github.com/kpifinity/ski-framework/blob/main/SECURITY.md" target="_blank" rel="noopener">SECURITY.md ↗</a></li>
+          <li><a href="https://github.com/kpifinity/ski-framework/blob/main/SUPPORT.md" target="_blank" rel="noopener">SUPPORT.md ↗</a></li>
+          <li><a href="mailto:hello@skiframework.org">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-copy">© 2026 KpiFinity Inc., Calgary, Alberta. Specification under <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener">CC BY 4.0</a>; software under <a href="https://github.com/kpifinity/ski-framework/blob/main/LICENSE" target="_blank" rel="noopener">Apache 2.0</a>. · <a href="mailto:hello@skiframework.org">hello@skiframework.org</a> · <a href="https://kpifinity.com" target="_blank" rel="noopener">kpifinity.com ↗</a></p>
+      <p class="footer-trademark">"SKI Framework", "Sovereign Knowledge Intelligence", and "SKI Conformant" are trademarks of KpiFinity Inc. <a href="https://github.com/kpifinity/ski-framework/blob/main/TRADEMARKS.md" target="_blank" rel="noopener">Trademark Policy</a></p>
+      <p class="footer-disclaimer"><strong>Not legal, regulatory, or compliance advice.</strong> The SKI Framework is a technical and architectural specification. Consult qualified legal and regulatory counsel for obligations specific to your deployment.</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  const t=new Date('2026-08-02T00:00:00Z'),n=new Date(),diff=Math.max(0,Math.ceil((t-n)/86400000));
+  const d=document.getElementById('announce-days'); if(d) d.textContent=diff;
+  const d2=document.getElementById('euai-days');    if(d2) d2.textContent=diff;
+})();
+</script>
+<script src="assets/js/main.js" defer></script>
+</body>
+</html>

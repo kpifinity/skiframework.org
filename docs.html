@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Documentation · SKI Framework</title>
+<meta name="description" content="Technical documentation for the SKI Framework: quick start, six PyPI packages, conformance levels, Kubernetes deployment, and API reference.">
+<meta property="og:title" content="Documentation · SKI Framework">
+<meta property="og:description" content="Quick start, six PyPI packages, conformance levels, Kubernetes deployment, and API reference for the SKI compliance monitoring framework.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://skiframework.org/docs.html">
+<meta property="og:image" content="https://skiframework.org/assets/images/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Documentation · SKI Framework">
+<meta name="twitter:description" content="Quick start, six PyPI packages, conformance levels, Kubernetes deployment, and API reference for the SKI compliance monitoring framework.">
+<meta name="twitter:image" content="https://skiframework.org/assets/images/og.png">
+<link rel="canonical" href="https://skiframework.org/docs.html">
+<meta name="theme-color" content="#0A0A0A">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%230A0A0A'/><polygon points='50,7 93,50 50,93 7,50' fill='rgba(45,212,191,0.10)' stroke='%232DD4BF' stroke-width='6' stroke-linejoin='round'/><circle cx='50' cy='50' r='19' fill='%232DD4BF'/></svg>">
+<link rel="preconnect" href="https://fonts.bunny.net">
+<link href="https://fonts.bunny.net/css?family=plus-jakarta-sans:300,400,500,600,700,800,900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/styles.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "TechArticle",
+      "@id": "https://skiframework.org/docs.html#article",
+      "headline": "SKI Framework Documentation",
+      "url": "https://skiframework.org/docs.html",
+      "description": "Technical documentation for the SKI Framework: quick start, six PyPI packages, architecture, conformance levels, Kubernetes deployment, and API reference.",
+      "author": { "@type": "Organization", "name": "KpiFinity Inc.", "url": "https://kpifinity.com" },
+      "publisher": { "@id": "https://skiframework.org/#organization" },
+      "dateModified": "2026-06-16",
+      "about": { "@id": "https://skiframework.org/#software" },
+      "isPartOf": { "@id": "https://skiframework.org/#website" }
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://skiframework.org/docs.html#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Which LLM does SKI use?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "SKI is LLM-agnostic. The reference implementation ships with an Ollama backend (any local model via the Ollama API) and a vLLM backend (any OpenAI-compatible inference server). You supply the model — SKI orchestrates it, signs the transcript, and cross-checks the output with the Symbolic Verifier. Switching backends is a one-line config change. Custom backends can be added by implementing the LLMBackend protocol."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is there a hosted or SaaS version of SKI?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No, and there will not be one. Data sovereignty is an architectural property of SKI, not a configurable feature. For that guarantee to be real, your operational data must never leave your infrastructure. SKI is on-premise only."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How large is the SKI Framework deployment footprint?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The reference implementation runs as a single Docker Compose stack. Minimum resource requirements for the SKI framework services (excluding the LLM): approximately 2 vCPUs and 4 GB RAM. The air-gapped boot rig has been validated on a single bare-metal node. LLM resource requirements depend on which model you choose to run."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How long does it take to get a first verdict with SKI?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The 5-minute estimate in the quick start is accurate for demo mode, which does not require a model download and exercises every framework guarantee with a stub LLM. A production deployment including model download, KG configuration, and infrastructure setup is measured in hours, not days."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can SKI Framework connect to SCADA or operational data systems?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "SKI accepts readings as JSON payloads over an HTTP API. Any SCADA system, DCS, historian, or event stream that can make an HTTP POST can feed SKI. An OPC-UA read-only sidecar reference implementation is included in the repository under reference-implementation/integrations/opc-ua/."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I use SKI's Knowledge Graph for regulations outside the provided examples?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. The Knowledge Graph schema is general-purpose and not locked to any specific regulatory domain. Your domain experts translate your specific regulatory obligations into KG nodes, review and approve them, and the resulting graph is cryptographically sealed and deployed. SKI refuses to run on a Knowledge Graph whose seal does not verify."
+          }
+        }
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "item": { "@id": "https://skiframework.org", "name": "Home" } },
+        { "@type": "ListItem", "position": 2, "item": { "@id": "https://skiframework.org/docs.html", "name": "Documentation" } }
+      ]
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<a href="#main-content" class="skip-link">Skip to main content</a>
+
+<div class="announce" role="banner">
+  <span><strong>v3.1.0-beta.1</strong> on PyPI · v3.0.3 stable</span>
+  <span class="announce-sep">·</span>
+  <span>EU AI Act high-risk obligations: <strong id="announce-days">48</strong> days</span>
+  <span class="announce-sep">·</span>
+  <a href="compliance.html#eu-ai-act">Read the crosswalk →</a>
+</div>
+
+<header>
+  <nav class="nav" role="navigation" aria-label="Main navigation">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo" aria-label="SKI Framework home">
+        <span class="logo-ski">SKI</span>&nbsp;Framework
+        <span class="logo-beta">beta</span>
+      </a>
+      <ul class="nav-links" role="list">
+        <li><a href="index.html#why">Why SKI</a></li>
+        <li><a href="index.html?demo">How it works</a></li>
+        <li><a href="docs.html" class="active">Docs</a></li>
+        <li><a href="compliance.html">Compliance</a></li>
+        <li><a href="about.html">About</a></li>
+      </ul>
+      <div class="nav-actions">
+        <a href="https://github.com/kpifinity/ski-framework" class="nav-github" target="_blank" rel="noopener">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.009-.866-.013-1.7-2.782.603-3.369-1.342-3.369-1.342-.454-1.155-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0112 6.836c.85.004 1.705.114 2.504.336 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.744 0 .267.18.578.688.48C19.138 20.163 22 16.418 22 12c0-5.523-4.477-10-10-10z"/></svg>
+          GitHub
+        </a>
+        <button class="nav-hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-nav">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+  <div class="nav-mobile" id="mobile-nav" role="dialog" aria-modal="true" aria-label="Mobile navigation">
+    <a href="index.html#why">Why SKI</a>
+    <a href="index.html?demo">How it works</a>
+    <a href="docs.html">Docs</a>
+    <a href="compliance.html">Compliance</a>
+    <a href="about.html">About</a>
+    <a href="https://github.com/kpifinity/ski-framework" target="_blank" rel="noopener">GitHub ↗</a>
+  </div>
+</header>
+
+<main class="docs-layout" id="main-content">
+
+  <!-- Mobile section nav (visible on small screens only) -->
+  <nav class="docs-mobile-nav" aria-label="Jump to section">
+    <a href="#quick-start">Quick start</a>
+    <a href="#packages">Packages</a>
+    <a href="#demo">Demo</a>
+    <a href="#how-it-works">How SKI works</a>
+    <a href="#verdict-envelope">Envelope</a>
+    <a href="#verdict-types">Verdict types</a>
+    <a href="#symbolic-verifier">Verifier</a>
+    <a href="#audit-ledger">Ledger</a>
+    <a href="#knowledge-graph">KG</a>
+    <a href="#kubernetes">Kubernetes</a>
+    <a href="#conformance">Conformance</a>
+    <a href="#faq">FAQ</a>
+  </nav>
+
+  <!-- Sidebar -->
+  <aside class="docs-sidebar" role="navigation" aria-label="Documentation sections">
+    <div class="docs-sidebar-inner">
+      <div class="docs-sidebar-section">
+        <div class="docs-sidebar-label">Getting started</div>
+        <a href="#quick-start">Quick start</a>
+        <a href="#packages">Six packages</a>
+        <a href="#demo">5-minute demo</a>
+      </div>
+      <div class="docs-sidebar-section">
+        <div class="docs-sidebar-label">Architecture</div>
+        <a href="#how-it-works">How SKI works</a>
+        <a href="#verdict-envelope">Verdict envelope</a>
+        <a href="#verdict-types">Five verdict types</a>
+        <a href="#symbolic-verifier">Symbolic verifier</a>
+        <a href="#audit-ledger">Audit ledger</a>
+        <a href="#knowledge-graph">Knowledge graph</a>
+      </div>
+      <div class="docs-sidebar-section">
+        <div class="docs-sidebar-label">Deployment</div>
+        <a href="#docker">Docker Compose</a>
+        <a href="#kubernetes">Kubernetes / Helm</a>
+        <a href="#air-gap">Air-gapped environments</a>
+        <a href="#backends">LLM backends</a>
+      </div>
+      <div class="docs-sidebar-section">
+        <div class="docs-sidebar-label">Quality</div>
+        <a href="#conformance">Conformance levels</a>
+        <a href="#evals">SKI Evals</a>
+        <a href="#benchmarks">Benchmarks</a>
+        <a href="#metrics">Observability</a>
+      </div>
+      <div class="docs-sidebar-section">
+        <div class="docs-sidebar-label">Reference</div>
+        <a href="#faq">FAQ</a>
+        <a href="#changelog">Changelog</a>
+        <a href="#security">Security</a>
+        <a href="#github">GitHub ↗</a>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Content -->
+  <div class="docs-content" role="main">
+
+    <div class="docs-hero">
+      <div class="section-label">Documentation</div>
+      <h1>SKI Framework <span class="docs-version">v3.1.0-beta.1</span></h1>
+      <p class="docs-lead">SKI (Sovereign Knowledge Intelligence) is a neuro-symbolic AI compliance monitoring framework. This page covers the technical reference for deployers and integration engineers. Business overview: <a href="index.html">skiframework.org</a>. Animated walkthrough: <a href="index.html?demo">how it works</a>.</p>
+      <div class="docs-callout docs-callout-amber">
+        <strong>Pre-release.</strong> v3.1.0-beta.1 is the first beta of the v3.1 line. API and envelope format are stable for testing. For production use, track the <strong>v3.0.3</strong> stable line until v3.1.0 GA.
+      </div>
+    </div>
+
+    <!-- ── Quick Start ─────────────────────────────────────────── -->
+    <section id="quick-start">
+      <h2>Quick start</h2>
+      <p>Prerequisites: Python 3.11+, Docker 24+, Git. The demo mode exercises every framework guarantee, including cryptographic signing and the Symbolic Verifier, using a deterministic FakeLLM backend. No GPU required.</p>
+
+      <h3>Install from PyPI</h3>
+      <div class="code-block">
+        <div class="code-block-header"><span class="code-block-title">Install (stable)</span></div>
+        <pre><code><span class="cmd">pip install ski-sdk ski-schemas ski-kg-extractor ski-kg-validator ski-audit-ledger ski-model-deploy</span></code></pre>
+      </div>
+      <div class="code-block">
+        <div class="code-block-header"><span class="code-block-title">Install (beta)</span></div>
+        <pre><code><span class="cmd">pip install --pre ski-sdk ski-schemas ski-kg-extractor ski-kg-validator ski-audit-ledger ski-model-deploy</span></code></pre>
+      </div>
+
+      <h3 id="demo">5-minute demo</h3>
+      <div class="code-block">
+        <div class="code-block-header"><span class="code-block-title">Clone and boot</span></div>
+        <pre><code><span class="comment"># 1. Clone</span>
+<span class="cmd">git clone https://github.com/kpifinity/ski-framework.git && cd ski-framework</span>
+
+<span class="comment"># 2. Generate secrets, TLS, and a signed demo KG</span>
+<span class="cmd">./scripts/setup.sh</span>
+
+<span class="comment"># 3. Start the full stack (FakeLLM, no GPU needed)</span>
+<span class="cmd">cd reference-implementation</span>
+<span class="cmd">docker compose -f docker-compose.demo.yml up -d</span>
+
+<span class="comment"># 4. Health check</span>
+<span class="cmd">curl http://localhost:8000/api/health</span>
+<span class="comment"># → {"status":"ok","kg":"loaded","kg_signature":"valid"}</span>
+
+<span class="comment"># 5. Submit a measurement and get a verdict</span>
+<span class="cmd">curl -X POST http://localhost:8000/api/evaluate \
+  -H "Content-Type: application/json" \
+  -d '{"tenant_id":"demo","readings":{"so2_ppm":142},"context":"energy.wellhead.monitoring"}'</span></code></pre>
+      </div>
+      <div class="docs-callout">The demo mode is labeled non-conformant. It uses the FakeLLM backend to avoid requiring a multi-GB model download. Every structural guarantee (signing, verifier, ledger, envelope schema) is exercised identically to a real model run.</div>
+    </section>
+
+    <!-- ── Packages ────────────────────────────────────────────── -->
+    <section id="packages">
+      <h2>Six packages</h2>
+      <p>SKI ships six PyPI packages. <code>ski-schemas</code> and <code>ski-sdk</code> are independently versioned and will reach 1.0.0 on their own schedule. The four tools track the framework version.</p>
+
+      <div class="docs-table-wrap">
+        <table class="docs-table">
+          <thead>
+            <tr><th>Package</th><th>PyPI</th><th>Version</th><th>Purpose</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>ski-schemas</code></td>
+              <td><a href="https://pypi.org/project/ski-schemas/" target="_blank" rel="noopener">pypi ↗</a></td>
+              <td>0.1.0</td>
+              <td>Shared Pydantic models: <code>V3VerdictEnvelope</code>, <code>V3SignedTranscript</code>, <code>MeasurementRecord</code>. Single source of truth for the wire format.</td>
+            </tr>
+            <tr>
+              <td><code>ski-sdk</code></td>
+              <td><a href="https://pypi.org/project/ski-sdk/" target="_blank" rel="noopener">pypi ↗</a></td>
+              <td>0.1.0</td>
+              <td>Client library for submitting evaluations, reading verdicts, and querying the audit ledger from downstream services.</td>
+            </tr>
+            <tr>
+              <td><code>ski-kg-extractor</code></td>
+              <td><a href="https://pypi.org/project/ski-kg-extractor/" target="_blank" rel="noopener">pypi ↗</a></td>
+              <td>3.1.0b1</td>
+              <td>CLI for extracting obligation nodes from regulatory source documents into Knowledge Graph format.</td>
+            </tr>
+            <tr>
+              <td><code>ski-kg-validator</code></td>
+              <td><a href="https://pypi.org/project/ski-kg-validator/" target="_blank" rel="noopener">pypi ↗</a></td>
+              <td>3.1.0b1</td>
+              <td>Validates a KG against the spec schema, checks for missing source citations, and seals it with an ed25519 signature for production use.</td>
+            </tr>
+            <tr>
+              <td><code>ski-audit-ledger</code></td>
+              <td><a href="https://pypi.org/project/ski-audit-ledger/" target="_blank" rel="noopener">pypi ↗</a></td>
+              <td>3.1.0b1</td>
+              <td>Append-only ledger with hash chaining, sequence gap detection, and signed transcript storage. No UPDATE or DELETE at the database trigger level.</td>
+            </tr>
+            <tr>
+              <td><code>ski-model-deploy</code></td>
+              <td><a href="https://pypi.org/project/ski-model-deploy/" target="_blank" rel="noopener">pypi ↗</a></td>
+              <td>3.1.0b1</td>
+              <td>Deployment tooling: model pull, signature verification, health gate, and container image management.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ── Architecture ───────────────────────────────────────── -->
+    <section id="how-it-works">
+      <h2>How SKI works</h2>
+      <p>SKI is a passive sidecar observer. It receives a measurement record, evaluates it against a sealed Knowledge Graph, and produces a <code>V3VerdictEnvelope</code>. It has no write path to operational systems, by architectural design.</p>
+      <p>The evaluation path has two independent components that must agree before a verdict counts:</p>
+      <ol style="margin:16px 0 16px 24px;line-height:2">
+        <li><strong>The LLM examiner</strong>, reads the measurement, reasons against the KG, produces natural-language reasoning, and emits formalizable assertions.</li>
+        <li><strong>The Symbolic Verifier</strong>, a deterministic algorithm that re-checks every assertion mechanically against the measurement record and the cited obligation.</li>
+      </ol>
+      <p>If they agree: CLEAR or FLAG. If they disagree: DISCRETIONARY (human review). See the <a href="index.html?demo">animated walkthrough</a> for the full visual explanation.</p>
+    </section>
+
+    <section id="verdict-envelope">
+      <h2>Verdict envelope</h2>
+      <p>Every evaluation produces a <code>V3VerdictEnvelope</code> (spec v3.0 §4.2). Key fields:</p>
+      <div class="code-block">
+        <div class="code-block-header"><span class="code-block-title">V3VerdictEnvelope, field summary</span></div>
+        <pre><code><span class="k">verdict</span>                  <span class="comment"># One of five categorical outcomes (see below)</span>
+<span class="k">reasoning</span>                <span class="comment"># LLM natural-language explanation (signed, not ground truth)</span>
+<span class="k">kg_citations[]</span>           <span class="comment"># node_id, role, source_document, source_clause</span>
+<span class="k">formalizable_assertions[]</span> <span class="comment"># obligation_id, metric, operator, observed, expected, unit, satisfied</span>
+<span class="k">verifier_result</span>          <span class="comment"># status (AGREED/LLM_CONTRADICTION), verifier_observed, verifier_expected</span>
+<span class="k">model_provenance</span>         <span class="comment"># model_weight_hash, kg_version_hash, prompt_template_id, decoder_seed</span>
+<span class="k">transcript_ref</span>           <span class="comment"># ledger sequence pointer for the signed LLM transcript</span>
+<span class="k">notes[]</span>                  <span class="comment"># taxonomy guard remapping messages, if any</span></code></pre>
+      </div>
+      <p>The full schema lives in <code>ski-schemas</code> (<a href="https://github.com/kpifinity/ski-framework/blob/main/tools/ski-schemas/src/ski_schemas/envelope.py" target="_blank" rel="noopener">envelope.py ↗</a>). <code>ski_model.v3.envelope</code> re-exports from it for backwards compatibility.</p>
+    </section>
+
+    <section id="verdict-types">
+      <h2>Five verdict types</h2>
+      <div class="docs-table-wrap">
+        <table class="docs-table">
+          <thead><tr><th>Verdict</th><th>Meaning</th><th>When emitted</th></tr></thead>
+          <tbody>
+            <tr><td><code class="v-flag">FLAG</code></td><td>Confirmed breach</td><td>LLM and Verifier agree: assertion failed</td></tr>
+            <tr><td><code class="v-clear">CLEAR</code></td><td>Confirmed compliance</td><td>LLM and Verifier agree: all assertions satisfied</td></tr>
+            <tr><td><code>DISCRETIONARY</code></td><td>Ambiguous, human decides</td><td>LLM/Verifier disagree; or citations present but no provable assertions</td></tr>
+            <tr><td><code>NULL_UNMAPPED</code></td><td>No applicable rule</td><td>No KG node matches the reading, not a compliance decision</td></tr>
+            <tr><td><code>NULL_STALE</code></td><td>Stale rulebook</td><td>KG signature invalid or version too old for the request context</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>The taxonomy guard (v3.1.0-beta.1) ensures CLEAR can never be emitted with zero citations and zero assertions. An assertion-less CLEAR is deterministically remapped to NULL_UNMAPPED or DISCRETIONARY and recorded in <code>envelope.notes</code>.</p>
+    </section>
+
+    <section id="symbolic-verifier">
+      <h2>Symbolic verifier</h2>
+      <p>The Symbolic Verifier is a deterministic algorithm, not an LLM, that independently re-checks every <code>formalizable_assertion</code> the LLM produced. It verifies four obligation types (spec §3.3):</p>
+      <ul style="margin:12px 0 12px 24px;line-height:2">
+        <li><code>must_be_below</code> / <code>must_not_exceed</code></li>
+        <li><code>must_be_above</code> / <code>must_not_be_below</code></li>
+        <li><code>must_be_one_of</code></li>
+        <li><code>must_not_be_one_of</code></li>
+      </ul>
+      <p>If the Verifier disagrees with the LLM on any assertion, or if the LLM's observed value doesn't match the measurement record, the result is <code>LLM_CONTRADICTION</code> and the verdict becomes DISCRETIONARY. A parity test pins both directions: a KG author cannot write a spec-valid obligation that silently verifies nothing.</p>
+    </section>
+
+    <section id="audit-ledger">
+      <h2>Audit ledger</h2>
+      <p>The ledger is append-only at the database trigger level, no UPDATE, no DELETE. Every entry contains:</p>
+      <ul style="margin:12px 0 12px 24px;line-height:2">
+        <li>The signed <code>V3SignedTranscript</code> (ed25519 signature over the raw LLM output)</li>
+        <li>A monotonically increasing sequence number</li>
+        <li>A SHA-256 hash of the previous entry (hash chaining)</li>
+        <li>The full <code>V3VerdictEnvelope</code> JSON</li>
+      </ul>
+      <p>Sequence gaps trigger a Prometheus alert (<code>ski_ledger_sequence_gaps_total</code>). Tampering with any stored transcript is detectable by recomputing the ed25519 signature. Auditors can query the ledger directly and replay any verdict from its stored transcript.</p>
+    </section>
+
+    <section id="knowledge-graph">
+      <h2>Knowledge graph</h2>
+      <p>The Knowledge Graph is a versioned, sealed artifact encoding regulatory obligations as machine-readable nodes. Each node includes: an obligation type, metric, operator, threshold, unit, and a citation to the source regulatory document and clause.</p>
+      <p>The KG lifecycle: extract via <code>ski-kg-extractor</code> → human expert review → validate via <code>ski-kg-validator</code> → sign (ed25519) → deploy. The runtime refuses to load an unsigned or signature-invalid graph. Every verdict envelope records the KG version hash.</p>
+    </section>
+
+    <!-- ── Deployment ─────────────────────────────────────────── -->
+    <section id="docker">
+      <h2>Docker Compose</h2>
+      <p>The reference implementation ships two Compose files:</p>
+      <div class="docs-table-wrap">
+        <table class="docs-table">
+          <thead><tr><th>File</th><th>Purpose</th><th>LLM backend</th></tr></thead>
+          <tbody>
+            <tr><td><code>docker-compose.demo.yml</code></td><td>5-minute demo, no GPU</td><td>FakeLLM (deterministic)</td></tr>
+            <tr><td><code>docker-compose.yml</code></td><td>Full stack with Ollama</td><td>Ollama (real model)</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="code-block">
+        <div class="code-block-header"><span class="code-block-title">Full stack with Ollama</span></div>
+        <pre><code><span class="cmd">cd reference-implementation</span>
+<span class="cmd">docker compose up -d</span>
+<span class="comment"># Pulls qwen2.5:7b (~4 GB) on first run</span>
+<span class="cmd">docker compose logs -f ski-model</span></code></pre>
+      </div>
+    </section>
+
+    <section id="kubernetes">
+      <h2>Kubernetes / Helm</h2>
+      <p>The <code>deploy/helm/ski</code> chart enforces the SKI deployment constraints at render time, it fails if you try to configure multiple replicas (single writer by design), if no operator Secret is provided, or if no signed-KG ConfigMap is present.</p>
+      <div class="code-block">
+        <div class="code-block-header"><span class="code-block-title">Deploy with Helm</span></div>
+        <pre><code><span class="comment"># Create the signed-KG ConfigMap</span>
+<span class="cmd">kubectl create configmap ski-kg --from-file=kg.json=your-signed-kg.json</span>
+
+<span class="comment"># Create operator Secret</span>
+<span class="cmd">kubectl create secret generic ski-secrets \
+  --from-literal=SKI_SIGNING_KEY="$(cat keys/signing.key)"</span>
+
+<span class="comment"># Install</span>
+<span class="cmd">helm install ski ./deploy/helm/ski \
+  --set image.tag=3.1.0-beta.1</span>
+
+<span class="comment"># Air-gapped: drops DNS inside the pod network</span>
+<span class="cmd">helm install ski ./deploy/helm/ski \
+  --set networkPolicy.airgap=true</span></code></pre>
+      </div>
+      <p>Default image: <code>ghcr.io/kpifinity/ski-model</code>, no <code>--set image.repository</code> required for standard deployments. Review <code>values.yaml</code> and the NetworkPolicy before production use.</p>
+    </section>
+
+    <section id="air-gap">
+      <h2>Air-gapped environments</h2>
+      <p>SKI's sovereignty guarantee is architectural: the full runtime is tested inside <code>--network=none</code> on every CI run. The air-gapped boot rig (<code>conformance/sovereignty/test_air_gapped.py</code>) boots the audit ledger, joins the SKI Model to a loopback-only namespace, replays a signed-KG workload, and verifies hash-chained ledger entries from inside the gap.</p>
+      <p>To run the Level 3 sovereignty suite locally:</p>
+      <div class="code-block">
+        <div class="code-block-header"><span class="code-block-title">Level 3 sovereignty conformance</span></div>
+        <pre><code><span class="cmd">SKI_L3_AIRGAP=1 pytest conformance/sovereignty/ -v</span></code></pre>
+      </div>
+    </section>
+
+    <section id="backends">
+      <h2>LLM backends</h2>
+      <div class="docs-table-wrap">
+        <table class="docs-table">
+          <thead><tr><th>Backend</th><th>Env var</th><th>Notes</th></tr></thead>
+          <tbody>
+            <tr><td>Ollama</td><td><code>SKI_V3_LLM_BACKEND=ollama</code></td><td>Default. Runs qwen2.5:7b locally via the Ollama API.</td></tr>
+            <tr><td>vLLM</td><td><code>SKI_V3_LLM_BACKEND=vllm</code></td><td>OpenAI-compatible endpoint with <code>guided_json</code> grammar enforcement (token masking, stronger than post-hoc validation). Temperature 0, per-request seed.</td></tr>
+            <tr><td>FakeLLM</td><td><code>SKI_V3_LLM_BACKEND=fake</code></td><td>Deterministic test backend. No model download. Used in demo mode and CI. Not conformant.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ── Quality ────────────────────────────────────────────── -->
+    <section id="conformance">
+      <h2>Conformance levels</h2>
+      <p>SKI defines three conformance levels across 77 tests. The full conformance suite runs in CI:</p>
+      <div class="code-block">
+        <div class="code-block-header"><span class="code-block-title">Run the full conformance suite</span></div>
+        <pre><code><span class="cmd">pip install -r requirements-dev.txt</span>
+<span class="cmd">pytest conformance/ -v</span>
+<span class="comment"># 77 tests: 30 Provenance + 30 Durability + 17 Sovereignty</span></code></pre>
+      </div>
+      <div class="docs-table-wrap">
+        <table class="docs-table">
+          <thead><tr><th>Level</th><th>Tests</th><th>What it gates</th></tr></thead>
+          <tbody>
+            <tr>
+              <td>L1: Provenance</td>
+              <td>30</td>
+              <td>Verdict envelope completeness, KG citation presence, signed transcript, model provenance fields, taxonomy guard.</td>
+            </tr>
+            <tr>
+              <td>L2: Durability</td>
+              <td>30</td>
+              <td>Ledger append-only enforcement, hash-chain integrity, sequence gap detection, transcript replay, retention policy.</td>
+            </tr>
+            <tr>
+              <td>L3: Sovereignty</td>
+              <td>17</td>
+              <td>Zero outbound connections (air-gapped boot rig), KG signature validation, Helm NetworkPolicy enforcement, air-gap boot CI.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p>For full compliance details including the EU AI Act crosswalk, see the <a href="compliance.html">Compliance</a> page.</p>
+    </section>
+
+    <section id="evals">
+      <h2>SKI Evals</h2>
+      <p>SKI ships its own adversarial evaluation suite and publishes every run. A 50-case human-graded golden dataset evaluates the real production path, not mocks. The suite reports accuracy, FLAG recall/precision, NULL_UNMAPPED recall, assertion correctness, and LLM↔verifier agreement rate.</p>
+      <div class="code-block">
+        <div class="code-block-header"><span class="code-block-title">Run the eval suite</span></div>
+        <pre><code><span class="cmd">python -m evals.run --backend ollama</span>
+<span class="comment"># or with vLLM:</span>
+<span class="cmd">python -m evals.run --backend vllm --endpoint http://your-vllm:8000</span></code></pre>
+      </div>
+      <p>Full methodology and published run history: <a href="https://github.com/kpifinity/ski-framework/blob/main/docs/evals.md" target="_blank" rel="noopener">docs/evals.md ↗</a>.</p>
+    </section>
+
+    <section id="benchmarks">
+      <h2>Benchmarks</h2>
+      <p>The benchmark suite isolates framework overhead (scoping, citation validation, symbolic verification, risk-tier policy, ed25519 transcript signing) from LLM inference. Reference numbers on 2 vCPUs:</p>
+      <div class="docs-table-wrap">
+        <table class="docs-table">
+          <thead><tr><th>Percentile</th><th>Latency</th></tr></thead>
+          <tbody>
+            <tr><td>p50</td><td>0.10 ms</td></tr>
+            <tr><td>p95</td><td>0.16 ms</td></tr>
+            <tr><td>p99</td><td>0.36 ms</td></tr>
+            <tr><td>Throughput</td><td>~8,500 verdicts/s (single worker)</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>CI gates every build on p99 ≤ 100 ms (~250× headroom). Full methodology: <a href="https://github.com/kpifinity/ski-framework/blob/main/docs/benchmarks.md" target="_blank" rel="noopener">docs/benchmarks.md ↗</a>.</p>
+    </section>
+
+    <section id="metrics">
+      <h2>Observability, /metrics</h2>
+      <p>The runtime exports a Prometheus-compatible <code>/metrics</code> endpoint (intentionally unauthenticated for scrape compatibility). It exposes aggregates only, no payload data, no verdict bodies, no reasoning text, no tenant identifiers.</p>
+      <div class="code-block">
+        <div class="code-block-header"><span class="code-block-title">Exported series</span></div>
+        <pre><code><span class="k">ski_agreement_rate</span>                 <span class="comment"># LLM ↔ Verifier agreement</span>
+<span class="k">ski_kg_signature_verified</span>          <span class="comment"># KG signature validity (gauge)</span>
+<span class="k">ski_ledger_sequence_gaps_total</span>     <span class="comment"># Ledger tampering alert</span>
+<span class="k">ski_verdicts_total{verdict=...}</span>    <span class="comment"># Per-verdict-type counter</span>
+<span class="k">ski_evaluation_duration_seconds</span>    <span class="comment"># Latency histogram</span>
+<span class="k">ski_model_last_telemetry_timestamp</span> <span class="comment"># Heartbeat</span>
+<span class="k">ski_runtime_info</span>                   <span class="comment"># Version / KG hash info label</span></code></pre>
+      </div>
+      <p>Grafana alert rules ship in <code>monitoring/</code>. A regression test parses the alert rules and asserts every referenced series is exported, the contract cannot silently drift.</p>
+    </section>
+
+    <!-- ── FAQ ──────────────────────────────────────────────── -->
+    <section id="faq">
+      <h2>Frequently asked questions</h2>
+
+      <h3>Which LLM does SKI use?</h3>
+      <p>SKI is LLM-agnostic. The reference implementation ships with an <strong>Ollama backend</strong> (any local model via the Ollama API) and a <strong>vLLM backend</strong> (any OpenAI-compatible inference server). You supply the model — SKI orchestrates it, signs the transcript, and cross-checks the output with the Symbolic Verifier. Switching backends is a one-line config change. Custom backends can be added by implementing the <code>LLMBackend</code> protocol.</p>
+
+      <h3>Is there a hosted or SaaS version?</h3>
+      <p>No, and there will not be one. Data sovereignty is an architectural property of SKI, not a configurable feature. For that guarantee to be real, your operational data must never leave your infrastructure. SKI is on-premise only.</p>
+
+      <h3>How large is the deployment footprint?</h3>
+      <p>The reference implementation runs as a single Docker Compose stack. Minimum resource requirements for the SKI framework services (excluding the LLM): approximately 2 vCPUs and 4 GB RAM. The air-gapped boot rig has been validated on a single bare-metal node. LLM resource requirements depend entirely on which model you choose to run.</p>
+
+      <h3>How long does it take to get a first verdict?</h3>
+      <p>The 5-minute estimate in the quick start is accurate for demo mode, which does not require a model download and exercises every framework guarantee with a stub LLM. A production deployment including model download, KG configuration, and infrastructure setup is measured in hours, not days.</p>
+
+      <h3>Can SKI connect to my existing SCADA or operational data systems?</h3>
+      <p>SKI accepts readings as JSON payloads over an HTTP API. Any SCADA system, DCS, historian, or event stream that can make an HTTP POST can feed SKI. An OPC-UA read-only sidecar reference implementation is included in the repository under <code>reference-implementation/integrations/opc-ua/</code>.</p>
+
+      <h3>Can I use SKI's Knowledge Graph for regulations outside the examples?</h3>
+      <p>Yes. The KG schema is general-purpose — it is not locked to any specific regulatory domain. The reference KG covers an energy sector SO2 example; your domain experts translate your specific regulatory obligations into KG nodes, review and approve them, and the resulting graph is sealed and deployed. A full KG authoring and validation workflow is documented in <a href="#knowledge-graph">Knowledge graph</a>.</p>
+    </section>
+
+    <!-- ── Reference ──────────────────────────────────────────── -->
+    <section id="changelog">
+      <h2>Changelog</h2>
+      <p>Full changelog: <a href="https://github.com/kpifinity/ski-framework/blob/main/CHANGELOG.md" target="_blank" rel="noopener">CHANGELOG.md ↗</a>. Latest release notes: <a href="https://github.com/kpifinity/ski-framework/blob/main/docs/releases/v3.1.0-beta.1.md" target="_blank" rel="noopener">v3.1.0-beta.1 ↗</a>.</p>
+    </section>
+
+    <section id="security">
+      <h2>Security</h2>
+      <p>To report a security issue, see <a href="https://github.com/kpifinity/ski-framework/blob/main/SECURITY.md" target="_blank" rel="noopener">SECURITY.md ↗</a>. Do not open a public issue for security vulnerabilities. Responsible disclosure is the right path, we will acknowledge within 48 hours.</p>
+    </section>
+
+    <section id="github">
+      <h2>GitHub</h2>
+      <p>
+        <a href="https://github.com/kpifinity/ski-framework" target="_blank" rel="noopener" class="btn btn-secondary" style="display:inline-flex;gap:8px;align-items:center;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.009-.866-.013-1.7-2.782.603-3.369-1.342-3.369-1.342-.454-1.155-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0112 6.836c.85.004 1.705.114 2.504.336 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.744 0 .267.18.578.688.48C19.138 20.163 22 16.418 22 12c0-5.523-4.477-10-10-10z"/></svg>
+          kpifinity/ski-framework
+        </a>
+      </p>
+    </section>
+
+  </div><!-- /docs-content -->
+</main>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="footer-logo"><span class="logo-ski">SKI</span> Framework</div>
+        <p class="footer-tagline">Neuro-symbolic AI compliance monitoring for regulated industries. Verifiable provenance on every verdict.</p>
+        <div class="footer-badges">
+          <span class="footer-badge">Spec v3.0</span>
+          <span class="footer-badge">v3.1.0-beta.1</span>
+          <span class="footer-badge">Apache 2.0</span>
+          <span class="footer-badge">Open Source</span>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Product</h4>
+        <ul>
+          <li><a href="index.html?demo">How it works</a></li>
+          <li><a href="docs.html">Documentation</a></li>
+          <li><a href="compliance.html">Compliance</a></li>
+          <li><a href="#changelog">Changelog</a></li>
+          <li><a href="https://github.com/kpifinity/ski-framework/blob/main/ROADMAP.md" target="_blank" rel="noopener">Roadmap ↗</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Developers</h4>
+        <ul>
+          <li><a href="#quick-start">Quick start</a></li>
+          <li><a href="#packages">Packages</a></li>
+          <li><a href="#conformance">Conformance</a></li>
+          <li><a href="https://pypi.org/project/ski-sdk/" target="_blank" rel="noopener">PyPI ↗</a></li>
+          <li><a href="https://github.com/kpifinity/ski-framework" target="_blank" rel="noopener">GitHub ↗</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Compliance</h4>
+        <ul>
+          <li><a href="compliance.html#eu-ai-act">EU AI Act crosswalk</a></li>
+          <li><a href="compliance.html#conformance">Conformance levels</a></li>
+          <li><a href="compliance.html#audit">Audit trail</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Open Source</h4>
+        <ul>
+          <li><a href="about.html">About</a></li>
+          <li><a href="https://github.com/kpifinity/ski-framework/blob/main/SECURITY.md" target="_blank" rel="noopener">SECURITY.md ↗</a></li>
+          <li><a href="https://github.com/kpifinity/ski-framework/blob/main/SUPPORT.md" target="_blank" rel="noopener">SUPPORT.md ↗</a></li>
+          <li><a href="mailto:hello@skiframework.org">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-copy">© 2026 KpiFinity Inc., Calgary, Alberta. Specification under <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener">CC BY 4.0</a>; software under <a href="https://github.com/kpifinity/ski-framework/blob/main/LICENSE" target="_blank" rel="noopener">Apache 2.0</a>. · <a href="mailto:hello@skiframework.org">hello@skiframework.org</a> · <a href="https://kpifinity.com" target="_blank" rel="noopener">kpifinity.com ↗</a></p>
+      <p class="footer-trademark">"SKI Framework", "Sovereign Knowledge Intelligence", and "SKI Conformant" are trademarks of KpiFinity Inc. <a href="https://github.com/kpifinity/ski-framework/blob/main/TRADEMARKS.md" target="_blank" rel="noopener">Trademark Policy</a></p>
+      <p class="footer-disclaimer"><strong>Not legal, regulatory, or compliance advice.</strong> The SKI Framework is a technical and architectural specification. Consult qualified legal and regulatory counsel for obligations specific to your deployment.</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  const d=document.getElementById('announce-days');
+  if(d){const t=new Date('2026-08-02T00:00:00Z');const n=new Date();d.textContent=Math.max(0,Math.ceil((t-n)/86400000));}
+})();
+</script>
+<script src="assets/js/main.js" defer></script>
+</body>
+</html>
