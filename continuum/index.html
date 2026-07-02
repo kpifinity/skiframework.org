@@ -222,10 +222,9 @@
         <h2>Download Continuum</h2>
         <p>Free and open source. Install in a couple of clicks — the optional offline AI sets itself up the first time you turn it on.</p>
         <div class="cont-ctas">
-          <a href="https://github.com/kpifinity/continuum/releases/latest/download/Continuum-Setup.exe" class="btn btn-primary" target="_blank" rel="noopener">Download for Windows</a>
-          <a href="https://github.com/kpifinity/continuum/releases/latest/download/Continuum-macOS.dmg" class="btn btn-secondary" target="_blank" rel="noopener">Download for macOS</a>
+          <a id="dl-primary" href="https://github.com/kpifinity/continuum/releases/latest/download/Continuum-Setup.exe" class="btn btn-primary" download>Download for Windows</a>
         </div>
-        <p class="cont-platforms">Windows 10/11 · macOS 12+ · Offline AI optional (powered by Ollama)</p>
+        <p class="cont-platforms"><span id="dl-alt">Also available for <a id="dl-other" href="https://github.com/kpifinity/continuum/releases/latest/download/Continuum-macOS.dmg" download>macOS</a>.</span><br>Windows 10/11 · macOS 12+ · Offline AI optional (powered by Ollama)</p>
       </div>
     </div>
   </section>
@@ -276,6 +275,16 @@
   </div>
 </footer>
 
+<script>
+(function(){
+  var WIN='https://github.com/kpifinity/continuum/releases/latest/download/Continuum-Setup.exe', MAC='https://github.com/kpifinity/continuum/releases/latest/download/Continuum-macOS.dmg';
+  var isMac=/Mac/i.test(navigator.platform||"")||/Mac OS X/i.test(navigator.userAgent||"");
+  var p=document.getElementById('dl-primary'), alt=document.getElementById('dl-alt');
+  if(!p||!alt) return;
+  if(isMac){ p.href=MAC; p.textContent='Download for macOS'; alt.innerHTML='Also available for <a href="'+WIN+'" download>Windows</a>.'; }
+  else { p.href=WIN; p.textContent='Download for Windows'; alt.innerHTML='Also available for <a href="'+MAC+'" download>macOS</a>.'; }
+})();
+</script>
 <script src="../assets/js/main.js" defer></script>
 </body>
 </html>
