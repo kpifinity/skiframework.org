@@ -58,14 +58,22 @@
   .cont-dl h2 { font-size: clamp(1.6rem, 3vw, 2.2rem); letter-spacing: -0.02em; margin: 0 0 12px; }
   .cont-dl p { color: var(--text-2); max-width: 540px; margin: 0 auto 26px; line-height: 1.6; }
   .cont-platforms { color: var(--text-3); font-size: 13px; margin-top: 18px; }
-  .cont-firstlink { margin-top: 12px; font-size: 14px; }
-  .cont-firstlink a { color: var(--teal); }
-  .fr-steps { list-style: none; counter-reset: fr; margin: 4px 0 0; padding: 0; }
-  .fr-steps li { counter-increment: fr; position: relative; padding: 13px 0 13px 44px; line-height: 1.55; color: var(--text-2); font-size: 0.96rem; border-top: 1px solid var(--border-m); }
-  .fr-steps li:first-child { border-top: none; }
-  .fr-steps li::before { content: counter(fr); position: absolute; left: 0; top: 11px; width: 26px; height: 26px; border-radius: 50%; background: var(--teal-bg); border: 1px solid var(--teal-border); color: var(--teal); font-size: 13px; font-weight: 700; display: flex; align-items: center; justify-content: center; }
-  .fr-steps b { color: var(--text); font-weight: 600; white-space: nowrap; }
-  .fr-why { color: var(--text-3); font-size: 12.5px; margin-top: 14px; line-height: 1.5; }
+  .dl-modal { position: fixed; inset: 0; z-index: 200; display: flex; align-items: center; justify-content: center; padding: 20px; background: rgba(0,0,0,0.62); backdrop-filter: blur(6px); }
+  .dl-modal[hidden] { display: none; }
+  .dl-modal-card { position: relative; width: 100%; max-width: 470px; background: var(--bg-1); border: 1px solid var(--border); border-radius: 18px; padding: 30px 28px 24px; box-shadow: 0 24px 64px rgba(0,0,0,0.6); animation: dlpop .18s ease; }
+  @keyframes dlpop { from { transform: translateY(10px) scale(.98); opacity: 0 } to { transform: none; opacity: 1 } }
+  .dl-modal-x { position: absolute; top: 14px; right: 16px; background: none; border: 0; color: var(--text-3); font-size: 24px; line-height: 1; cursor: pointer; }
+  .dl-modal-x:hover { color: var(--text); }
+  .dl-modal-ic { width: 46px; height: 46px; border-radius: 13px; background: var(--teal-bg); border: 1px solid var(--teal-border); color: var(--teal); display: flex; align-items: center; justify-content: center; margin-bottom: 16px; }
+  .dl-modal-card h3 { font-size: 1.3rem; margin: 0 0 8px; letter-spacing: -0.01em; }
+  .dl-modal-sub { color: var(--text-2); font-size: 0.92rem; line-height: 1.55; margin: 0 0 18px; }
+  .dl-modal-steps { list-style: none; counter-reset: dm; margin: 0 0 20px; padding: 0; }
+  .dl-modal-steps li { counter-increment: dm; position: relative; padding: 12px 0 12px 42px; color: var(--text); font-size: 0.95rem; line-height: 1.5; border-top: 1px solid var(--border-m); }
+  .dl-modal-steps li:first-child { border-top: none; }
+  .dl-modal-steps li::before { content: counter(dm); position: absolute; left: 0; top: 10px; width: 26px; height: 26px; border-radius: 50%; background: linear-gradient(135deg,#2DD4BF,#0F9F96); color: #021212; font-size: 13px; font-weight: 800; display: flex; align-items: center; justify-content: center; }
+  .dl-modal-steps b { color: var(--teal-light); font-weight: 600; white-space: nowrap; }
+  .dl-modal-card .btn-primary { width: 100%; justify-content: center; padding: 13px; }
+  .dl-modal-foot { color: var(--text-3); font-size: 12px; margin: 12px 0 0; text-align: center; }
   @media (max-width: 760px){ .cont-split { grid-template-columns: 1fr; gap: 28px; } }
 </style>
 <script type="application/ld+json">
@@ -239,38 +247,7 @@
           <a id="dl-primary" href="https://github.com/kpifinity/continuum/releases/latest/download/Continuum-Setup.exe" class="btn btn-primary" download>Download for Windows</a>
         </div>
         <p class="cont-platforms"><span id="dl-alt">Also available for <a id="dl-other" href="https://github.com/kpifinity/continuum/releases/latest/download/Continuum-macOS.dmg" download>macOS</a>.</span><br>Windows 10/11 · macOS 12+ · Offline AI optional (powered by Ollama)</p>
-        <p class="cont-firstlink">First time opening it? Your computer may say it’s “unverified.” <a href="#firstrun">Here’s how to open it →</a></p>
       </div>
-    </div>
-  </section>
-
-  <!-- FIRST LAUNCH -->
-  <section class="section" id="firstrun" style="background:var(--bg-1)">
-    <div class="container">
-      <div class="section-label">First launch</div>
-      <h2 class="section-title">Opening Continuum the first time</h2>
-      <p class="section-sub">Continuum is brand new and open source, so it isn’t code-signed yet — your computer shows a one-time “unverified” warning. It’s safe: the full source is public on GitHub and nothing ever leaves your computer. Here’s how to get past it.</p>
-      <div class="cont-split">
-        <div class="cont-panel">
-          <h3 style="color:var(--teal);margin:0 0 12px">Windows</h3>
-          <ol class="fr-steps">
-            <li>Run <b>Continuum-Setup.exe</b>.</li>
-            <li>If a blue <b>“Windows&nbsp;protected&nbsp;your&nbsp;PC”</b> box appears, click <b>More&nbsp;info</b>, then <b>Run&nbsp;anyway</b>.</li>
-            <li>Continue through the installer, then open Continuum.</li>
-          </ol>
-        </div>
-        <div class="cont-panel">
-          <h3 style="color:var(--teal);margin:0 0 12px">macOS</h3>
-          <ol class="fr-steps">
-            <li>Open the downloaded <b>.dmg</b> and drag <b>Continuum</b> into <b>Applications</b>.</li>
-            <li>Open Continuum from Applications. If macOS says it “could not verify” the app, click <b>Done</b>.</li>
-            <li>Open <b>System&nbsp;Settings</b> → <b>Privacy&nbsp;&amp;&nbsp;Security</b> and scroll to the bottom.</li>
-            <li>Click <b>Open&nbsp;Anyway</b> next to Continuum, then confirm with your password or Touch&nbsp;ID.</li>
-          </ol>
-          <p class="fr-why">Older macOS: right-click Continuum and choose <b>Open</b> → <b>Open</b>.</p>
-        </div>
-      </div>
-      <p class="fr-why">These warnings disappear once the app is code-signed (Apple Developer ID for macOS, a Windows signing certificate) — on the roadmap.</p>
     </div>
   </section>
 
@@ -320,14 +297,48 @@
   </div>
 </footer>
 
+<div class="dl-modal" id="dl-modal" hidden>
+  <div class="dl-modal-card" role="dialog" aria-modal="true" aria-labelledby="dl-modal-title">
+    <button class="dl-modal-x" id="dl-modal-x" aria-label="Close">×</button>
+    <div class="dl-modal-ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 21h16"/></svg></div>
+    <h3 id="dl-modal-title">Your download is starting…</h3>
+    <p class="dl-modal-sub">Continuum is new and open source, so it isn’t code-signed yet — your <span id="dl-os">computer</span> will show a one-time “unverified” warning. It’s completely safe. Here’s how to open it:</p>
+    <ol class="dl-modal-steps" id="dl-modal-steps"></ol>
+    <button class="btn btn-primary" id="dl-modal-done">Got it</button>
+    <p class="dl-modal-foot">Full source is public on GitHub · nothing ever leaves your computer.</p>
+  </div>
+</div>
+
 <script>
 (function(){
   var WIN='https://github.com/kpifinity/continuum/releases/latest/download/Continuum-Setup.exe', MAC='https://github.com/kpifinity/continuum/releases/latest/download/Continuum-macOS.dmg';
+  var WIN_STEPS=[
+    'Open <b>Continuum-Setup.exe</b> from your Downloads.',
+    'If a blue <b>“Windows&nbsp;protected&nbsp;your&nbsp;PC”</b> box appears, click <b>More&nbsp;info</b>, then <b>Run&nbsp;anyway</b>.',
+    'Follow the installer, then open Continuum.'
+  ];
+  var MAC_STEPS=[
+    'Open the <b>.dmg</b> and drag <b>Continuum</b> into <b>Applications</b>.',
+    'Open Continuum. If macOS says it “could not verify” it, click <b>Done</b>.',
+    'Open <b>System&nbsp;Settings → Privacy&nbsp;&amp;&nbsp;Security</b>, scroll down, click <b>Open&nbsp;Anyway</b>, and confirm.'
+  ];
   var isMac=/Mac/i.test(navigator.platform||"")||/Mac OS X/i.test(navigator.userAgent||"");
   var p=document.getElementById('dl-primary'), alt=document.getElementById('dl-alt');
-  if(!p||!alt) return;
-  if(isMac){ p.href=MAC; p.textContent='Download for macOS'; alt.innerHTML='Also available for <a href="'+WIN+'" download>Windows</a>.'; }
-  else { p.href=WIN; p.textContent='Download for Windows'; alt.innerHTML='Also available for <a href="'+MAC+'" download>macOS</a>.'; }
+  if(p&&alt){
+    if(isMac){ p.href=MAC; p.setAttribute('data-dl','mac'); p.textContent='Download for macOS'; alt.innerHTML='Also available for <a href="'+WIN+'" data-dl="win" download>Windows</a>.'; }
+    else { p.href=WIN; p.setAttribute('data-dl','win'); p.textContent='Download for Windows'; alt.innerHTML='Also available for <a href="'+MAC+'" data-dl="mac" download>macOS</a>.'; }
+  }
+  var modal=document.getElementById('dl-modal');
+  if(modal){
+    var stepsEl=document.getElementById('dl-modal-steps'), osEl=document.getElementById('dl-os');
+    function show(os){ var st=os==='mac'?MAC_STEPS:WIN_STEPS; if(osEl)osEl.textContent=(os==='mac'?'Mac':'PC'); stepsEl.innerHTML=st.map(function(x){return '<li>'+x+'</li>';}).join(''); modal.hidden=false; }
+    function hide(){ modal.hidden=true; }
+    document.getElementById('dl-modal-x').onclick=hide;
+    document.getElementById('dl-modal-done').onclick=hide;
+    modal.addEventListener('click',function(e){ if(e.target===modal) hide(); });
+    document.addEventListener('keydown',function(e){ if(e.key==='Escape') hide(); });
+    document.addEventListener('click',function(e){ var a=e.target.closest&&e.target.closest('a[data-dl]'); if(a) show(a.getAttribute('data-dl')); });
+  }
 })();
 </script>
 <script src="../assets/js/main.js" defer></script>
