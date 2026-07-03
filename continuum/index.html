@@ -60,10 +60,12 @@
   .cont-platforms { color: var(--text-3); font-size: 13px; margin-top: 18px; }
   .cont-firstlink { margin-top: 12px; font-size: 14px; }
   .cont-firstlink a { color: var(--teal); }
-  .fr-steps { margin: 6px 0 0; padding-left: 20px; }
-  .fr-steps li { margin: 9px 0; line-height: 1.55; color: var(--text-2); font-size: 0.95rem; }
-  .fr-steps b { color: var(--text); font-weight: 600; }
-  .fr-why { color: var(--text-3); font-size: 12.5px; margin-top: 10px; line-height: 1.5; }
+  .fr-steps { list-style: none; counter-reset: fr; margin: 4px 0 0; padding: 0; }
+  .fr-steps li { counter-increment: fr; position: relative; padding: 13px 0 13px 44px; line-height: 1.55; color: var(--text-2); font-size: 0.96rem; border-top: 1px solid var(--border-m); }
+  .fr-steps li:first-child { border-top: none; }
+  .fr-steps li::before { content: counter(fr); position: absolute; left: 0; top: 11px; width: 26px; height: 26px; border-radius: 50%; background: var(--teal-bg); border: 1px solid var(--teal-border); color: var(--teal); font-size: 13px; font-weight: 700; display: flex; align-items: center; justify-content: center; }
+  .fr-steps b { color: var(--text); font-weight: 600; white-space: nowrap; }
+  .fr-why { color: var(--text-3); font-size: 12.5px; margin-top: 14px; line-height: 1.5; }
   @media (max-width: 760px){ .cont-split { grid-template-columns: 1fr; gap: 28px; } }
 </style>
 <script type="application/ld+json">
@@ -247,27 +249,28 @@
     <div class="container">
       <div class="section-label">First launch</div>
       <h2 class="section-title">Opening Continuum the first time</h2>
-      <p class="section-sub">Continuum is brand new and open source, so it isn’t code-signed yet — your computer may warn that it’s “unverified.” It’s safe: the full source is public on GitHub and nothing you do ever leaves your computer. Here’s how to get past the one-time warning.</p>
+      <p class="section-sub">Continuum is brand new and open source, so it isn’t code-signed yet — your computer shows a one-time “unverified” warning. It’s safe: the full source is public on GitHub and nothing ever leaves your computer. Here’s how to get past it.</p>
       <div class="cont-split">
         <div class="cont-panel">
-          <h3 style="color:var(--teal);margin:0 0 10px">Windows</h3>
+          <h3 style="color:var(--teal);margin:0 0 12px">Windows</h3>
           <ol class="fr-steps">
             <li>Run <b>Continuum-Setup.exe</b>.</li>
-            <li>If you see <b>“Windows protected your PC”</b>, click <b>More info</b>, then <b>Run anyway</b>.</li>
-            <li>Finish the installer and launch Continuum.</li>
+            <li>If a blue <b>“Windows&nbsp;protected&nbsp;your&nbsp;PC”</b> box appears, click <b>More&nbsp;info</b>, then <b>Run&nbsp;anyway</b>.</li>
+            <li>Continue through the installer, then open Continuum.</li>
           </ol>
         </div>
         <div class="cont-panel">
-          <h3 style="color:var(--teal);margin:0 0 10px">macOS</h3>
+          <h3 style="color:var(--teal);margin:0 0 12px">macOS</h3>
           <ol class="fr-steps">
-            <li>Open the <b>.dmg</b> and drag Continuum into <b>Applications</b>.</li>
-            <li>Double-click Continuum. If macOS says it “could not verify” the app, click <b>Done</b>.</li>
-            <li>Open <b>System Settings → Privacy &amp; Security</b>, scroll down, and click <b>Open Anyway</b> next to Continuum — then confirm with your password or Touch ID.</li>
+            <li>Open the downloaded <b>.dmg</b> and drag <b>Continuum</b> into <b>Applications</b>.</li>
+            <li>Open Continuum from Applications. If macOS says it “could not verify” the app, click <b>Done</b>.</li>
+            <li>Open <b>System&nbsp;Settings</b> → <b>Privacy&nbsp;&amp;&nbsp;Security</b> and scroll to the bottom.</li>
+            <li>Click <b>Open&nbsp;Anyway</b> next to Continuum, then confirm with your password or Touch&nbsp;ID.</li>
           </ol>
-          <p class="fr-why">On older macOS you can instead right-click Continuum → <b>Open</b> → <b>Open</b>.</p>
+          <p class="fr-why">Older macOS: right-click Continuum and choose <b>Open</b> → <b>Open</b>.</p>
         </div>
       </div>
-      <p class="fr-why">Want these warnings gone entirely? They disappear once the app is code-signed (an Apple Developer ID for macOS and a Windows signing certificate). That’s on the roadmap.</p>
+      <p class="fr-why">These warnings disappear once the app is code-signed (Apple Developer ID for macOS, a Windows signing certificate) — on the roadmap.</p>
     </div>
   </section>
 
