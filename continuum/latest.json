@@ -1,6 +1,6 @@
 {
-  "version": "0.1.0",
-  "notes": "First public release of Continuum.",
+  "version": "0.1.1",
+  "notes": "Guided step-by-step import for Claude, ChatGPT, Gemini and Grok.",
   "url": "https://skiframework.org/continuum/",
   "ollama_recommended": "",
   "ollama_url": "https://ollama.com/download"
