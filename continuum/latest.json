@@ -1,6 +1,6 @@
 {
-  "version": "0.1.1",
-  "notes": "Guided step-by-step import for Claude, ChatGPT, Gemini and Grok.",
+  "version": "0.1.2",
+  "notes": "Guided chat import for Claude, ChatGPT, Gemini and Grok; signing-ready installers.",
   "url": "https://skiframework.org/continuum/",
   "ollama_recommended": "",
   "ollama_url": "https://ollama.com/download"
