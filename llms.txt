@@ -4,7 +4,7 @@
 
 SKI (Sovereign Knowledge Intelligence) is a framework built by KpiFinity Inc. (Calgary, Alberta) that enables regulated industries to deploy AI compliance monitoring that regulators can directly audit. Sectors: oil & gas, financial services, defence, energy & utilities, mining, critical manufacturing.
 
-Current versions: v3.1.0-beta.1 (latest beta, on PyPI), v3.0.3 (stable). Specification under CC BY 4.0.
+Current version: v3.1.0 (GA, on PyPI). Specification under CC BY 4.0.
 
 ## What SKI does
 
@@ -28,7 +28,7 @@ Every evaluation produces exactly one of five categorical verdict types. No conf
 - **Replayable**: any auditor with the same model weights, KG version, and prompt template can reconstruct any past verdict and verify its authenticity
 - **LLM-agnostic**: reference implementation ships with Ollama backend (any local model) and vLLM backend (any OpenAI-compatible server); custom backends via `LLMBackend` protocol
 - **Passive, read-only**: SKI has zero control path to operational systems; operations continue uninterrupted if SKI goes offline
-- **Conformance-tested**: 77 tests across three levels (L1: Basic Provenance, L2: Durability, L3: Sovereignty); Level 3 fully runnable including the air-gapped boot rig
+- **Conformance-tested**: 82 tests across three levels (L1: Basic Provenance, L2: Durability, L3: Sovereignty); Level 3 fully runnable including the air-gapped boot rig
 
 ## Measured results (published)
 
@@ -41,7 +41,7 @@ Across 6 published adversarial evaluation campaigns on a 50-case human-graded go
 
 ## EU AI Act
 
-SKI publishes an article-level crosswalk covering provider obligations (Articles 9–19, 72) and deployer obligations (Article 26), with an element-by-element Article 12(3) record-keeping mapping onto the audit ledger. High-risk AI obligations apply from 2 August 2026.
+SKI publishes an article-level crosswalk covering provider obligations (Articles 9–19, 72) and deployer obligations (Article 26), with an element-by-element Article 12(3) record-keeping mapping onto the audit ledger. High-risk AI obligations have been in force since 2 August 2026.
 
 ## Quick start
 

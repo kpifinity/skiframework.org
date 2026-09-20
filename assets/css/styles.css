@@ -2004,3 +2004,72 @@ header {
 .nav-dd-item-title { display: block; font-weight: 600; font-size: 14px; }
 .nav-dd-item-desc { display: block; color: var(--text-3); font-size: 12px; margin-top: 2px; }
 .nav-mobile-group-label { color: var(--text-3); font-size: 12px; text-transform: uppercase; letter-spacing: .6px; margin-top: 10px; padding-left: 2px; }
+
+/* ============================================================
+   LIGHT THEME — "Sage & Ink"  (marketing pages only)
+   Applied via <body class="theme-light">. :root stays dark so the
+   shared stylesheet leaves continuum/ completely untouched.
+   Accent: Deep Emerald #0F7A3F  ·  Contrast: Brass #8F6B24
+   ============================================================ */
+body.theme-light{
+  --bg:#F4F6F3; --bg-1:#FFFFFF; --bg-2:#EEF1EC; --bg-3:#E6EAE4;
+  --bg-card:#FFFFFF; --bg-card-h:#F2F5F0; --bg-nav:rgba(244,246,243,0.82);
+  --border:rgba(24,42,36,0.12); --border-h:rgba(24,42,36,0.20); --border-m:rgba(24,42,36,0.07);
+  --teal:#0F7A3F; --teal-light:#0B6733; --teal-bg:rgba(15,122,63,0.08); --teal-border:rgba(15,122,63,0.24); --teal-glow:rgba(15,122,63,0.10);
+  --blue:#2563A8; --blue-bg:rgba(37,99,168,0.08); --blue-glow:rgba(37,99,168,0.10);
+  --violet:#6D28D9; --violet-bg:rgba(109,40,217,0.08);
+  --green:#1F7A46; --green-bg:rgba(31,122,70,0.09); --green-glow:rgba(31,122,70,0.12);
+  --amber:#B45309; --amber-bg:rgba(180,83,9,0.09); --amber-glow:rgba(180,83,9,0.12);
+  --red:#C0362C; --red-bg:rgba(192,54,44,0.08);
+  --text:#182A24; --text-2:#4C5B54; --text-3:#74827B;
+  --brass:#8F6B24; --brass-bg:rgba(143,107,36,0.10); --brass-bd:rgba(143,107,36,0.32);
+  background:var(--bg); color:var(--text);
+}
+body.theme-light .announce{ background:rgba(244,246,243,0.90); border-bottom:1px solid var(--border-m); color:var(--text-2); }
+body.theme-light .announce::before{ background:linear-gradient(90deg, rgba(15,122,63,0.05), rgba(143,107,36,0.04) 50%, rgba(15,122,63,0.05)); }
+body.theme-light .hero::after{ background-image:radial-gradient(rgba(24,42,36,0.05) 1px, transparent 1px); }
+body.theme-light .hero-orb-1{ background:radial-gradient(circle, rgba(15,122,63,0.07), transparent 65%); }
+body.theme-light .hero-orb-2{ background:radial-gradient(circle, rgba(143,107,36,0.06), transparent 65%); }
+body.theme-light .btn-primary{ background:var(--teal); color:#fff; box-shadow:0 1px 2px rgba(12,50,28,0.14), 0 10px 24px rgba(15,122,63,0.20); }
+body.theme-light .btn-primary::after{ background:linear-gradient(90deg, transparent, rgba(255,255,255,0.28), transparent); }
+body.theme-light .btn-secondary{ background:transparent; color:var(--brass); border-color:var(--brass-bd); }
+body.theme-light .btn-secondary:hover{ background:var(--brass-bg); border-color:var(--brass); color:var(--brass); }
+body.theme-light .hero h1 em{ background:none; -webkit-text-fill-color:var(--teal); color:var(--teal); }
+body.theme-light .trust-item{ background:#fff; border-color:var(--border); }
+body.theme-light .nav-github{ background:#fff; }
+body.theme-light .nav-links a:hover,
+body.theme-light .nav-demo-btn:hover,
+body.theme-light .nav-mobile a:hover,
+body.theme-light .nav-mobile .nav-demo-btn:hover,
+body.theme-light .nav-github:hover,
+body.theme-light .how-step:hover,
+body.theme-light .docs-sidebar a:hover{ background:rgba(24,42,36,0.05); }
+body.theme-light .problem-card::after{ color:rgba(24,42,36,0.045); }
+body.theme-light .problem-card,
+body.theme-light .measured-stat,
+body.theme-light .how-teaser,
+body.theme-light .getstarted-card,
+body.theme-light .compliance-card{ box-shadow:0 1px 2px rgba(20,40,30,0.05), 0 10px 26px rgba(20,40,30,0.06); }
+body.theme-light .footer-badges .footer-badge:last-child{ color:var(--brass); border-color:var(--brass-bd); background:var(--brass-bg); }
+/* dark panel islands — engineered surfaces stay dark & legible */
+body.theme-light .hero-terminal,
+body.theme-light .envelope-code,
+body.theme-light .envelope-panel,
+body.theme-light .code-block{
+  --text:#E4EBE7; --text-2:#93A79E; --text-3:#93A79E;
+  --teal:#43D8C2; --teal-light:#7BE9D8; --blue:#8BB9F2; --green:#43D8C2; --amber:#F2C15A; --red:#F0928A;
+  --border:rgba(255,255,255,0.10); --border-m:rgba(255,255,255,0.07);
+  --bg-1:#12211D; --bg-2:#0E1A16; --bg-3:#0E1A16; --bg-card:rgba(255,255,255,0.05);
+  color:var(--text);
+}
+body.theme-light .envelope-code{ background:#12211D; }
+body.theme-light .code-block{ background:#12211D; border-color:rgba(255,255,255,0.10); }
+/* structural dark bars that were hardcoded (not tokenised) */
+body.theme-light .nav{ background:rgba(244,246,243,0.85); border-bottom:1px solid var(--border-m); }
+body.theme-light .nav-mobile{ background:rgba(244,246,243,0.97); border-color:var(--border); }
+body.theme-light .docs-mobile-nav{ background:rgba(244,246,243,0.97); }
+
+/* footer social icons (marketing pages) */
+.footer-social{ display:flex; gap:10px; margin-top:18px; }
+.footer-social a{ display:inline-flex; align-items:center; justify-content:center; width:36px; height:36px; border-radius:9px; border:1px solid var(--border); color:var(--text-2); background:var(--bg-card); transition:color .15s ease, border-color .15s ease, background .15s ease; }
+.footer-social a:hover{ color:var(--teal); border-color:var(--teal-border); background:var(--teal-bg); }
