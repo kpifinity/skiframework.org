@@ -2021,7 +2021,7 @@ body.theme-light{
   --green:#1F7A46; --green-bg:rgba(31,122,70,0.09); --green-glow:rgba(31,122,70,0.12);
   --amber:#B45309; --amber-bg:rgba(180,83,9,0.09); --amber-glow:rgba(180,83,9,0.12);
   --red:#C0362C; --red-bg:rgba(192,54,44,0.08);
-  --text:#182A24; --text-2:#4C5B54; --text-3:#74827B;
+  --text:#182A24; --text-2:#4C5B54; --text-3:#647065;
   --brass:#8F6B24; --brass-bg:rgba(143,107,36,0.10); --brass-bd:rgba(143,107,36,0.32);
   background:var(--bg); color:var(--text);
 }
@@ -2073,3 +2073,9 @@ body.theme-light .docs-mobile-nav{ background:rgba(244,246,243,0.97); }
 .footer-social{ display:flex; gap:10px; margin-top:18px; }
 .footer-social a{ display:inline-flex; align-items:center; justify-content:center; width:36px; height:36px; border-radius:9px; border:1px solid var(--border); color:var(--text-2); background:var(--bg-card); transition:color .15s ease, border-color .15s ease, background .15s ease; }
 .footer-social a:hover{ color:var(--teal); border-color:var(--teal-border); background:var(--teal-bg); }
+
+/* a11y: legible 'In force' label on light; reduced-motion support */
+body.theme-light .euai-days-label{ color:var(--amber); }
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{ animation-duration:0.001ms!important; animation-iteration-count:1!important; transition-duration:0.001ms!important; scroll-behavior:auto!important; }
+}
