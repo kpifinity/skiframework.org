@@ -68,7 +68,7 @@
 <a href="#main-content" class="skip-link">Skip to main content</a>
 
 <div class="announce" role="banner">
-  <span><strong>v3.1.0</strong> on PyPI · GA</span>
+  <span><strong>v3.2.0</strong> on PyPI · GA</span>
   <span class="announce-sep">·</span>
   <span>EU AI Act high-risk obligations: <strong>in force</strong> since 2 August 2026</span>
   <span class="announce-sep">·</span>
@@ -190,7 +190,7 @@
     <div class="about-section">
       <h2>The project</h2>
       <p>SKI Framework is an open-source project built by <a href="https://kpifinity.com" target="_blank" rel="noopener">KpiFinity Inc.</a>, a technology company based in Calgary, Alberta, focused on AI-driven compliance infrastructure for the energy sector and beyond.</p>
-      <p>v3.1.0 is the current general-availability release. It completes the eval loop, adds the air-gapped boot rig (Level 3 conformance), documents the telemetry trust boundary with a fail-safe default, and ships a dedicated adversarial-telemetry (T9) conformance test — the OT-hardening gate that took SKI out of beta. It also publishes the EU AI Act crosswalk against the high-risk obligations now in force.</p>
+      <p>v3.2.0 is the current release. It makes the runtime fail closed where the specification says it must (a Symbolic Verifier that checks every applicable obligation itself, Knowledge Graphs that load only when signed by an operator-pinned key, and a least-privilege audit-ledger role). It publishes the wire format as language-neutral contracts any implementation can be tested against, extends the audit ledger's hash chain to cover every stored decision record, and makes strict sovereignty the default: the runtime refuses to start, or to keep evaluating, if anything would leave the operator's infrastructure. It builds on v3.1.0, the OT-hardened GA release with the air-gapped boot rig and the EU AI Act crosswalk.</p>
 
       <div class="about-links">
         <a href="https://github.com/kpifinity/ski-framework" target="_blank" rel="noopener" class="about-link">
@@ -260,7 +260,7 @@
         <p class="footer-tagline">Neuro-symbolic AI compliance monitoring for regulated industries. Verifiable provenance on every verdict.</p>
         <div class="footer-badges">
           <span class="footer-badge">Spec v3.0</span>
-          <span class="footer-badge">v3.1.0</span>
+          <span class="footer-badge">v3.2.0</span>
           <span class="footer-badge">Apache 2.0</span>
           <span class="footer-badge">Open Source</span>
           <span class="footer-badge">Built in Canada</span>

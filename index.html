@@ -62,7 +62,7 @@
       "applicationCategory": "BusinessApplication",
       "applicationSubCategory": "Compliance Monitoring Software",
       "operatingSystem": "Linux",
-      "softwareVersion": "3.1.0",
+      "softwareVersion": "3.2.0",
       "softwareRequirements": "Docker, Python 3.10+",
       "codeRepository": "https://github.com/kpifinity/ski-framework",
       "downloadUrl": "https://pypi.org/project/ski-sdk/",
@@ -82,9 +82,9 @@
         "Neuro-symbolic dual examiner: LLM plus deterministic Symbolic Verifier",
         "Five categorical verdict types: CLEAR, FLAG, DISCRETIONARY, NULL_UNMAPPED, NULL_STALE",
         "Six-anchor cryptographic provenance per verdict (model hash, KG hash, prompt hash, decoder seed, grammar hash)",
-        "Tamper-evident append-only audit ledger",
+        "Tamper-evident append-only audit ledger whose hash chain covers every stored decision record",
         "LLM-agnostic: Ollama and vLLM backends included",
-        "82 conformance tests across three levels",
+        "156 conformance tests across three levels",
         "EU AI Act Article 12(3) audit ledger mapping",
         "0.36 ms p99 framework overhead on 2 vCPUs",
         "0 breaches silently cleared across 6 published adversarial eval campaigns"
@@ -113,7 +113,7 @@
 
 <!-- Announcement banner -->
 <div class="announce" role="banner">
-  <span><strong>v3.1.0</strong> on PyPI · GA</span>
+  <span><strong>v3.2.0</strong> on PyPI · GA</span>
   <span class="announce-sep">·</span>
   <span>EU AI Act high-risk obligations: <strong>in force</strong> since 2 August 2026</span>
   <span class="announce-sep">·</span>
@@ -197,7 +197,7 @@
         </div>
         <div class="trust-item">
           <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
-          82 conformance tests
+          156 conformance tests
         </div>
         <div class="trust-item">
           <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
@@ -656,7 +656,7 @@
 
       <div class="code-block">
         <div class="code-block-header">
-          <span class="code-block-title">Full conformance suite (82 tests)</span>
+          <span class="code-block-title">Full conformance suite (156 tests)</span>
         </div>
         <pre><code><span class="cmd">pip install -r requirements-dev.txt && pytest conformance/</span></code></pre>
       </div>
@@ -683,7 +683,7 @@
         <p class="footer-tagline">Neuro-symbolic AI compliance monitoring for regulated industries. Verifiable provenance on every verdict.</p>
         <div class="footer-badges">
           <span class="footer-badge">Spec v3.0</span>
-          <span class="footer-badge">v3.1.0</span>
+          <span class="footer-badge">v3.2.0</span>
           <span class="footer-badge">Apache 2.0</span>
           <span class="footer-badge">Open Source</span>
           <span class="footer-badge">Built in Canada</span>
