@@ -4,7 +4,7 @@
 
 SKI (Sovereign Knowledge Intelligence) is a framework built by KpiFinity Inc. (Calgary, Alberta) that enables regulated industries to deploy AI compliance monitoring that regulators can directly audit. Sectors: oil & gas, financial services, defence, energy & utilities, mining, critical manufacturing.
 
-Current version: v3.1.0 (GA, on PyPI). Specification under CC BY 4.0.
+Current version: v3.2.0 (GA, on PyPI). Specification under CC BY 4.0.
 
 ## What SKI does
 
@@ -23,12 +23,13 @@ Every evaluation produces exactly one of five categorical verdict types. No conf
 
 ## Key architectural properties
 
-- **Sovereign**: zero outbound connections at runtime; CI-proven with `--network=none` boot rig that verifies verdicts from inside an air gap
+- **Sovereign**: zero outbound connections at runtime; CI-proven with `--network=none` boot rig that verifies verdicts from inside an air gap. Strict sovereignty mode (the default) refuses to start unless the model, ledger and KG trust anchors are all local and operator-pinned, refuses any network call that leaves the deployment during an evaluation, and serves a signed attestation at `/api/sovereignty`
 - **Verifiable provenance**: six hash anchors per verdict envelope — model weight hash, KG version hash, prompt template ID, prompt template hash, decoder seed, structured grammar hash
-- **Replayable**: any auditor with the same model weights, KG version, and prompt template can reconstruct any past verdict and verify its authenticity
+- **Replayable**: any auditor with the same model weights, KG version, and prompt template can reconstruct any past verdict and verify its authenticity; `audit-ledger replay` re-checks each recorded verdict from its signed transcript, and the ledger's hash chain covers every stored decision record
+- **Language-neutral contracts**: the wire format is published as JSON Schema, OpenAPI 3.1 and RFC 8785 canonicalization test vectors, so another implementation can be built and checked against them
 - **LLM-agnostic**: reference implementation ships with Ollama backend (any local model) and vLLM backend (any OpenAI-compatible server); custom backends via `LLMBackend` protocol
 - **Passive, read-only**: SKI has zero control path to operational systems; operations continue uninterrupted if SKI goes offline
-- **Conformance-tested**: 82 tests across three levels (L1: Basic Provenance, L2: Durability, L3: Sovereignty); Level 3 fully runnable including the air-gapped boot rig
+- **Conformance-tested**: 156 tests across three levels (L1: Basic Provenance, L2: Durability, L3: Sovereignty); Level 3 fully runnable including the air-gapped boot rig
 
 ## Measured results (published)
 

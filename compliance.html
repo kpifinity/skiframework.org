@@ -61,7 +61,7 @@
 <a href="#main-content" class="skip-link">Skip to main content</a>
 
 <div class="announce" role="banner">
-  <span><strong>v3.1.0</strong> on PyPI · GA</span>
+  <span><strong>v3.2.0</strong> on PyPI · GA</span>
   <span class="announce-sep">·</span>
   <span>EU AI Act high-risk obligations: <strong>in force</strong> since 2 August 2026</span>
   <span class="announce-sep">·</span>
@@ -250,7 +250,7 @@
             <tr>
               <td>Art. 17</td>
               <td>Quality management system</td>
-              <td>CI-gated conformance suite (82 tests), benchmark CI gate, nightly eval workflow, changelog promotion discipline, trusted publishing.</td>
+              <td>CI-gated conformance suite (156 tests), benchmark CI gate, nightly eval workflow, changelog promotion discipline, trusted publishing.</td>
             </tr>
             <tr>
               <td>Art. 72</td>
@@ -346,9 +346,9 @@
       <h2>Level 3: Sovereignty (22 tests)</h2>
       <p>Requires Level 1 + 2. The full runtime produces correct verdicts inside a <code>--network=none</code> container, zero outbound connections, proven not by policy but by the air-gapped boot rig that boots the complete stack and verifies hash-chained ledger entries from inside the gap. KG signature validation is enforced at load time. Helm NetworkPolicy is rendered and verified.</p>
       <div class="code-block">
-        <div class="code-block-header"><span class="code-block-title">Run all 82 tests (including L3 air-gap rig)</span></div>
+        <div class="code-block-header"><span class="code-block-title">Run all 156 tests (including L3 air-gap rig)</span></div>
         <pre><code><span class="cmd">SKI_L3_AIRGAP=1 pytest conformance/ -v</span>
-<span class="comment"># 82 tests, L3 requires Docker with --network=none capability</span></code></pre>
+<span class="comment"># 156 tests, L3 requires Docker with --network=none capability</span></code></pre>
       </div>
     </section>
 
@@ -397,7 +397,7 @@
         <p class="footer-tagline">Neuro-symbolic AI compliance monitoring for regulated industries. Verifiable provenance on every verdict.</p>
         <div class="footer-badges">
           <span class="footer-badge">Spec v3.0</span>
-          <span class="footer-badge">v3.1.0</span>
+          <span class="footer-badge">v3.2.0</span>
           <span class="footer-badge">Apache 2.0</span>
           <span class="footer-badge">Open Source</span>
           <span class="footer-badge">Built in Canada</span>

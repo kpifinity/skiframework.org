@@ -105,7 +105,7 @@
 <a href="#main-content" class="skip-link">Skip to main content</a>
 
 <div class="announce" role="banner">
-  <span><strong>v3.1.0</strong> on PyPI · GA</span>
+  <span><strong>v3.2.0</strong> on PyPI · GA</span>
   <span class="announce-sep">·</span>
   <span>EU AI Act high-risk obligations: <strong>in force</strong> since 2 August 2026</span>
   <span class="announce-sep">·</span>
@@ -219,10 +219,10 @@
 
     <div class="docs-hero">
       <div class="section-label">Documentation</div>
-      <h1>SKI Framework <span class="docs-version">v3.1.0</span></h1>
+      <h1>SKI Framework <span class="docs-version">v3.2.0</span></h1>
       <p class="docs-lead">SKI (Sovereign Knowledge Intelligence) is a neuro-symbolic AI compliance monitoring framework. This page covers the technical reference for deployers and integration engineers. Business overview: <a href="index.html">skiframework.org</a>. Animated walkthrough: <a href="index.html?demo">how it works</a>.</p>
       <div class="docs-callout docs-callout-amber">
-        <strong>General availability.</strong> v3.1.0 is the first GA release of the v3.1 line — the API and envelope format are stable, every fail-safe path is tested and CI-gated, and it is hardened for OT deployment.
+        <strong>v3.2.0: trust, one contract, strict sovereignty.</strong> The runtime fails closed where the spec says it must, the wire format is published as language-neutral contracts, the audit ledger's hash chain covers every stored decision record, and production deployments start in strict sovereignty mode. <a href="https://github.com/kpifinity/ski-framework/blob/main/docs/releases/v3.2.0.md" target="_blank" rel="noopener">Release notes ↗</a>
       </div>
     </div>
 
@@ -250,22 +250,24 @@
 <span class="cmd">cd reference-implementation</span>
 <span class="cmd">docker compose -f docker-compose.demo.yml up -d</span>
 
-<span class="comment"># 4. Health check</span>
-<span class="cmd">curl http://localhost:8000/api/health</span>
-<span class="comment"># → {"status":"ok","kg":"loaded","kg_signature":"valid"}</span>
+<span class="comment"># 4. Health check (self-signed demo TLS, hence -k)</span>
+<span class="cmd">curl -k https://localhost:8000/api/health</span>
+<span class="comment"># → {"status":"ok","kg_loaded":true,"kg_signature_verified":true, ...}</span>
 
-<span class="comment"># 5. Submit a measurement and get a verdict</span>
-<span class="cmd">curl -X POST http://localhost:8000/api/evaluate \
-  -H "Content-Type: application/json" \
-  -d '{"tenant_id":"demo","readings":{"so2_ppm":142},"context":"energy.wellhead.monitoring"}'</span></code></pre>
+<span class="comment"># 5. Submit a measurement and get a verdict (SO2 above its 100 ppm cap → FLAG)</span>
+<span class="cmd">export $(grep ^SKI_API_KEY= .env)</span>
+<span class="cmd">curl -k -X POST https://localhost:8000/api/evaluate \
+  -H "X-API-Key: $SKI_API_KEY" -H "Content-Type: application/json" \
+  -d '{"measurement_id":"demo-1","timestamp":"'"$(date -u +%Y-%m-%dT%H:%M:%SZ)"'",
+       "subject":"stack-1","measurement":{"so2_ppm":142}}'</span></code></pre>
       </div>
-      <div class="docs-callout">The demo mode is labeled non-conformant. It uses the FakeLLM backend to avoid requiring a multi-GB model download. Every structural guarantee (signing, verifier, ledger, envelope schema) is exercised identically to a real model run.</div>
+      <div class="docs-callout">The demo mode is labeled non-conformant. It uses the FakeLLM backend to avoid requiring a multi-GB model download, and runs with <code>SKI_SOVEREIGNTY=advisory</code>. Every structural guarantee (signing, verifier, ledger, envelope schema) is exercised identically to a real model run. A production deployment starts in strict sovereignty mode: see <a href="#air-gap">Air-gapped environments</a>.</div>
     </section>
 
     <!-- ── Packages ────────────────────────────────────────────── -->
     <section id="packages">
       <h2>Six packages</h2>
-      <p>SKI ships six PyPI packages, all versioned together with the framework — currently v3.1.0.</p>
+      <p>SKI ships six PyPI packages, all versioned together with the framework — currently v3.2.0.</p>
 
       <div class="docs-table-wrap">
         <table class="docs-table">
@@ -276,38 +278,38 @@
             <tr>
               <td><code>ski-schemas</code></td>
               <td><a href="https://pypi.org/project/ski-schemas/" target="_blank" rel="noopener">pypi ↗</a></td>
-              <td>0.1.0</td>
-              <td>Shared Pydantic models: <code>V3VerdictEnvelope</code>, <code>V3SignedTranscript</code>, <code>MeasurementRecord</code>. Single source of truth for the wire format.</td>
+              <td>3.2.0</td>
+              <td>Shared Pydantic models (<code>V3VerdictEnvelope</code>, <code>MeasurementRecord</code>, the KG obligation) and the RFC 8785 canonicalizer. Single source of truth for the wire format, published as JSON Schema and OpenAPI.</td>
             </tr>
             <tr>
               <td><code>ski-sdk</code></td>
               <td><a href="https://pypi.org/project/ski-sdk/" target="_blank" rel="noopener">pypi ↗</a></td>
-              <td>0.1.0</td>
+              <td>3.2.0</td>
               <td>Client library for submitting evaluations, reading verdicts, and querying the audit ledger from downstream services.</td>
             </tr>
             <tr>
               <td><code>ski-kg-extractor</code></td>
               <td><a href="https://pypi.org/project/ski-kg-extractor/" target="_blank" rel="noopener">pypi ↗</a></td>
-              <td>3.1.0</td>
+              <td>3.2.0</td>
               <td>CLI for extracting obligation nodes from regulatory source documents into Knowledge Graph format.</td>
             </tr>
             <tr>
               <td><code>ski-kg-validator</code></td>
               <td><a href="https://pypi.org/project/ski-kg-validator/" target="_blank" rel="noopener">pypi ↗</a></td>
-              <td>3.1.0</td>
-              <td>Validates a KG against the spec schema, checks for missing source citations, and seals it with an ed25519 signature for production use.</td>
+              <td>3.2.0</td>
+              <td>Validates a graph KG against the spec §3 schema: node and edge types, missing citations and scopes, under-tiered obligations.</td>
             </tr>
             <tr>
               <td><code>ski-audit-ledger</code></td>
               <td><a href="https://pypi.org/project/ski-audit-ledger/" target="_blank" rel="noopener">pypi ↗</a></td>
-              <td>3.1.0</td>
-              <td>Append-only ledger with hash chaining, sequence gap detection, and signed transcript storage. No UPDATE or DELETE at the database trigger level.</td>
+              <td>3.2.0</td>
+              <td>Verifies, exports and replays the append-only ledger: hash-chain and evidence checks (ledger v4), sequence gap detection, deterministic replay of each verdict.</td>
             </tr>
             <tr>
               <td><code>ski-model-deploy</code></td>
               <td><a href="https://pypi.org/project/ski-model-deploy/" target="_blank" rel="noopener">pypi ↗</a></td>
-              <td>3.1.0</td>
-              <td>Deployment tooling: model pull, signature verification, health gate, and container image management.</td>
+              <td>3.2.0</td>
+              <td>Deployment tooling: KG signing (<code>sign</code>) and trust-anchor verification (<code>load-kg</code>), deployment config, health gate.</td>
             </tr>
           </tbody>
         </table>
@@ -374,20 +376,20 @@
 
     <section id="audit-ledger">
       <h2>Audit ledger</h2>
-      <p>The ledger is append-only at the database trigger level, no UPDATE, no DELETE. Every entry contains:</p>
+      <p>The ledger is append-only at the database trigger level, no UPDATE, no DELETE, and the runtime writes as a least-privilege role (INSERT and SELECT only). Every entry contains:</p>
       <ul style="margin:12px 0 12px 24px;line-height:2">
-        <li>The signed <code>V3SignedTranscript</code> (ed25519 signature over the raw LLM output)</li>
-        <li>A monotonically increasing sequence number</li>
-        <li>A SHA-256 hash of the previous entry (hash chaining)</li>
+        <li>The signed LLM transcript (ed25519 signature over the request and response hashes)</li>
         <li>The full <code>V3VerdictEnvelope</code> JSON</li>
+        <li>A monotonically increasing sequence number</li>
+        <li>A SHA-256 entry hash chained to the previous entry</li>
       </ul>
-      <p>Sequence gaps trigger a Prometheus alert (<code>ski_ledger_sequence_gaps_total</code>). Tampering with any stored transcript is detectable by recomputing the ed25519 signature. Auditors can query the ledger directly and replay any verdict from its stored transcript.</p>
+      <p>Since ledger v4 (v3.2.0) each entry's hash also covers the digests of the stored envelope and transcript, so <code>audit-ledger verify</code> detects an edit to a decision's evidence, not only to its verdict. Sequence gaps trigger a Prometheus alert (<code>ski_ledger_sequence_gaps_total</code>). <code>audit-ledger replay</code> re-runs each recorded decision from its signed transcript, checks it against the stored telemetry and the KG, and reports any divergence.</p>
     </section>
 
     <section id="knowledge-graph">
       <h2>Knowledge graph</h2>
-      <p>The Knowledge Graph is a versioned, sealed artifact encoding regulatory obligations as machine-readable nodes. Each node includes: an obligation type, metric, operator, threshold, unit, and a citation to the source regulatory document and clause.</p>
-      <p>The KG lifecycle: extract via <code>ski-kg-extractor</code> → human expert review → validate via <code>ski-kg-validator</code> → sign (ed25519) → deploy. The runtime refuses to load an unsigned or signature-invalid graph. Every verdict envelope records the KG version hash.</p>
+      <p>The Knowledge Graph is a versioned, signed graph of typed nodes and edges (spec §3): Rules, Obligations, Subjects, Jurisdictions, Definitions, Exemptions, Precedents and Citations. Each Obligation carries an obligation type, metric, threshold, unit and effective dates; edges scope it to jurisdictions and cite its source document and clause.</p>
+      <p>The KG lifecycle: extract via <code>ski-kg-extractor</code> → human expert review → validate via <code>ski-kg-validator</code> → sign with <code>ski-model-deploy sign</code> (ed25519 over the whole graph) → deploy. The runtime loads a KG only if its signature verifies against an operator-pinned trust anchor (<code>SKI_KG_TRUST_ANCHORS</code>), never the key the KG embeds. Every verdict envelope records the KG version hash. Older flat-format KGs still load; <code>scripts/flat-kg-to-graph.py</code> converts them.</p>
     </section>
 
     <!-- ── Deployment ─────────────────────────────────────────── -->
@@ -414,23 +416,31 @@
 
     <section id="kubernetes">
       <h2>Kubernetes / Helm</h2>
-      <p>The <code>deploy/helm/ski</code> chart enforces the SKI deployment constraints at render time, it fails if you try to configure multiple replicas (single writer by design), if no operator Secret is provided, or if no signed-KG ConfigMap is present.</p>
+      <p>The <code>deploy/helm/ski</code> chart enforces the SKI deployment constraints at render time: it fails if you configure multiple replicas (single writer by design), or if the operator Secret, the signed-KG ConfigMap, the KG trust-anchor ConfigMap or the TLS Secret is missing.</p>
       <div class="code-block">
         <div class="code-block-header"><span class="code-block-title">Deploy with Helm</span></div>
-        <pre><code><span class="comment"># Create the signed-KG ConfigMap</span>
+        <pre><code><span class="comment"># The signed KG, and (separately) the public keys allowed to sign it</span>
 <span class="cmd">kubectl create configmap ski-kg --from-file=kg.json=your-signed-kg.json</span>
+<span class="cmd">kubectl create configmap ski-kg-trust-anchors \
+  --from-file=kg-trust-anchors.pem=./kg-owner-public.pem</span>
 
-<span class="comment"># Create operator Secret</span>
+<span class="comment"># Operator Secret: api-key, postgres-password, ledger-writer-password</span>
 <span class="cmd">kubectl create secret generic ski-secrets \
-  --from-literal=SKI_SIGNING_KEY="$(cat keys/signing.key)"</span>
+  --from-literal=api-key="$(openssl rand -hex 32)" \
+  --from-literal=postgres-password="$(openssl rand -hex 24)" \
+  --from-literal=ledger-writer-password="$(openssl rand -hex 24)"</span>
 
-<span class="comment"># Install</span>
+<span class="comment"># Install (strict sovereignty: pin the model weights)</span>
 <span class="cmd">helm install ski ./deploy/helm/ski \
-  --set image.tag=3.1.0</span>
+  --set existingSecret=ski-secrets \
+  --set kg.configMapName=ski-kg \
+  --set kg.trustAnchors.configMapName=ski-kg-trust-anchors \
+  --set tls.secretName=ski-tls \
+  --set skiModel.modelFileSha256=&lt;weights-sha256&gt; \
+  --set image.tag=3.2.0</span>
 
-<span class="comment"># Air-gapped: drops DNS inside the pod network</span>
-<span class="cmd">helm install ski ./deploy/helm/ski \
-  --set networkPolicy.airgap=true</span></code></pre>
+<span class="comment"># Air-gapped: add this flag to the install above (also drops DNS in the pod network)</span>
+<span class="cmd">--set networkPolicy.airgap=true</span></code></pre>
       </div>
       <p>Default image: <code>ghcr.io/kpifinity/ski-model</code>, no <code>--set image.repository</code> required for standard deployments. Review <code>values.yaml</code> and the NetworkPolicy before production use.</p>
     </section>
@@ -438,6 +448,7 @@
     <section id="air-gap">
       <h2>Air-gapped environments</h2>
       <p>SKI's sovereignty guarantee is architectural: the full runtime is tested inside <code>--network=none</code> on every CI run. The air-gapped boot rig (<code>conformance/sovereignty/test_air_gapped.py</code>) boots the audit ledger, joins the SKI Model to a loopback-only namespace, replays a signed-KG workload, and verifies hash-chained ledger entries from inside the gap.</p>
+      <p><strong>Strict sovereignty mode (spec §6).</strong> <code>SKI_SOVEREIGNTY=strict</code> is the default. The runtime refuses to start unless five checks pass: a sovereign backend (Ollama or vLLM), a pinned model weight hash (<code>SKI_MODEL_FILE_SHA256</code>), operator KG trust anchors, a ledger inside the deployment, and no evaluation-path destination outside it. While a verdict is evaluated, any network call leaving the deployment is counted in <code>ski_egress_attempts_total</code> and, in strict mode, refused; the runtime then stops evaluating until restarted. <code>GET /api/sovereignty</code> returns a signed attestation of the mode, the check results, and the running model, KG and build. <code>advisory</code> mode only logs unmet checks, for demos and CI.</p>
       <p>To run the Level 3 sovereignty suite locally:</p>
       <div class="code-block">
         <div class="code-block-header"><span class="code-block-title">Level 3 sovereignty conformance</span></div>
@@ -462,12 +473,12 @@
     <!-- ── Quality ────────────────────────────────────────────── -->
     <section id="conformance">
       <h2>Conformance levels</h2>
-      <p>SKI defines three conformance levels across 82 tests. The full conformance suite runs in CI:</p>
+      <p>SKI defines three conformance levels across 156 tests. The full conformance suite runs in CI:</p>
       <div class="code-block">
         <div class="code-block-header"><span class="code-block-title">Run the full conformance suite</span></div>
         <pre><code><span class="cmd">pip install -r requirements-dev.txt</span>
 <span class="cmd">pytest conformance/ -v</span>
-<span class="comment"># 82 tests: 30 Provenance + 30 Durability + 22 Sovereignty</span></code></pre>
+<span class="comment"># 156 tests: 69 Provenance + 30 Durability + 57 Sovereignty</span></code></pre>
       </div>
       <div class="docs-table-wrap">
         <table class="docs-table">
@@ -475,8 +486,8 @@
           <tbody>
             <tr>
               <td>L1: Provenance</td>
-              <td>30</td>
-              <td>Verdict envelope completeness, KG citation presence, signed transcript, model provenance fields, taxonomy guard.</td>
+              <td>69</td>
+              <td>Verdict envelope completeness, KG citation presence, signed transcript, model provenance fields, taxonomy guard, the fail-closed verifier against an adversarial model.</td>
             </tr>
             <tr>
               <td>L2: Durability</td>
@@ -485,8 +496,8 @@
             </tr>
             <tr>
               <td>L3: Sovereignty</td>
-              <td>17</td>
-              <td>Zero outbound connections (air-gapped boot rig), KG signature validation, Helm NetworkPolicy enforcement, air-gap boot CI.</td>
+              <td>57</td>
+              <td>Zero outbound connections (air-gapped boot rig), KG trust anchors, least-privilege ledger role, ledger-v4 tamper detection, live replay, signed sovereignty attestation, Helm NetworkPolicy enforcement.</td>
             </tr>
           </tbody>
         </table>
@@ -534,7 +545,10 @@
 <span class="k">ski_verdicts_total{verdict=...}</span>    <span class="comment"># Per-verdict-type counter</span>
 <span class="k">ski_evaluation_duration_seconds</span>    <span class="comment"># Latency histogram</span>
 <span class="k">ski_model_last_telemetry_timestamp</span> <span class="comment"># Heartbeat</span>
-<span class="k">ski_runtime_info</span>                   <span class="comment"># Version / KG hash info label</span></code></pre>
+<span class="k">ski_runtime_info</span>                   <span class="comment"># Version / KG hash info label</span>
+<span class="k">ski_egress_attempts_total</span>          <span class="comment"># Network calls leaving the deployment mid-evaluation (spec §6.3)</span>
+<span class="k">ski_unverifiable_total{tier=...}</span>   <span class="comment"># UNVERIFIABLE verdicts by risk tier</span>
+<span class="k">ski_telemetry_clock_skew_total</span>     <span class="comment"># Readings rejected or downgraded for clock skew</span></code></pre>
       </div>
       <p>Grafana alert rules ship in <code>monitoring/</code>. A regression test parses the alert rules and asserts every referenced series is exported, the contract cannot silently drift.</p>
     </section>
@@ -565,7 +579,7 @@
     <!-- ── Reference ──────────────────────────────────────────── -->
     <section id="changelog">
       <h2>Changelog</h2>
-      <p>Full changelog: <a href="https://github.com/kpifinity/ski-framework/blob/main/CHANGELOG.md" target="_blank" rel="noopener">CHANGELOG.md ↗</a>. Latest release notes: <a href="https://github.com/kpifinity/ski-framework/blob/main/docs/releases/v3.1.0.md" target="_blank" rel="noopener">v3.1.0 ↗</a>.</p>
+      <p>Full changelog: <a href="https://github.com/kpifinity/ski-framework/blob/main/CHANGELOG.md" target="_blank" rel="noopener">CHANGELOG.md ↗</a>. Latest release notes: <a href="https://github.com/kpifinity/ski-framework/blob/main/docs/releases/v3.2.0.md" target="_blank" rel="noopener">v3.2.0 ↗</a>.</p>
     </section>
 
     <section id="security">
@@ -594,7 +608,7 @@
         <p class="footer-tagline">Neuro-symbolic AI compliance monitoring for regulated industries. Verifiable provenance on every verdict.</p>
         <div class="footer-badges">
           <span class="footer-badge">Spec v3.0</span>
-          <span class="footer-badge">v3.1.0</span>
+          <span class="footer-badge">v3.2.0</span>
           <span class="footer-badge">Apache 2.0</span>
           <span class="footer-badge">Open Source</span>
           <span class="footer-badge">Built in Canada</span>
